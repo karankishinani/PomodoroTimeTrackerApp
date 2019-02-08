@@ -1,0 +1,592 @@
+swagger: "2.0"
+info:
+  description: "This is a sample server for Pomodoro Time Tracker. Designed By Team Mobile 4"
+  version: "1.0.0"
+  title: "Pomodoro Time Tracker"
+  termsOfService: "http://swagger.io/terms/"
+  contact:
+    email: "bosheng@gatech.edu"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "mobile4.swagger.io"
+basePath: "/v2"
+tags:
+- name: "users"
+  description: "Operations about user"
+- name: "projects"
+  description: "Operations about projects"
+- name: "sessions"
+  description: "Operations about sessions"
+
+schemes:
+- "https"
+- "http"
+paths:
+  /users:
+    post:
+      tags:
+      - "users"
+      summary: "Create one user"
+      description: "This can only be done by the admin."
+      operationId: "createUser"
+      produces:
+      - "application/json"
+      - "application/xml"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Created one user object"
+        required: true
+        schema:
+          $ref: "#/definitions/User"
+      responses:
+        default:
+          description: "successful operation"
+    get:
+      tags:
+      - "users"
+      summary: "Get all users"
+      description: "This can only be done by the admin."
+      operationId: "getUsers"
+      produces:
+      - "application/json"
+      - "application/xml"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/User"
+        400:
+          description: "Bad Request"
+        404:
+          description: "User not found"
+    delete:
+      tags:
+      - "users"
+      summary: "Delete all users"
+      description: "This can only be done by the admin"
+      operationId: "deleteUsers"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/User"
+        400:
+          description: "Bad Request"
+        404:
+          description: "Nothing to delete, it's already empty"
+
+
+  /users/{email}:
+    get:
+      tags:
+      - "users"
+      summary: "Get user by user email (email serves as ID)"
+      description: "Get user by email id"
+      operationId: "getUser"
+      produces:
+      - "application/json"
+      - "application/xml"
+      parameters:
+      - name: "email"
+        in: "path"
+        description: "The user email(id) that needs to be fetched."
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: array
+            items: 
+              $ref: "#/definitions/User"
+        400:
+          description: "Invalid email supplied"
+        404:
+          description: "User not found"
+    put:
+      tags:
+      - "users"
+      summary: "Updated user"
+      description: "This can only be done by the admin."
+      operationId: "updateUser"
+      produces:
+      - "application/json"
+      - "application/xml"
+      parameters:
+      - name: "email"
+        in: "path"
+        description: "user that need to be updated"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "body"
+        description: "Updated user object"
+        required: true
+        schema:
+          $ref: "#/definitions/User"
+      responses:
+        400:
+          description: "Invalid user supplied"
+        404:
+          description: "User not found"
+    delete:
+      tags:
+      - "users"
+      summary: "Delete one user"
+      description: "This can only be done by the admin."
+      operationId: "deleteUser"
+      produces:
+      - "application/json"
+      - "application/xml"
+      parameters:
+      - name: "email"
+        in: "path"
+        description: "The user that needs to be deleted"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Operation successfully"
+          schema:
+            $ref: "#/definitions/User"
+        400:
+          description: "Invalid username supplied"
+        404:
+          description: "User not found"
+          
+  /users/{email}/projects:
+    post:
+      tags:
+      - "projects"
+      summary: "Create one project"
+      description: "This can only be done by the current logged in user."
+      operationId: "createProject"
+      produces:
+      - "application/json"
+      - "application/xml"
+      parameters:
+      - name: "email"
+        in: "path"
+        description: "The email(id) of the current user."
+        required: true
+        type: "string"
+      - in: "body"
+        name: "body"
+        description: "Created project object"
+        required: true
+        schema:
+          $ref: "#/definitions/Project"
+      responses:
+        default:
+          description: "successful operation"
+    get:
+      tags:
+      - "projects"
+      summary: "Get all projects of the current user"
+      description: "Can only be done by the current user"
+      operationId: "getProjects"
+      produces:
+      - "application/json"
+      - "application/xml"
+      parameters:
+      - name: "email"
+        in: "path"
+        description: "userId(email)."
+        required: true
+        type: "string"
+      responses:
+        200:
+         description: "successful operation"
+         schema:
+           type: array
+           items:
+             $ref: "#/definitions/Project"
+        400:
+          description: "Bad Request"
+        404:
+          description: "User not found"
+    delete:
+      tags:
+      - "projects"
+      summary: "Delete all projects of the current user"
+      description: "Can only be done by the current user"
+      operationId: "deleteProjects"
+      produces:
+      - "application/json"
+      - "application/xml"
+      parameters:
+      - name: "email"
+        in: "path"
+        description: "the email(id) of the user who deletes all their projects"
+        required: true
+        type: "string"
+      responses:
+        200:
+         description: "successful operation"
+         schema:
+           type: array
+           items:
+             $ref: "#/definitions/Project"
+        400:
+          description: "Bad Request"
+        404:
+          description: "User not found"
+    
+      
+  /users/{email}/projects/{projectId}:
+    get:
+      tags:
+      - "projects"
+      summary: "Get project by project id"
+      description: "Get one project by project id and user id"
+      operationId: "getProject"
+      produces:
+      - "application/json"
+      - "application/xml"
+      parameters:
+      - name: "email"
+        in: "path"
+        description: "The user's email id."
+        required: true
+        type: "string"
+      - name: "projectId"
+        in: "path"
+        description: "The id of the project that needs to be fetched."
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Project"
+        400:
+          description: "Invalid projectId supplied"
+        404:
+          description: "Project not found"
+    put:
+      tags:
+      - "projects"
+      summary: "Updated one project"
+      description: "This can only be done by the user."
+      operationId: "updateProject"
+      produces:
+      - "application/json"
+      - "application/xml"
+      parameters:
+      - name: "email"
+        in: "path"
+        description: "The user's email id"
+        required: true
+        type: "string"
+      - name: "projectId"
+        in: "path"
+        description: "id of the project that need to be updated"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "body"
+        description: "Updated project object"
+        required: true
+        schema:
+          $ref: "#/definitions/Project"
+      responses:
+        400:
+          description: "Invalid projectId supplied"
+        404:
+          description: "Project not found"
+    delete:
+      tags:
+      - "projects"
+      summary: "Delete one project"
+      description: "This can only be done by the user."
+      operationId: "deleteProject"
+      produces:
+      - "application/json"
+      - "application/xml"
+      parameters:
+      - name: "email"
+        in: "path"
+        description: "The user's email id"
+        required: true
+        type: "string"
+      - name: "projectId"
+        in: "path"
+        description: "id of the project that needs to be deleted"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Operation success"
+          schema:
+            type: array
+            items: 
+              $ref: "#/definitions/Project"
+        400:
+          description: "Invalid projectId supplied"
+        404:
+          description: "Project not found"
+          
+  # get all sessions for all projects
+  /users/{email}/sessions/:
+    get:
+      tags:
+      - "sessions"
+      summary: "Get all sessions for all projects of one user"
+      description: "Get all sessions for all projects of one user"
+      operationId: "getAllSessions"
+      produces:
+      - "application/json"
+      - "application/xml"
+      parameters:
+      - name: "email"
+        in: "path"
+        description: "The user's email id."
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Session"
+        400:
+          description: "Invalid projectId supplied"
+        404:
+          description: "Project not found"
+
+  
+  /users/{email}/projects/{projectId}/sessions:
+    get:
+      tags:
+      - "sessions"
+      summary: "Get all sessions of one project of one user by project id and user's email(id)"
+      description: "Get all sessions of one project of one user by project id and user's email(id)"
+      operationId: "getSessions"
+      produces:
+      - "application/json"
+      - "application/xml"
+      parameters:
+      - name: "email"
+        in: "path"
+        description: "The user's email id."
+        required: true
+        type: "string"
+      - name: "projectId"
+        in: "path"
+        description: "The id of the project that needs to be fetched."
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Session"
+        400:
+          description: "Invalid projectId supplied"
+        404:
+          description: "Project not found"
+    post:
+      tags:
+      - "sessions"
+      summary: "Create one session of a project"
+      description: "This can only be done by the current logged in user."
+      operationId: "createSession"
+      produces:
+      - "application/json"
+      - "application/xml"
+      parameters:
+      - name: "email"
+        in: "path"
+        description: "The user's email id."
+        required: true
+        type: "string"
+      - name: "projectId"
+        in: "path"
+        description: "The id of the project that the user associates with a new session."
+        required: true
+        type: "string"
+      - in: "body"
+        name: "body"
+        description: "Created session object"
+        required: true
+        schema:
+          $ref: "#/definitions/Session"
+      responses:
+        default:
+          description: "successful operation" 
+    delete:
+      tags:
+      - "sessions"
+      summary: "Delete all sessions of a project"
+      description: "Can only be done by the current user"
+      operationId: "deleteSessions"
+      produces:
+      - "application/json"
+      - "application/xml"
+      parameters:
+      - name: "email"
+        in: "path"
+        description: "the email(id) of the user"
+        required: true
+        type: "string"
+      - name: "projectId"
+        in: "path"
+        description: "the projectId"
+        required: true
+        type: "string"
+      responses:
+        200:
+         description: "successful operation"
+         schema:
+           type: array
+           items:
+             $ref: "#/definitions/Session"
+        400:
+          description: "Bad Request"
+        404:
+          description: "User not found"
+
+  # get one session 
+  /users/{email}/projects/{projectId}/sessions/{sessionId}:
+    get:
+      tags:
+      - "sessions"
+      summary: "Get one session by project id and user's id"
+      description: "Get one session by project id and user's id"
+      operationId: "getSession"
+      produces:
+      - "application/json"
+      - "application/xml"
+      parameters:
+      - name: "email"
+        in: "path"
+        description: "user's email id"
+        required: true
+        type: "string"
+      - name: "projectId"
+        in: "path"
+        description: "The id of the project that needs to be fetched."
+        required: true
+        type: "string"
+      - name: "sessionId"
+        in: "path"
+        description: "The id of the session that needs to be fetched."
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Session"
+        400:
+          description: "Invalid projectId or sessionId supplied"
+        404:
+          description: "Project or Session not found"
+    put:
+      tags:
+      - "sessions"
+      summary: "Update one session"
+      description: "Update one session"
+      operationId: "UpdateSession"
+      produces:
+      - "application/json"
+      - "application/xml"
+      parameters:
+      - name: "email"
+        in: "path"
+        description: "User's email id."
+        required: true
+        type: "string"
+      - name: "projectId"
+        in: "path"
+        description: "The id of the project that needs to be fetched."
+        required: true
+        type: "string"
+      - name: "sessionId"
+        in: "path"
+        description: "The id of the session that needs to be fetched."
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Session"
+        400:
+          description: "Invalid projectId or sessionId supplied"
+        404:
+          description: "Session or Project not found"
+
+definitions:
+  User:
+    type: "object"
+    properties:
+      firstname:
+        type: "string"
+      lastname:
+        type: "string"
+      email:
+        type: "string"
+        description: "serves as ID"
+      projectIds:
+        default: null
+        type: "array"
+        items:
+          type: "string"
+    xml:
+      name: "User"
+  Project:
+    type: "object"
+    properties:
+      id:
+        type: "string"
+      name:
+        type: "string"
+      completed:
+        type: "boolean"
+        default: false
+      sessionIds:
+        default: "null"
+        type: "array"
+        items:
+          type: "string"
+    xml:
+      name: "Project"
+  Session:
+    type: "object"
+    properties:
+      session_id:
+          type: "string"
+      project_id:
+          type: "string"
+          description: "Project id it linked to"
+      start_time:
+          type: "string"
+          format: "date-time"
+          description: "Starting Time of the first Pomodoro in the session"
+      end_time:
+          type: "string"
+          format: "date-time"
+          description: "Ending Time of the last Pomodoro in the session (even if it's incomplete)"
+      duration:
+          type: "string"
+          format: "minutes - seconds"
+          description: "Duration Time of the Session"
+      pomodoro_completed:
+          type: "integer"
+          default: 0
+          description: "Number of completed Pomodoros"
+    xml:
+      name: "Session"
+externalDocs:
+  description: "Find out more about Swagger"
+  url: "http://swagger.io"
