@@ -845,7 +845,34 @@ public class PTTBackendTests {
         return response;
     }
     // SESSION
+    private CloseableHttpResponse createSession(String userid, String projectid, String startTime, String endTime, Integer counter) throws IOException {
+        HttpPost httpRequest = new HttpPost(baseUrl + "/users/" + userid + "/projects/" + projectid + "/sessions");
+        httpRequest.addHeader("accept", "application/json");
+        StringEntity input = new StringEntity("{\"startTime\":\"" + startTime + "\"," +
+                "\"endTime\":\"" + endTime + "\"," 
+                "\"counter\":\"" + counter + "\"}");
+        input.setContentType("application/json");
+        httpRequest.setEntity(input);
 
+        System.out.println("*** Executing request " + httpRequest.getRequestLine() + "***");
+        CloseableHttpResponse response = httpclient.execute(httpRequest);
+        System.out.println("*** Raw response " + response + "***");
+        return response;
+    }
+
+    private CloseableHttpResponse updateSession(String userid, String projectid, String sessionid, String startTime, String endTime, Integer counter) throws IOException {
+        HttpPut httpRequest = new HttpPut(baseUrl + "/users/" + userid + "/projects/" + projectid + "/sessions/" +sessionid);
+        httpRequest.addHeader("accept", "application/json");
+        StringEntity input = new StringEntity("{\"endTime\":\"" + endTime + "\"," +
+                "\"counter\":\"" + counter + "\"}");
+        input.setContentType("application/json");
+        httpRequest.setEntity(input);
+
+        System.out.println("*** Executing request " + httpRequest.getRequestLine() + "***");
+        CloseableHttpResponse response = httpclient.execute(httpRequest);
+        System.out.println("*** Raw response " + response + "***");
+        return response;
+    }
     // REPORT
 
     // GET ID from Response
