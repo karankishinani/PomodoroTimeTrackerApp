@@ -249,6 +249,36 @@ public class PTTBackendTests {
     }
 
     // PROJECT HERE
+    @Test
+    public void createProjectTest() throws Exception {
+        //How to Clear?? 
+        deleteContacts();
+
+        try {
+            CloseableHttpResponse response =
+                    createProject("John", "Doe", "john@doe.org");
+
+            int status = response.getStatusLine().getStatusCode();
+            HttpEntity entity;
+            if (status == 201) {
+                entity = response.getEntity();
+            } else {
+                throw new ClientProtocolException("Unexpected response status: " + status);
+            }
+            String strResponse = EntityUtils.toString(entity);
+
+            System.out.println("*** String response " + strResponse + " (" + response.getStatusLine().getStatusCode() + ") ***");
+
+            String id = getIdFromStringResponse(strResponse);
+
+            String expectedJson = "{\"id\":\"" + id + "\",\"firstName\":\"John\",\"lastName\":\"Doe\",\"email\":\"john@doe.org\"}";
+            JSONAssert.assertEquals(expectedJson,strResponse, false);
+            EntityUtils.consume(response.getEntity());
+            response.close();
+        } finally {
+            httpclient.close();
+        }
+    }
 
     // SESSION HERE
 
@@ -693,7 +723,65 @@ public class PTTBackendTests {
     }
 
     // PROJECT
+    private CloseableHttpResponse createProject(String userid, String projectname) throws IOException {
+        HttpPost httpRequest = new HttpPost(baseUrl + "/users/" + userid + "/projects");
+        httpRequest.addHeader("accept", "application/json");
+        StringEntity input = new StringEntity("{\"projectname\":\"" + projectname + "\"," +
+                "\"userid\":\"" + userid + "\"}");
+        input.setContentType("application/json");
+        httpRequest.setEntity(input);
 
+        System.out.println("*** Executing request " + httpRequest.getRequestLine() + "***");
+        CloseableHttpResponse response = httpclient.execute(httpRequest);
+        System.out.println("*** Raw response " + response + "***");
+        return response;
+    }
+
+    private CloseableHttpResponse updateProject(String userid, String projectid) throws IOException {
+        HttpPut httpRequest = new HttpPut(baseUrl + "/users/" + userid + "/projects/" + projectid);
+        httpRequest.addHeader("accept", "application/json");
+        StringEntity input = new StringEntity("{\"projectname\":\"" + projectname + "\"," +
+                "\"userid\":\"" + userid + "\"}");
+        input.setContentType("application/json");
+        httpRequest.setEntity(input);
+
+        System.out.println("*** Executing request " + httpRequest.getRequestLine() + "***");
+        CloseableHttpResponse response = httpclient.execute(httpRequest);
+        System.out.println("*** Raw response " + response + "***");
+        return response;
+    }
+
+    private CloseableHttpResponse getProject(String userid, String projectid) throws IOException {
+        HttpGet httpRequest = new HttpGet(baseUrl + "/users/" + userid + "/projects/" + projectid);
+        httpRequest.addHeader("accept", "application/json");
+
+        System.out.println("*** Executing request " + httpRequest.getRequestLine() + "***");
+        CloseableHttpResponse response = httpclient.execute(httpRequest);
+        System.out.println("*** Raw response " + response + "***");
+        return response;
+    }
+    // Not Needed?
+    private CloseableHttpResponse getAllProjects(String userid) throws IOException {
+        HttpGet httpRequest = new HttpGet(baseUrl + "/users/" + userid);
+        httpRequest.addHeader("accept", "application/json");
+
+        System.out.println("*** Executing request " + httpRequest.getRequestLine() + "***");
+        CloseableHttpResponse response = httpclient.execute(httpRequest);
+        System.out.println("*** Raw response " + response + "***");
+        return response;
+    }
+
+    private CloseableHttpResponse deleteProject(String userid, String projectid) throws IOException {
+        HttpDelete httpDelete = new HttpDelete(baseUrl + "/users/" + userid + "/projects/" + projectid);
+        httpDelete.addHeader("accept", "application/json");
+
+        System.out.println("*** Executing request " + httpDelete.getRequestLine() + "***");
+        CloseableHttpResponse response = httpclient.execute(httpDelete);
+        System.out.println("*** Raw response " + response + "***");
+        // EntityUtils.consume(response.getEntity());
+        // response.close();
+        return response;
+    }
     // SESSION
 
     // REPORT
