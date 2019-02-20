@@ -249,7 +249,65 @@ public class PTTBackendTests {
         }
     }
 
-    // CREATE MULTIPLE DELETE ONE
+    @Test
+    public void CreateMultipleDeleteOneUserTest() throws Exception {
+        httpclient = HttpClients.createDefault();
+        // TODO: convert to deleteUsers()
+        deleteContacts();
+        String expectedJson = "";
+
+        try {
+            CloseableHttpResponse response = createUser("John", "Doe", "john@doe.org");
+            // EntityUtils.consume(response.getEntity());
+            String deleteId = getIdFromResponse(response);
+            response.close();
+
+            response = createUser("Jane", "Wall", "jane@wall.com");
+            // EntityUtils.consume(response.getEntity());
+            String id = getIdFromResponse(response);
+            expectedJson += "[{\"id\":\"" + id + "\",\"firstName\":\"Jane\",\"lastName\":\"Wall\",\"email\":\"jane@wall.com\"}]";
+            response.close();
+
+            int status;
+            HttpEntity entity;
+            String strResponse;
+
+            response = deleteUser(deleteId);
+
+            status = response.getStatusLine().getStatusCode();
+            if (status == 200) {
+                entity = response.getEntity();
+            } else {
+                throw new ClientProtocolException("Unexpected response status: " + status);
+            }
+            strResponse = EntityUtils.toString(entity);
+
+            System.out.println("*** String response " + strResponse + " (" + response.getStatusLine().getStatusCode() + ") ***");
+
+            String expectedJson2 = "{\"id\":\"" + deleteId + "\",\"firstName\":\"John\",\"lastName\":\"Doe\",\"email\":\"john@doe.org\"}";
+            JSONAssert.assertEquals(expectedJson2,strResponse, false);
+            EntityUtils.consume(response.getEntity());
+            response.close();
+
+            response = getAllUsers();
+            status = response.getStatusLine().getStatusCode();
+            if (status == 200) {
+                entity = response.getEntity();
+            } else {
+                throw new ClientProtocolException("Unexpected response status: " + status);
+            }
+            strResponse = EntityUtils.toString(entity);
+
+            System.out.println("*** String response " + strResponse + " (" + response.getStatusLine().getStatusCode() + ") ***");
+
+            // expectedJson = "[]";
+            JSONAssert.assertEquals(expectedJson,strResponse, false);
+            EntityUtils.consume(response.getEntity());
+            response.close();
+        } finally {
+            httpclient.close();
+        }
+    }
 
     @Test
     public void CreateMultipleUpdateOneUserTest() throws Exception {
