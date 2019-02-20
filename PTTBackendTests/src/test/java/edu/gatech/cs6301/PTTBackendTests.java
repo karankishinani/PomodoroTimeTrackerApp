@@ -29,21 +29,21 @@ public class PTTBackendTests {
     private PoolingHttpClientConnectionManager cm = new PoolingHttpClientConnectionManager();
     private CloseableHttpClient httpclient;
     private boolean setupdone;
-    
+
     @Before
     public void runBefore() {
-	if (!setupdone) {
-	    System.out.println("*** SETTING UP TESTS ***");
-	    // Increase max total connection to 100
-	    cm.setMaxTotal(100);
-	    // Increase default max connection per route to 20
-	    cm.setDefaultMaxPerRoute(10);
-	    // Increase max connections for localhost:80 to 50
-	    HttpHost localhost = new HttpHost("locahost", 8080);
-	    cm.setMaxPerRoute(new HttpRoute(localhost), 10);
-	    httpclient = HttpClients.custom().setConnectionManager(cm).build();
-	    setupdone = true;
-	}
+        if (!setupdone) {
+            System.out.println("*** SETTING UP TESTS ***");
+            // Increase max total connection to 100
+            cm.setMaxTotal(100);
+            // Increase default max connection per route to 20
+            cm.setDefaultMaxPerRoute(10);
+            // Increase max connections for localhost:80 to 50
+            HttpHost localhost = new HttpHost("locahost", 8080);
+            cm.setMaxPerRoute(new HttpRoute(localhost), 10);
+            httpclient = HttpClients.custom().setConnectionManager(cm).build();
+            setupdone = true;
+        }
         System.out.println("*** STARTING TEST ***");
     }
 
@@ -53,14 +53,24 @@ public class PTTBackendTests {
     }
 
     // *** YOU SHOULD NOT NEED TO CHANGE ANYTHING ABOVE THIS LINE ***
-    
+
+    // USER HERE
+
+    // PROJECT HERE
+
+    // SESSION HERE
+
+    // REPORT HERE
+
+    // OLD CODE BELOW
+
     @Test
     public void createContactTest() throws Exception {
-	deleteContacts();
+        deleteContacts();
 
         try {
             CloseableHttpResponse response =
-		createContact("John", "Doe", "(123)-456-7890" , "john@doe.org");
+                    createContact("John", "Doe", "(123)-456-7890" , "john@doe.org");
 
             int status = response.getStatusLine().getStatusCode();
             HttpEntity entity;
@@ -76,7 +86,7 @@ public class PTTBackendTests {
             String id = getIdFromStringResponse(strResponse);
 
             String expectedJson = "{\"id\":\"" + id + "\",\"firstname\":\"John\",\"familyname\":\"Doe\",\"phonenumber\":\"(123)-456-7890\",\"email\":\"john@doe.org\"}";
-	    JSONAssert.assertEquals(expectedJson,strResponse, false);
+            JSONAssert.assertEquals(expectedJson,strResponse, false);
             EntityUtils.consume(response.getEntity());
             response.close();
         } finally {
@@ -108,7 +118,7 @@ public class PTTBackendTests {
             System.out.println("*** String response " + strResponse + " (" + response.getStatusLine().getStatusCode() + ") ***");
 
             String expectedJson = "{\"id\":\"" + id + "\",\"firstname\":\"Tom\",\"familyname\":\"Doe\",\"phonenumber\":\"(123)-456-7890\",\"email\":\"tom@doe.org\"}";
-	    JSONAssert.assertEquals(expectedJson,strResponse, false);
+            JSONAssert.assertEquals(expectedJson,strResponse, false);
             EntityUtils.consume(response.getEntity());
             response.close();
         } finally {
@@ -142,7 +152,7 @@ public class PTTBackendTests {
             System.out.println("*** String response " + strResponse + " (" + response.getStatusLine().getStatusCode() + ") ***");
 
             String expectedJson = "{\"id\":\"" + id + "\",\"firstname\":\"John\",\"familyname\":\"Doe\",\"phonenumber\":\"(123)-456-7890\",\"email\":\"john@doe.org\"}";
-	    JSONAssert.assertEquals(expectedJson,strResponse, false);
+            JSONAssert.assertEquals(expectedJson,strResponse, false);
             EntityUtils.consume(response.getEntity());
             response.close();
         } finally {
@@ -184,7 +194,7 @@ public class PTTBackendTests {
 
             System.out.println("*** String response " + strResponse + " (" + response.getStatusLine().getStatusCode() + ") ***");
 
-	    JSONAssert.assertEquals(expectedJson,strResponse, false);
+            JSONAssert.assertEquals(expectedJson,strResponse, false);
             EntityUtils.consume(response.getEntity());
             response.close();
         } finally {
@@ -237,7 +247,7 @@ public class PTTBackendTests {
             System.out.println("*** String response " + strResponse + " (" + response.getStatusLine().getStatusCode() + ") ***");
 
             expectedJson = "[]";
-	    JSONAssert.assertEquals(expectedJson,strResponse, false);
+            JSONAssert.assertEquals(expectedJson,strResponse, false);
             EntityUtils.consume(response.getEntity());
             response.close();
         } finally {
@@ -424,6 +434,18 @@ public class PTTBackendTests {
         }
     }
 
+    // METHODS HERE
+
+    // USER
+
+    // PROJECT
+
+    // SESSION
+
+    // REPORT
+
+    // OLD CODE BELOW
+
     private CloseableHttpResponse createContact(String firstname, String familyname, String phonenumber, String email) throws IOException {
         HttpPost httpRequest = new HttpPost(baseUrl + "/api/contacts");
         httpRequest.addHeader("accept", "application/json");
@@ -489,7 +511,7 @@ public class PTTBackendTests {
     }
 
     private CloseableHttpResponse deleteContacts() throws IOException {
-	HttpDelete httpDelete = new HttpDelete(baseUrl + "/api/contacts");
+        HttpDelete httpDelete = new HttpDelete(baseUrl + "/api/contacts");
         httpDelete.addHeader("accept", "application/json");
 
         System.out.println("*** Executing request " + httpDelete.getRequestLine() + "***");
