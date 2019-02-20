@@ -95,7 +95,7 @@ public class PTTBackendTests {
             String id = getIdFromResponse(response);
             response.close();
 
-            response = updateContact(id, "Tom", "Doe", "(123)-456-7890" , "tom@doe.org");
+            response = updateUser(id, "Tom", "Doe", "tom@doe.org");
 
             int status = response.getStatusLine().getStatusCode();
             HttpEntity entity;
@@ -243,6 +243,68 @@ public class PTTBackendTests {
             JSONAssert.assertEquals(expectedJson,strResponse, false);
             EntityUtils.consume(response.getEntity());
             response.close();
+        } finally {
+            httpclient.close();
+        }
+    }
+
+    // CREATE MULTIPLE DELETE ONE
+
+    @Test
+    public void CreateMultipleUpdateOneContactTest() throws Exception {
+        httpclient = HttpClients.createDefault();
+        deleteContacts();
+
+        try {
+            CloseableHttpResponse response = createContact("John", "Doe", "(123)-456-7890" , "john@doe.org");
+            // EntityUtils.consume(response.getEntity());
+            String id = getIdFromResponse(response);
+            response.close();
+
+            response = createContact("Jane", "Wall", "(9876)-543-210" , "jane@wall.com");
+            // EntityUtils.consume(response.getEntity());
+            String updatedId = getIdFromResponse(response);
+            response.close();
+
+            int status;
+            HttpEntity entity;
+            String strResponse;
+
+            response = updateContact(updatedId, "Jane", "Wall", "(6789)-210-534" , "jane@wall.com");
+            String expectedJson = "{\"id\":\"" + updatedId + "\",\"firstname\":\"Jane\",\"familyname\":\"Wall\",\"phonenumber\":\"(6789)-210-534\",\"email\":\"jane@wall.com\"}";
+
+            status = response.getStatusLine().getStatusCode();
+            if (status == 200) {
+                entity = response.getEntity();
+            } else {
+                throw new ClientProtocolException("Unexpected response status: " + status);
+            }
+            strResponse = EntityUtils.toString(entity);
+
+            System.out.println("*** String response " + strResponse + " (" + response.getStatusLine().getStatusCode() + ") ***");
+
+            // Check that the record is correct in the response
+            JSONAssert.assertEquals(expectedJson,strResponse, false);
+            EntityUtils.consume(response.getEntity());
+            response.close();
+
+            response = getContact(updatedId);
+
+            status = response.getStatusLine().getStatusCode();
+            if (status == 200) {
+                entity = response.getEntity();
+            } else {
+                throw new ClientProtocolException("Unexpected response status: " + status);
+            }
+            strResponse = EntityUtils.toString(entity);
+
+            System.out.println("*** String response " + strResponse + " (" + response.getStatusLine().getStatusCode() + ") ***");
+
+            // Check that the record was correctly updated in the addressbook
+            JSONAssert.assertEquals(expectedJson,strResponse, false);
+            EntityUtils.consume(response.getEntity());
+            response.close();
+
         } finally {
             httpclient.close();
         }
