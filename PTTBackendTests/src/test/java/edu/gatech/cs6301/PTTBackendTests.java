@@ -58,8 +58,8 @@ public class PTTBackendTests {
 
     @Test
     public void createUserTest() throws Exception {
+        // TODO: convert to deleteUsers()
         deleteContacts();
-
         try {
             CloseableHttpResponse response =
                     createUser("John", "Doe", "john@doe.org");
@@ -88,8 +88,8 @@ public class PTTBackendTests {
 
     @Test
     public void updateUserTest() throws Exception {
+        // TODO: convert to deleteUsers()
         deleteContacts();
-
         try {
             CloseableHttpResponse response = createUser("John", "Doe", "john@doe.org");
             String id = getIdFromResponse(response);
@@ -110,6 +110,136 @@ public class PTTBackendTests {
             System.out.println("*** String response " + strResponse + " (" + response.getStatusLine().getStatusCode() + ") ***");
 
             String expectedJson = "{\"id\":\"" + id + "\",\"firstname\":\"Tom\",\"familyname\":\"Doe\",\"phonenumber\":\"(123)-456-7890\",\"email\":\"tom@doe.org\"}";
+            JSONAssert.assertEquals(expectedJson,strResponse, false);
+            EntityUtils.consume(response.getEntity());
+            response.close();
+        } finally {
+            httpclient.close();
+        }
+    }
+
+    @Test
+    public void getUserTest() throws Exception {
+        httpclient = HttpClients.createDefault();
+        // TODO: convert to deleteUsers()
+        deleteContacts();
+        try {
+            CloseableHttpResponse response = createUser("John", "Doe", "john@doe.org");
+            String id = getIdFromResponse(response);
+            // EntityUtils.consume(response.getEntity());
+            response.close();
+
+            response = getContact(id);
+
+            int status = response.getStatusLine().getStatusCode();
+            HttpEntity entity;
+            String strResponse;
+            if (status == 200) {
+                entity = response.getEntity();
+            } else {
+                throw new ClientProtocolException("Unexpected response status: " + status);
+            }
+            strResponse = EntityUtils.toString(entity);
+
+            System.out.println("*** String response " + strResponse + " (" + response.getStatusLine().getStatusCode() + ") ***");
+
+            String expectedJson = "{\"id\":\"" + id + "\",\"firstName\":\"John\",\"lastName\":\"Doe\",\"email\":\"john@doe.org\"}";
+            JSONAssert.assertEquals(expectedJson,strResponse, false);
+            EntityUtils.consume(response.getEntity());
+            response.close();
+        } finally {
+            httpclient.close();
+        }
+    }
+
+    @Test
+    public void getAllUsersTest() throws Exception {
+        httpclient = HttpClients.createDefault();
+        // TODO: convert to deleteUsers()
+        deleteContacts();
+        String id = null;
+        String expectedJson = "";
+
+        try {
+            CloseableHttpResponse response = createUser("John", "Doe", "john@doe.org");
+            // EntityUtils.consume(response.getEntity());
+            id = getIdFromResponse(response);
+            expectedJson += "[{\"id\":\"" + id + "\",\"firstName\":\"John\",\"lastName\":\"Doe\",\"email\":\"john@doe.org\"}";
+            response.close();
+
+            response = createUser("Jane", "Wall", "jane@wall.com");
+            // EntityUtils.consume(response.getEntity());
+            id = getIdFromResponse(response);
+            expectedJson += ",{\"id\":\"" + id + "\",\"firstName\":\"Jane\",\"lastName\":\"Wall\",\"email\":\"jane@wall.com\"}]";
+            response.close();
+
+            response = getAllUsers();
+
+            int status = response.getStatusLine().getStatusCode();
+            HttpEntity entity;
+            String strResponse;
+            if (status == 200) {
+                entity = response.getEntity();
+            } else {
+                throw new ClientProtocolException("Unexpected response status: " + status);
+            }
+            strResponse = EntityUtils.toString(entity);
+
+            System.out.println("*** String response " + strResponse + " (" + response.getStatusLine().getStatusCode() + ") ***");
+
+            JSONAssert.assertEquals(expectedJson,strResponse, false);
+            EntityUtils.consume(response.getEntity());
+            response.close();
+        } finally {
+            httpclient.close();
+        }
+    }
+
+    @Test
+    public void DeleteUserTest() throws Exception {
+        httpclient = HttpClients.createDefault();
+        deleteContacts();
+        String expectedJson = null;
+
+        try {
+            CloseableHttpResponse response = createUser("John", "Doe", "john@doe.org");
+            // EntityUtils.consume(response.getEntity());
+            String deleteid = getIdFromResponse(response);
+            response.close();
+
+            int status;
+            HttpEntity entity;
+            String strResponse;
+
+            response = deleteUser(deleteid);
+
+            status = response.getStatusLine().getStatusCode();
+            if (status == 200) {
+                entity = response.getEntity();
+            } else {
+                throw new ClientProtocolException("Unexpected response status: " + status);
+            }
+            strResponse = EntityUtils.toString(entity);
+
+            System.out.println("*** String response " + strResponse + " (" + response.getStatusLine().getStatusCode() + ") ***");
+
+            expectedJson = "{\"id\":\"" + deleteid + "\",\"firstName\":\"John\",\"lastName\":\"Doe\",\"email\":\"john@doe.org\"}";
+            JSONAssert.assertEquals(expectedJson,strResponse, false);
+            EntityUtils.consume(response.getEntity());
+            response.close();
+
+            response = getAllUsers();
+            status = response.getStatusLine().getStatusCode();
+            if (status == 200) {
+                entity = response.getEntity();
+            } else {
+                throw new ClientProtocolException("Unexpected response status: " + status);
+            }
+            strResponse = EntityUtils.toString(entity);
+
+            System.out.println("*** String response " + strResponse + " (" + response.getStatusLine().getStatusCode() + ") ***");
+
+            expectedJson = "[]";
             JSONAssert.assertEquals(expectedJson,strResponse, false);
             EntityUtils.consume(response.getEntity());
             response.close();
