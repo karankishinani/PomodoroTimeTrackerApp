@@ -254,6 +254,7 @@ public class PTTBackendTests {
     @Test
     public void CreateMultipleUpdateOneUserTest() throws Exception {
         httpclient = HttpClients.createDefault();
+        // TODO: convert to deleteUsers()
         deleteContacts();
 
         try {
@@ -289,7 +290,7 @@ public class PTTBackendTests {
             EntityUtils.consume(response.getEntity());
             response.close();
 
-            response = getContact(updatedId);
+            response = getUser(updatedId);
 
             status = response.getStatusLine().getStatusCode();
             if (status == 200) {
@@ -306,6 +307,67 @@ public class PTTBackendTests {
             EntityUtils.consume(response.getEntity());
             response.close();
 
+        } finally {
+            httpclient.close();
+        }
+    }
+
+    @Test
+    public void getMissingUserTest() throws Exception {
+        httpclient = HttpClients.createDefault();
+        // TODO: convert to deleteUsers()
+        deleteContacts();
+
+        try {
+            CloseableHttpResponse response = createUser("John", "Doe", "john@doe.org");
+            // EntityUtils.consume(response.getEntity());
+            String id1 = getIdFromResponse(response);
+            response.close();
+
+            response = createUser("Jane", "Wall", "jane@wall.com");
+            // EntityUtils.consume(response.getEntity());
+            String id2 = getIdFromResponse(response);
+            response.close();
+
+            String missingId = "xyz" + id1 + id2; // making sure the ID is not present
+
+            response = getUser(missingId);
+
+            int status = response.getStatusLine().getStatusCode();
+            Assert.assertEquals(404, status);
+
+            EntityUtils.consume(response.getEntity());
+            response.close();
+        } finally {
+            httpclient.close();
+        }
+    }
+
+    @Test
+    public void deleteMissingUsertTest() throws Exception {
+        httpclient = HttpClients.createDefault();
+        deleteContacts();
+
+        try {
+            CloseableHttpResponse response = createUser("John", "Doe", "john@doe.org");
+            // EntityUtils.consume(response.getEntity());
+            String id1 = getIdFromResponse(response);
+            response.close();
+
+            response = createUser("Jane", "Wall", "jane@wall.com");
+            // EntityUtils.consume(response.getEntity());
+            String id2 = getIdFromResponse(response);
+            response.close();
+
+            String missingId = "xyz" + id1 + id2; // making sure the ID is not present
+
+            response = deleteUser(missingId);
+
+            int status = response.getStatusLine().getStatusCode();
+            Assert.assertEquals(404, status);
+
+            EntityUtils.consume(response.getEntity());
+            response.close();
         } finally {
             httpclient.close();
         }
