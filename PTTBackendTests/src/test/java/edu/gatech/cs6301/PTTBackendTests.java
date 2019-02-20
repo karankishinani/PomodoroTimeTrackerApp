@@ -198,6 +198,7 @@ public class PTTBackendTests {
     @Test
     public void DeleteUserTest() throws Exception {
         httpclient = HttpClients.createDefault();
+        // TODO: convert to deleteUsers()
         deleteContacts();
         String expectedJson = null;
 
@@ -251,17 +252,17 @@ public class PTTBackendTests {
     // CREATE MULTIPLE DELETE ONE
 
     @Test
-    public void CreateMultipleUpdateOneContactTest() throws Exception {
+    public void CreateMultipleUpdateOneUserTest() throws Exception {
         httpclient = HttpClients.createDefault();
         deleteContacts();
 
         try {
-            CloseableHttpResponse response = createContact("John", "Doe", "(123)-456-7890" , "john@doe.org");
+            CloseableHttpResponse response = createUser("John", "Doe", "john@doe.org");
             // EntityUtils.consume(response.getEntity());
             String id = getIdFromResponse(response);
             response.close();
 
-            response = createContact("Jane", "Wall", "(9876)-543-210" , "jane@wall.com");
+            response = createUser("Jane", "Wall", "jane@wall.com");
             // EntityUtils.consume(response.getEntity());
             String updatedId = getIdFromResponse(response);
             response.close();
@@ -270,8 +271,8 @@ public class PTTBackendTests {
             HttpEntity entity;
             String strResponse;
 
-            response = updateContact(updatedId, "Jane", "Wall", "(6789)-210-534" , "jane@wall.com");
-            String expectedJson = "{\"id\":\"" + updatedId + "\",\"firstname\":\"Jane\",\"familyname\":\"Wall\",\"phonenumber\":\"(6789)-210-534\",\"email\":\"jane@wall.com\"}";
+            response = updateUser(updatedId, "Jane", "Wall", "jane@wall.com");
+            String expectedJson = "{\"id\":\"" + updatedId + "\",\"firstName\":\"Jane\",\"lastName\":\"Wall\",\"email\":\"jane@wall.com\"}";
 
             status = response.getStatusLine().getStatusCode();
             if (status == 200) {
