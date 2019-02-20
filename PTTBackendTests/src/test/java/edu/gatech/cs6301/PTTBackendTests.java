@@ -56,6 +56,68 @@ public class PTTBackendTests {
 
     // USER HERE
 
+    @Test
+    public void createUserTest() throws Exception {
+        deleteContacts();
+
+        try {
+            CloseableHttpResponse response =
+                    createUser("John", "Doe", "john@doe.org");
+
+            int status = response.getStatusLine().getStatusCode();
+            HttpEntity entity;
+            if (status == 201) {
+                entity = response.getEntity();
+            } else {
+                throw new ClientProtocolException("Unexpected response status: " + status);
+            }
+            String strResponse = EntityUtils.toString(entity);
+
+            System.out.println("*** String response " + strResponse + " (" + response.getStatusLine().getStatusCode() + ") ***");
+
+            String id = getIdFromStringResponse(strResponse);
+
+            String expectedJson = "{\"id\":\"" + id + "\",\"firstName\":\"John\",\"lastName\":\"Doe\",\"email\":\"john@doe.org\"}";
+            JSONAssert.assertEquals(expectedJson,strResponse, false);
+            EntityUtils.consume(response.getEntity());
+            response.close();
+        } finally {
+            httpclient.close();
+        }
+    }
+
+    @Test
+    public void updateUserTest() throws Exception {
+        deleteContacts();
+
+        try {
+            CloseableHttpResponse response = createUser("John", "Doe", "john@doe.org");
+            String id = getIdFromResponse(response);
+            response.close();
+
+            response = updateContact(id, "Tom", "Doe", "(123)-456-7890" , "tom@doe.org");
+
+            int status = response.getStatusLine().getStatusCode();
+            HttpEntity entity;
+            String strResponse;
+            if (status == 200) {
+                entity = response.getEntity();
+            } else {
+                throw new ClientProtocolException("Unexpected response status: " + status);
+            }
+            strResponse = EntityUtils.toString(entity);
+
+            System.out.println("*** String response " + strResponse + " (" + response.getStatusLine().getStatusCode() + ") ***");
+
+            String expectedJson = "{\"id\":\"" + id + "\",\"firstname\":\"Tom\",\"familyname\":\"Doe\",\"phonenumber\":\"(123)-456-7890\",\"email\":\"tom@doe.org\"}";
+            JSONAssert.assertEquals(expectedJson,strResponse, false);
+            EntityUtils.consume(response.getEntity());
+            response.close();
+        } finally {
+            httpclient.close();
+        }
+    }
+
     // PROJECT HERE
 
     // SESSION HERE
@@ -438,11 +500,96 @@ public class PTTBackendTests {
 
     // USER
 
+    private CloseableHttpResponse createUser(String firstName, String lastName, String email) throws IOException {
+        HttpPost httpRequest = new HttpPost(baseUrl + "/users");
+        httpRequest.addHeader("accept", "application/json");
+        StringEntity input = new StringEntity("{\"firstName\":\"" + firstName + "\"," +
+                "\"lastName\":\"" + lastName + "\"," +
+                "\"email\":\"" + email + "\"}");
+        input.setContentType("application/json");
+        httpRequest.setEntity(input);
+
+        System.out.println("*** Executing request " + httpRequest.getRequestLine() + "***");
+        CloseableHttpResponse response = httpclient.execute(httpRequest);
+        System.out.println("*** Raw response " + response + "***");
+        return response;
+    }
+
+    private CloseableHttpResponse updateUser(String id, String firstName, String lastName, String email) throws IOException {
+        HttpPut httpRequest = new HttpPut(baseUrl + "/users/" + id);
+        httpRequest.addHeader("accept", "application/json");
+        StringEntity input = new StringEntity("{\"firstName\":\"" + firstName + "\"," +
+                "\"lastName\":\"" + lastName + "\"," +
+                "\"email\":\"" + email + "\"}");
+        input.setContentType("application/json");
+        httpRequest.setEntity(input);
+
+        System.out.println("*** Executing request " + httpRequest.getRequestLine() + "***");
+        CloseableHttpResponse response = httpclient.execute(httpRequest);
+        System.out.println("*** Raw response " + response + "***");
+        return response;
+    }
+
+    private CloseableHttpResponse getUser(String id) throws IOException {
+        HttpGet httpRequest = new HttpGet(baseUrl + "/users/" + id);
+        httpRequest.addHeader("accept", "application/json");
+
+        System.out.println("*** Executing request " + httpRequest.getRequestLine() + "***");
+        CloseableHttpResponse response = httpclient.execute(httpRequest);
+        System.out.println("*** Raw response " + response + "***");
+        return response;
+    }
+
+    private CloseableHttpResponse getAllUsers() throws IOException {
+        HttpGet httpRequest = new HttpGet(baseUrl + "/users");
+        httpRequest.addHeader("accept", "application/json");
+
+        System.out.println("*** Executing request " + httpRequest.getRequestLine() + "***");
+        CloseableHttpResponse response = httpclient.execute(httpRequest);
+        System.out.println("*** Raw response " + response + "***");
+        return response;
+    }
+
+    private CloseableHttpResponse deleteUser(String id) throws IOException {
+        HttpDelete httpDelete = new HttpDelete(baseUrl + "/users/" + id);
+        httpDelete.addHeader("accept", "application/json");
+
+        System.out.println("*** Executing request " + httpDelete.getRequestLine() + "***");
+        CloseableHttpResponse response = httpclient.execute(httpDelete);
+        System.out.println("*** Raw response " + response + "***");
+        // EntityUtils.consume(response.getEntity());
+        // response.close();
+        return response;
+    }
+
     // PROJECT
 
     // SESSION
 
     // REPORT
+
+    // GET ID from Response
+
+    private String getIdFromResponse(CloseableHttpResponse response) throws IOException, JSONException {
+        HttpEntity entity = response.getEntity();
+        String strResponse = EntityUtils.toString(entity);
+        String id = getIdFromStringResponse(strResponse);
+        return id;
+    }
+
+    private String getIdFromStringResponse(String strResponse) throws JSONException {
+        JSONObject object = new JSONObject(strResponse);
+
+        String id = null;
+        Iterator<String> keyList = object.keys();
+        while (keyList.hasNext()){
+            String key = keyList.next();
+            if (key.equals("id")) {
+                id = object.get(key).toString();
+            }
+        }
+        return id;
+    }
 
     // OLD CODE BELOW
 
@@ -510,6 +657,7 @@ public class PTTBackendTests {
         return response;
     }
 
+    // NOT NEEDED!
     private CloseableHttpResponse deleteContacts() throws IOException {
         HttpDelete httpDelete = new HttpDelete(baseUrl + "/api/contacts");
         httpDelete.addHeader("accept", "application/json");
@@ -522,25 +670,6 @@ public class PTTBackendTests {
         return response;
     }
 
-    private String getIdFromResponse(CloseableHttpResponse response) throws IOException, JSONException {
-        HttpEntity entity = response.getEntity();
-        String strResponse = EntityUtils.toString(entity);
-        String id = getIdFromStringResponse(strResponse);
-        return id;
-    }
 
-    private String getIdFromStringResponse(String strResponse) throws JSONException {
-        JSONObject object = new JSONObject(strResponse);
-
-        String id = null;
-        Iterator<String> keyList = object.keys();
-        while (keyList.hasNext()){
-            String key = keyList.next();
-            if (key.equals("id")) {
-                id = object.get(key).toString();
-            }
-        }
-        return id;
-    }
 
 }
