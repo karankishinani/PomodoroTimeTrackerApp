@@ -131,7 +131,7 @@ public class PTTBackendTests {
             // EntityUtils.consume(response.getEntity());
             response.close();
 
-            response = getContact(id);
+            response = getUser(id);
 
             int status = response.getStatusLine().getStatusCode();
             HttpEntity entity;
@@ -379,7 +379,7 @@ public class PTTBackendTests {
             // delete all users that are created in this test
             response = deleteUser(id);
             response.close();
-            response = deleteUser(updateId);
+            response = deleteUser(updatedId);
             response.close();
         } finally {
             httpclient.close();
@@ -617,7 +617,7 @@ public class PTTBackendTests {
             expectedJson += "{\"id\":" + projectid + ",\"projectname\":\"project 3\"}]";
             response.close();
 
-            response = getAllProjects();
+            response = getAllProjects(id);
 
             int status = response.getStatusLine().getStatusCode();
             HttpEntity entity;
@@ -765,7 +765,7 @@ public class PTTBackendTests {
             strResponse = EntityUtils.toString(entity);
             System.out.println("*** String response " + strResponse + " (" + response.getStatusLine().getStatusCode() + ") ***");
             String sessionid = getIdFromStringResponse(strResponse);
-            expectedJson = "{\"id\":" + sessionid + ",\"startTime\":\"2019-02-18T20:00Z\",\"endTime\":\"2019-02-18T21:00Z\",\"counter\":" +counter+ "}";
+            expectedJson = "{\"id\":" + sessionid + ",\"startTime\":\"2019-02-18T20:00Z\",\"endTime\":\"2019-02-18T21:00Z\",\"counter\":1}";
             JSONAssert.assertEquals(expectedJson,strResponse, false);
             EntityUtils.consume(response.getEntity());
             response.close();
@@ -809,7 +809,7 @@ public class PTTBackendTests {
 
             System.out.println("*** String response " + strResponse + " (" + response.getStatusLine().getStatusCode() + ") ***");
 
-            String expectedJson = "{\"id\":" + sessionid + ",\"startTime\":\"2019-02-18T20:00Z\",\"endTime\":\"2019-02-20T22:00Z\",\"counter\":" + counter + "}";
+            String expectedJson = "{\"id\":" + sessionid + ",\"startTime\":\"2019-02-18T20:00Z\",\"endTime\":\"2019-02-20T22:00Z\",\"counter\":2}";
             JSONAssert.assertEquals(expectedJson,strResponse, false);
             EntityUtils.consume(response.getEntity());
             response.close();
