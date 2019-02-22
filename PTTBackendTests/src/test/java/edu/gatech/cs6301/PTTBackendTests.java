@@ -491,6 +491,8 @@ public class PTTBackendTests {
             response.close();
 
             // delete all users that are created in this test
+            response = deleteProject(id, projectid);
+            response.close();
             response = deleteUser(id);
             response.close();
         } finally {
@@ -529,6 +531,8 @@ public class PTTBackendTests {
             response.close();
 
             // delete all users that are created in this test
+            response = deleteProject(id, projectid);
+            response.close();
             response = deleteUser(id);
             response.close();
         } finally {
@@ -569,6 +573,8 @@ public class PTTBackendTests {
             response.close();
             
             // delete all users that are created in this test
+            response = deleteProject(id, projectid);
+            response.close();
             response = deleteUser(id);
             response.close();
         } finally {
@@ -580,6 +586,9 @@ public class PTTBackendTests {
     public void getAllProjectsTest() throws Exception {
         httpclient = HttpClients.createDefault();
         String id = null;
+        String projectid1 = null;
+        String projectid2 = null;
+        String projectid3 = null;
         String projectid = null;
         String expectedJson = "";
 
@@ -592,16 +601,19 @@ public class PTTBackendTests {
             response = createProject(id, "project 1");
             // EntityUtils.consume(response.getEntity());
             projectid = getIdFromResponse(response);
+            projectid1 = projectid;
             expectedJson += "[{\"id\":" + projectid + ",\"projectname\":\"project 1\"}";
             response.close();
 
             response = createProject(id, "project 2");
             projectid = getIdFromResponse(response);
+            projectid2 = projectid;
             expectedJson += "{\"id\":" + projectid + ",\"projectname\":\"project 2\"}";
             response.close();
 
             response = createProject(id, "project 3");
             projectid = getIdFromResponse(response);
+            projectid3 = projectid;
             expectedJson += "{\"id\":" + projectid + ",\"projectname\":\"project 3\"}]";
             response.close();
 
@@ -624,6 +636,12 @@ public class PTTBackendTests {
             response.close();
 
             // delete all users that are created in this test
+            response = deleteProject(id, projectid1);
+            response.close();
+            response = deleteProject(id, projectid2);
+            response.close();
+            response = deleteProject(id, projectid3);
+            response.close();
             response = deleteUser(id);
             response.close();
         } finally {
@@ -694,8 +712,6 @@ public class PTTBackendTests {
     // SESSION HERE
     @Test
     public void createSessionTest() throws Exception {
-        //How to Clear?? 
-        deleteContacts();
 
        try {
             //Create a User first
@@ -753,6 +769,12 @@ public class PTTBackendTests {
             JSONAssert.assertEquals(expectedJson,strResponse, false);
             EntityUtils.consume(response.getEntity());
             response.close();
+
+            // delete all users that are created in this test
+            response = deleteProject(id, projectid);
+            response.close();
+            response = deleteUser(id);
+            response.close();
         } finally {
             httpclient.close();
         }
@@ -760,8 +782,6 @@ public class PTTBackendTests {
 
     @Test
     public void updateSessionTest() throws Exception {
-        // TODO: convert to deleteUsers()
-        deleteContacts();
         try {
             CloseableHttpResponse response = createUser("John", "Doe", "john@doe.org");
             String id = getIdFromResponse(response);
@@ -794,6 +814,11 @@ public class PTTBackendTests {
             EntityUtils.consume(response.getEntity());
             response.close();
 
+            // delete all users that are created in this test
+            response = deleteProject(id, projectid);
+            response.close();
+            response = deleteUser(id);
+            response.close();
         } finally {
             httpclient.close();
         }
