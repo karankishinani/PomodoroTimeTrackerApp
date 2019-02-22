@@ -381,8 +381,7 @@ public class PTTBackendTests {
 
        try {
             //Create a User first
-            CloseableHttpResponse response =
-                    createUser("John", "Doe", "john@doe.org");
+            CloseableHttpResponse response = createUser("John", "Doe", "john@doe.org");
 
             int status = response.getStatusLine().getStatusCode();
             HttpEntity entity;
