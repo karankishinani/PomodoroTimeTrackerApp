@@ -577,7 +577,7 @@ public class PTTBackendTests {
             response = createProject(id, "project 1");
             // EntityUtils.consume(response.getEntity());
             projectid = getIdFromResponse(response);
-            expectedJson += "{\"id\":\"" + projectid + "\",\"projectname\":\"project 1\"}";
+            expectedJson += "[{\"id\":\"" + projectid + "\",\"projectname\":\"project 1\"}";
             response.close();
 
             response = createProject(id, "project 2");
@@ -587,7 +587,7 @@ public class PTTBackendTests {
 
             response = createProject(id, "project 3");
             projectid = getIdFromResponse(response);
-            expectedJson += "{\"id\":\"" + projectid + "\",\"projectname\":\"project 3\"}";
+            expectedJson += "{\"id\":\"" + projectid + "\",\"projectname\":\"project 3\"}]";
             response.close();
 
             response = getAllProjects();
