@@ -58,8 +58,6 @@ public class PTTBackendTests {
 
     @Test
     public void createUserTest() throws Exception {
-        // TODO: convert to deleteUsers()
-        deleteContacts();
         try {
             CloseableHttpResponse response =
                     createUser("John", "Doe", "john@doe.org");
@@ -81,6 +79,10 @@ public class PTTBackendTests {
             JSONAssert.assertEquals(expectedJson,strResponse, false);
             EntityUtils.consume(response.getEntity());
             response.close();
+
+            // delete all users that are created in this test
+            response = deleteUser(id);
+            response.close();
         } finally {
             httpclient.close();
         }
@@ -88,8 +90,6 @@ public class PTTBackendTests {
 
     @Test
     public void updateUserTest() throws Exception {
-        // TODO: convert to deleteUsers()
-        deleteContacts();
         try {
             CloseableHttpResponse response = createUser("John", "Doe", "john@doe.org");
             String id = getIdFromResponse(response);
@@ -113,6 +113,10 @@ public class PTTBackendTests {
             JSONAssert.assertEquals(expectedJson,strResponse, false);
             EntityUtils.consume(response.getEntity());
             response.close();
+            
+            // delete all users that are created in this test
+            response = deleteUser(id);
+            response.close();
         } finally {
             httpclient.close();
         }
@@ -121,8 +125,6 @@ public class PTTBackendTests {
     @Test
     public void getUserTest() throws Exception {
         httpclient = HttpClients.createDefault();
-        // TODO: convert to deleteUsers()
-        deleteContacts();
         try {
             CloseableHttpResponse response = createUser("John", "Doe", "john@doe.org");
             String id = getIdFromResponse(response);
@@ -147,6 +149,10 @@ public class PTTBackendTests {
             JSONAssert.assertEquals(expectedJson,strResponse, false);
             EntityUtils.consume(response.getEntity());
             response.close();
+
+            // delete all users that are created in this test
+            response = deleteUser(id);
+            response.close();
         } finally {
             httpclient.close();
         }
@@ -155,8 +161,7 @@ public class PTTBackendTests {
     @Test
     public void getAllUsersTest() throws Exception {
         httpclient = HttpClients.createDefault();
-        // TODO: convert to deleteUsers()
-        deleteContacts();
+        String id0 = null;
         String id = null;
         String expectedJson = "";
 
@@ -164,6 +169,7 @@ public class PTTBackendTests {
             CloseableHttpResponse response = createUser("John", "Doe", "john@doe.org");
             // EntityUtils.consume(response.getEntity());
             id = getIdFromResponse(response);
+            id0 = id;
             expectedJson += "[{\"id\":" + id + ",\"firstName\":\"John\",\"lastName\":\"Doe\",\"email\":\"john@doe.org\"}";
             response.close();
 
@@ -190,6 +196,12 @@ public class PTTBackendTests {
             JSONAssert.assertEquals(expectedJson,strResponse, false);
             EntityUtils.consume(response.getEntity());
             response.close();
+
+            // delete all users that are created in this test
+            response = deleteUser(id0);
+            response.close();
+            response = deleteUser(id);
+            response.close();
         } finally {
             httpclient.close();
         }
@@ -198,8 +210,6 @@ public class PTTBackendTests {
     @Test
     public void DeleteUserTest() throws Exception {
         httpclient = HttpClients.createDefault();
-        // TODO: convert to deleteUsers()
-        deleteContacts();
         String expectedJson = null;
 
         try {
@@ -252,8 +262,6 @@ public class PTTBackendTests {
     @Test
     public void CreateMultipleDeleteOneUserTest() throws Exception {
         httpclient = HttpClients.createDefault();
-        // TODO: convert to deleteUsers()
-        deleteContacts();
         String expectedJson = "";
 
         try {
@@ -304,6 +312,10 @@ public class PTTBackendTests {
             JSONAssert.assertEquals(expectedJson,strResponse, false);
             EntityUtils.consume(response.getEntity());
             response.close();
+            
+            // delete all users that are created in this test
+            response = deleteUser(id);
+            response.close();
         } finally {
             httpclient.close();
         }
@@ -312,8 +324,6 @@ public class PTTBackendTests {
     @Test
     public void CreateMultipleUpdateOneUserTest() throws Exception {
         httpclient = HttpClients.createDefault();
-        // TODO: convert to deleteUsers()
-        deleteContacts();
 
         try {
             CloseableHttpResponse response = createUser("John", "Doe", "john@doe.org");
@@ -365,6 +375,12 @@ public class PTTBackendTests {
             EntityUtils.consume(response.getEntity());
             response.close();
 
+
+            // delete all users that are created in this test
+            response = deleteUser(id);
+            response.close();
+            response = deleteUser(updateId);
+            response.close();
         } finally {
             httpclient.close();
         }
@@ -373,8 +389,6 @@ public class PTTBackendTests {
     @Test
     public void getMissingUserTest() throws Exception {
         httpclient = HttpClients.createDefault();
-        // TODO: convert to deleteUsers()
-        deleteContacts();
 
         try {
             CloseableHttpResponse response = createUser("John", "Doe", "john@doe.org");
@@ -404,7 +418,6 @@ public class PTTBackendTests {
     @Test
     public void deleteMissingUserTest() throws Exception {
         httpclient = HttpClients.createDefault();
-        deleteContacts();
 
         try {
             CloseableHttpResponse response = createUser("John", "Doe", "john@doe.org");
@@ -434,8 +447,6 @@ public class PTTBackendTests {
     // PROJECT HERE
     @Test
     public void createProjectTest() throws Exception {
-        //How to Clear?? 
-        deleteContacts();
 
        try {
             //Create a User first
@@ -479,6 +490,9 @@ public class PTTBackendTests {
             EntityUtils.consume(response.getEntity());
             response.close();
 
+            // delete all users that are created in this test
+            response = deleteUser(id);
+            response.close();
         } finally {
             httpclient.close();
         }
@@ -486,8 +500,6 @@ public class PTTBackendTests {
 
     @Test
     public void updateProjectTest() throws Exception {
-        // TODO: convert to deleteUsers()
-        deleteContacts();
         try {
             CloseableHttpResponse response = createUser("John", "Doe", "john@doe.org");
             String id = getIdFromResponse(response);
@@ -516,6 +528,9 @@ public class PTTBackendTests {
             EntityUtils.consume(response.getEntity());
             response.close();
 
+            // delete all users that are created in this test
+            response = deleteUser(id);
+            response.close();
         } finally {
             httpclient.close();
         }
@@ -524,8 +539,6 @@ public class PTTBackendTests {
     @Test
     public void getProjectTest() throws Exception {
         httpclient = HttpClients.createDefault();
-        // TODO: convert to deleteUsers()
-        deleteContacts();
         try {
             CloseableHttpResponse response = createUser("John", "Doe", "john@doe.org");
             String id = getIdFromResponse(response);
@@ -554,6 +567,10 @@ public class PTTBackendTests {
             JSONAssert.assertEquals(expectedJson,strResponse, false);
             EntityUtils.consume(response.getEntity());
             response.close();
+            
+            // delete all users that are created in this test
+            response = deleteUser(id);
+            response.close();
         } finally {
             httpclient.close();
         }
@@ -562,8 +579,6 @@ public class PTTBackendTests {
     @Test
     public void getAllProjectsTest() throws Exception {
         httpclient = HttpClients.createDefault();
-        // TODO: convert to deleteUsers()
-        deleteContacts();
         String id = null;
         String projectid = null;
         String expectedJson = "";
@@ -607,6 +622,10 @@ public class PTTBackendTests {
             JSONAssert.assertEquals(expectedJson,strResponse, false);
             EntityUtils.consume(response.getEntity());
             response.close();
+
+            // delete all users that are created in this test
+            response = deleteUser(id);
+            response.close();
         } finally {
             httpclient.close();
         }
@@ -615,7 +634,6 @@ public class PTTBackendTests {
     @Test
     public void DeleteProjectTest() throws Exception {
         httpclient = HttpClients.createDefault();
-        deleteContacts();
         String expectedJson = null;
 
         try {
@@ -663,6 +681,10 @@ public class PTTBackendTests {
             expectedJson = "[]";
             JSONAssert.assertEquals(expectedJson,strResponse, false);
             EntityUtils.consume(response.getEntity());
+            response.close();
+
+            // delete all users that are created in this test
+            response = deleteUser(id);
             response.close();
         } finally {
             httpclient.close();
