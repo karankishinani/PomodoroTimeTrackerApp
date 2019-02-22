@@ -596,7 +596,6 @@ public class PTTBackendTests {
 
         try {
             CloseableHttpResponse response = createUser("John", "Doe", "john@doe.org");
-            EntityUtils.toString(entity);
 
             // EntityUtils.consume(response.getEntity());
             id = getIdFromResponse(response);
