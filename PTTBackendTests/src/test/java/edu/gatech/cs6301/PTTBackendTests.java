@@ -1158,7 +1158,7 @@ public class PTTBackendTests {
     // USER
 
     private CloseableHttpResponse createUser(String firstName, String lastName, String email) throws IOException {
-        HttpPost httpRequest = new HttpPost(baseUrl + "/users");
+        HttpPost httpRequest = new HttpPost(baseUrl + "/ptt/users");
         httpRequest.addHeader("accept", "application/json");
         StringEntity input = new StringEntity("{\"firstName\":\"" + firstName + "\"," +
                 "\"lastName\":\"" + lastName + "\"," +
@@ -1173,7 +1173,7 @@ public class PTTBackendTests {
     }
 
     private CloseableHttpResponse updateUser(String id, String firstName, String lastName, String email) throws IOException {
-        HttpPut httpRequest = new HttpPut(baseUrl + "/users/" + id);
+        HttpPut httpRequest = new HttpPut(baseUrl + "/ptt/users/" + id);
         httpRequest.addHeader("accept", "application/json");
         StringEntity input = new StringEntity("{\"firstName\":\"" + firstName + "\"," +
                 "\"lastName\":\"" + lastName + "\"," +
@@ -1188,7 +1188,7 @@ public class PTTBackendTests {
     }
 
     private CloseableHttpResponse getUser(String id) throws IOException {
-        HttpGet httpRequest = new HttpGet(baseUrl + "/users/" + id);
+        HttpGet httpRequest = new HttpGet(baseUrl + "/ptt/users/" + id);
         httpRequest.addHeader("accept", "application/json");
 
         System.out.println("*** Executing request " + httpRequest.getRequestLine() + "***");
@@ -1198,7 +1198,7 @@ public class PTTBackendTests {
     }
 
     private CloseableHttpResponse getAllUsers() throws IOException {
-        HttpGet httpRequest = new HttpGet(baseUrl + "/users");
+        HttpGet httpRequest = new HttpGet(baseUrl + "/ptt/users");
         httpRequest.addHeader("accept", "application/json");
 
         System.out.println("*** Executing request " + httpRequest.getRequestLine() + "***");
@@ -1208,7 +1208,7 @@ public class PTTBackendTests {
     }
 
     private CloseableHttpResponse deleteUser(String id) throws IOException {
-        HttpDelete httpDelete = new HttpDelete(baseUrl + "/users/" + id);
+        HttpDelete httpDelete = new HttpDelete(baseUrl + "/ptt/users/" + id);
         httpDelete.addHeader("accept", "application/json");
 
         System.out.println("*** Executing request " + httpDelete.getRequestLine() + "***");
@@ -1221,7 +1221,7 @@ public class PTTBackendTests {
 
     // PROJECT
     private CloseableHttpResponse createProject(String userid, String projectname) throws IOException {
-        HttpPost httpRequest = new HttpPost(baseUrl + "/users/" + userid + "/projects");
+        HttpPost httpRequest = new HttpPost(baseUrl + "/ptt/users/" + userid + "/projects");
         httpRequest.addHeader("accept", "application/json");
         StringEntity input = new StringEntity("{\"projectname\":\"" + projectname + "\"," +
                 "\"userid\":\"" + userid + "\"}");
@@ -1235,7 +1235,7 @@ public class PTTBackendTests {
     }
 
     private CloseableHttpResponse updateProject(String userid, String projectid, String projectname) throws IOException {
-        HttpPut httpRequest = new HttpPut(baseUrl + "/users/" + userid + "/projects/" + projectid);
+        HttpPut httpRequest = new HttpPut(baseUrl + "/ptt/users/" + userid + "/projects/" + projectid);
         httpRequest.addHeader("accept", "application/json");
         StringEntity input = new StringEntity("{\"projectname\":\"" + projectname + "\"}");
         input.setContentType("application/json");
@@ -1248,7 +1248,7 @@ public class PTTBackendTests {
     }
 
     private CloseableHttpResponse getProject(String userid, String projectid) throws IOException {
-        HttpGet httpRequest = new HttpGet(baseUrl + "/users/" + userid + "/projects/" + projectid);
+        HttpGet httpRequest = new HttpGet(baseUrl + "/ptt/users/" + userid + "/projects/" + projectid);
         httpRequest.addHeader("accept", "application/json");
 
         System.out.println("*** Executing request " + httpRequest.getRequestLine() + "***");
@@ -1258,7 +1258,7 @@ public class PTTBackendTests {
     }
     // Not Needed?
     private CloseableHttpResponse getAllProjects(String userid) throws IOException {
-        HttpGet httpRequest = new HttpGet(baseUrl + "/users/" + userid);
+        HttpGet httpRequest = new HttpGet(baseUrl + "/ptt/users/" + userid);
         httpRequest.addHeader("accept", "application/json");
 
         System.out.println("*** Executing request " + httpRequest.getRequestLine() + "***");
@@ -1268,7 +1268,7 @@ public class PTTBackendTests {
     }
 
     private CloseableHttpResponse deleteProject(String userid, String projectid) throws IOException {
-        HttpDelete httpDelete = new HttpDelete(baseUrl + "/users/" + userid + "/projects/" + projectid);
+        HttpDelete httpDelete = new HttpDelete(baseUrl + "/ptt/users/" + userid + "/projects/" + projectid);
         httpDelete.addHeader("accept", "application/json");
 
         System.out.println("*** Executing request " + httpDelete.getRequestLine() + "***");
@@ -1283,7 +1283,7 @@ public class PTTBackendTests {
         HttpPost httpRequest = new HttpPost(baseUrl + "/ptt/users/" + userid + "/projects/" + projectid + "/sessions");
         httpRequest.addHeader("accept", "application/json");
         StringEntity input = new StringEntity("{\"startTime\":\"" + startTime + "\"," +
-                "\"endTime\":\"" + endTime + "\"," 
+                "\"endTime\":\"" + endTime + "\"," +
                 "\"counter\":\"" + counter + "\"}");
         input.setContentType("application/json");
         httpRequest.setEntity(input);
