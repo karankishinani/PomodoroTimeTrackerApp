@@ -161,7 +161,8 @@ public class PTTBackendTests {
     @Test
     public void getAllUsersTest() throws Exception {
         httpclient = HttpClients.createDefault();
-        String id0 = null;
+        String id1 = null;
+        String id2 = null;
         String id = null;
         String expectedJson = "";
 
@@ -169,13 +170,14 @@ public class PTTBackendTests {
             CloseableHttpResponse response = createUser("John", "Doe", "john@doe.org");
             // EntityUtils.consume(response.getEntity());
             id = getIdFromResponse(response);
-            id0 = id;
+            id1 = id;
             expectedJson += "[{\"id\":" + id + ",\"firstName\":\"John\",\"lastName\":\"Doe\",\"email\":\"john@doe.org\"}";
             response.close();
 
             response = createUser("Jane", "Wall", "jane@wall.com");
             // EntityUtils.consume(response.getEntity());
             id = getIdFromResponse(response);
+            id2 = id;
             expectedJson += ",{\"id\":" + id + ",\"firstName\":\"Jane\",\"lastName\":\"Wall\",\"email\":\"jane@wall.com\"}]";
             response.close();
 
@@ -198,9 +200,9 @@ public class PTTBackendTests {
             response.close();
 
             // delete all users that are created in this test
-            response = deleteUser(id0);
+            response = deleteUser(id1);
             response.close();
-            response = deleteUser(id);
+            response = deleteUser(id2);
             response.close();
         } finally {
             httpclient.close();
@@ -985,6 +987,27 @@ public class PTTBackendTests {
         return response;
     }
     // REPORT
+    private CloseableHttpResponse getReport(String userid, String projectid, String from, String to, boolean includeCompletedPomodoros, boolean includeTotalHoursWorkedOnProject) throws IOException {
+        String icp = null;
+        String ithwop = null;
+        if (includeCompletedPomodoros) {
+        	icp = "true";
+        } else {
+        	icp = "false";
+        }
+        if (includeTotalHoursWorkedOnProject) {
+        	ithwop = "true";
+        } else {
+        	ithwop = "false";
+        }
+        HttpGet httpRequest = new HttpGet(baseUrl + "/ptt/users/" + userid + "/projects/" + projectid + "report?from=" + from + "&to=" + to + "&includeCompletedPomodoros=" + icp + "&includeTotalHoursWorkedOnProject=" + ithwop);
+        httpRequest.addHeader("accept", "application/json");
+
+        System.out.println("*** Executing request " + httpRequest.getRequestLine() + "***");
+        CloseableHttpResponse response = httpclient.execute(httpRequest);
+        System.out.println("*** Raw response " + response + "***");
+        return response;
+    }
 
     // GET ID from Response
 
