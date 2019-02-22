@@ -164,13 +164,13 @@ public class PTTBackendTests {
             CloseableHttpResponse response = createUser("John", "Doe", "john@doe.org");
             // EntityUtils.consume(response.getEntity());
             id = getIdFromResponse(response);
-            expectedJson += "[{\"id\":\"" + id + "\",\"firstName\":\"John\",\"lastName\":\"Doe\",\"email\":\"john@doe.org\"}";
+            expectedJson += "[{\"id\":" + id + ",\"firstName\":\"John\",\"lastName\":\"Doe\",\"email\":\"john@doe.org\"}";
             response.close();
 
             response = createUser("Jane", "Wall", "jane@wall.com");
             // EntityUtils.consume(response.getEntity());
             id = getIdFromResponse(response);
-            expectedJson += ",{\"id\":\"" + id + "\",\"firstName\":\"Jane\",\"lastName\":\"Wall\",\"email\":\"jane@wall.com\"}]";
+            expectedJson += ",{\"id\":" + id + ",\"firstName\":\"Jane\",\"lastName\":\"Wall\",\"email\":\"jane@wall.com\"}]";
             response.close();
 
             response = getAllUsers();
@@ -224,7 +224,7 @@ public class PTTBackendTests {
 
             System.out.println("*** String response " + strResponse + " (" + response.getStatusLine().getStatusCode() + ") ***");
 
-            expectedJson = "{\"id\":\"" + deleteid + "\",\"firstName\":\"John\",\"lastName\":\"Doe\",\"email\":\"john@doe.org\"}";
+            expectedJson = "{\"id\":" + deleteid + ",\"firstName\":\"John\",\"lastName\":\"Doe\",\"email\":\"john@doe.org\"}";
             JSONAssert.assertEquals(expectedJson,strResponse, false);
             EntityUtils.consume(response.getEntity());
             response.close();
@@ -265,7 +265,7 @@ public class PTTBackendTests {
             response = createUser("Jane", "Wall", "jane@wall.com");
             // EntityUtils.consume(response.getEntity());
             String id = getIdFromResponse(response);
-            expectedJson += "[{\"id\":\"" + id + "\",\"firstName\":\"Jane\",\"lastName\":\"Wall\",\"email\":\"jane@wall.com\"}]";
+            expectedJson += "[{\"id\":" + id + ",\"firstName\":\"Jane\",\"lastName\":\"Wall\",\"email\":\"jane@wall.com\"}]";
             response.close();
 
             int status;
@@ -284,7 +284,7 @@ public class PTTBackendTests {
 
             System.out.println("*** String response " + strResponse + " (" + response.getStatusLine().getStatusCode() + ") ***");
 
-            String expectedJson2 = "{\"id\":\"" + deleteId + "\",\"firstName\":\"John\",\"lastName\":\"Doe\",\"email\":\"john@doe.org\"}";
+            String expectedJson2 = "{\"id\":" + deleteId + ",\"firstName\":\"John\",\"lastName\":\"Doe\",\"email\":\"john@doe.org\"}";
             JSONAssert.assertEquals(expectedJson2,strResponse, false);
             EntityUtils.consume(response.getEntity());
             response.close();
@@ -331,7 +331,7 @@ public class PTTBackendTests {
             String strResponse;
 
             response = updateUser(updatedId, "Jane", "Wall", "jane@wall.com");
-            String expectedJson = "{\"id\":\"" + updatedId + "\",\"firstName\":\"Jane\",\"lastName\":\"Wall\",\"email\":\"jane@wall.com\"}";
+            String expectedJson = "{\"id\":" + updatedId + ",\"firstName\":\"Jane\",\"lastName\":\"Wall\",\"email\":\"jane@wall.com\"}";
 
             status = response.getStatusLine().getStatusCode();
             if (status == 200) {
@@ -474,7 +474,7 @@ public class PTTBackendTests {
 
             String projectid = getIdFromStringResponse(strResponse);
 
-            String expectedJson = "{\"id\":\"" + projectid + "\",\"projectname\":\"project 1\"}";
+            String expectedJson = "{\"id\":" + projectid + ",\"projectname\":\"project 1\"}";
             JSONAssert.assertEquals(expectedJson,strResponse, false);
             EntityUtils.consume(response.getEntity());
             response.close();
@@ -511,7 +511,7 @@ public class PTTBackendTests {
 
             System.out.println("*** String response " + strResponse + " (" + response.getStatusLine().getStatusCode() + ") ***");
 
-            String expectedJson = "{\"id\":\"" + projectid + "\",\"projectname\":\"project 2\"}";
+            String expectedJson = "{\"id\":" + projectid + ",\"projectname\":\"project 2\"}";
             JSONAssert.assertEquals(expectedJson,strResponse, false);
             EntityUtils.consume(response.getEntity());
             response.close();
@@ -550,7 +550,7 @@ public class PTTBackendTests {
 
             System.out.println("*** String response " + strResponse + " (" + response.getStatusLine().getStatusCode() + ") ***");
 
-            String expectedJson = "{\"id\":\"" + projectid + "\",\"projectname\":\"project 1\"}";
+            String expectedJson = "{\"id\":" + projectid + ",\"projectname\":\"project 1\"}";
             JSONAssert.assertEquals(expectedJson,strResponse, false);
             EntityUtils.consume(response.getEntity());
             response.close();
@@ -577,17 +577,17 @@ public class PTTBackendTests {
             response = createProject(id, "project 1");
             // EntityUtils.consume(response.getEntity());
             projectid = getIdFromResponse(response);
-            expectedJson += "[{\"id\":\"" + projectid + "\",\"projectname\":\"project 1\"}";
+            expectedJson += "[{\"id\":" + projectid + ",\"projectname\":\"project 1\"}";
             response.close();
 
             response = createProject(id, "project 2");
             projectid = getIdFromResponse(response);
-            expectedJson += "{\"id\":\"" + projectid + "\",\"projectname\":\"project 2\"}";
+            expectedJson += "{\"id\":" + projectid + ",\"projectname\":\"project 2\"}";
             response.close();
 
             response = createProject(id, "project 3");
             projectid = getIdFromResponse(response);
-            expectedJson += "{\"id\":\"" + projectid + "\",\"projectname\":\"project 3\"}]";
+            expectedJson += "{\"id\":" + projectid + ",\"projectname\":\"project 3\"}]";
             response.close();
 
             response = getAllProjects();
@@ -644,7 +644,7 @@ public class PTTBackendTests {
 
             System.out.println("*** String response " + strResponse + " (" + response.getStatusLine().getStatusCode() + ") ***");
 
-            expectedJson = "{\"id\":\"" + projectid + "\",\"projectname\":\"project 1\"}";
+            expectedJson = "{\"id\":" + projectid + ",\"projectname\":\"project 1\"}";
             JSONAssert.assertEquals(expectedJson,strResponse, false);
             EntityUtils.consume(response.getEntity());
             response.close();
@@ -1237,8 +1237,7 @@ public class PTTBackendTests {
     private CloseableHttpResponse updateProject(String userid, String projectid, String projectname) throws IOException {
         HttpPut httpRequest = new HttpPut(baseUrl + "/users/" + userid + "/projects/" + projectid);
         httpRequest.addHeader("accept", "application/json");
-        StringEntity input = new StringEntity("{\"projectname\":\"" + projectname + "\"," +
-                "\"userid\":\"" + userid + "\"}");
+        StringEntity input = new StringEntity("{\"projectname\":\"" + projectname + "\"}");
         input.setContentType("application/json");
         httpRequest.setEntity(input);
 
