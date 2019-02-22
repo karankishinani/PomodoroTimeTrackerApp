@@ -402,7 +402,7 @@ public class PTTBackendTests {
     }
 
     @Test
-    public void deleteMissingUsertTest() throws Exception {
+    public void deleteMissingUserTest() throws Exception {
         httpclient = HttpClients.createDefault();
         deleteContacts();
 
