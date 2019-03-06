@@ -18,16 +18,32 @@
         android:id="@+id/mainUserLoginBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="167dp"
+        android:layout_marginLeft="167dp"
+        android:layout_marginTop="226dp"
+        android:layout_marginEnd="156dp"
+        android:layout_marginRight="156dp"
+        android:layout_marginBottom="45dp"
         android:text="USER"
-        tools:layout_editor_absoluteX="167dp"
-        tools:layout_editor_absoluteY="226dp" />
+        app:layout_constraintBottom_toTopOf="@+id/mainAdminLoginBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/mainAdminLoginBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="166dp"
+        android:layout_marginLeft="166dp"
+        android:layout_marginTop="45dp"
+        android:layout_marginEnd="157dp"
+        android:layout_marginRight="157dp"
+        android:layout_marginBottom="364dp"
         android:text="Admin"
-        tools:layout_editor_absoluteX="166dp"
-        tools:layout_editor_absoluteY="319dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mainUserLoginBtn" />
 
 </android.support.constraint.ConstraintLayout>
