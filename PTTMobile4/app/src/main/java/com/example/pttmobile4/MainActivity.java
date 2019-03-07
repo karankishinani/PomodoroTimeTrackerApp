@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.pttmobile4.admin.AdminActivity;
+import com.example.pttmobile4.user.UserLoginActivity;
+
 public class MainActivity extends AppCompatActivity {
 
     Button mainUserLoginBtn;
@@ -19,9 +22,8 @@ public class MainActivity extends AppCompatActivity {
         mainAdminLoginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), AdminActivity.class);
+                Intent intent = new Intent(MainActivity.this, AdminActivity.class);
                 startActivity(intent);
-                // Send Intent
 
             }
         });
@@ -29,7 +31,8 @@ public class MainActivity extends AppCompatActivity {
         mainUserLoginBtn = findViewById(R.id.mainUserLoginBtn);
         mainUserLoginBtn.setOnClickListener(new View.OnClickListener() {
             public void  onClick(View v){
-                // Send Intent
+                Intent intent = new Intent(MainActivity.this, UserLoginActivity.class);
+                startActivity(intent);
             }
         });
     }

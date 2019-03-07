@@ -1,13 +1,15 @@
-package com.example.pttmobile4;
+package com.example.pttmobile4.admin;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class CreateProjectActivity extends AppCompatActivity {
+import com.example.pttmobile4.R;
+
+public class EditUserActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_project);
+        setContentView(R.layout.activity_edit_user);
     }
 }
