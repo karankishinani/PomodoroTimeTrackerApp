@@ -26,7 +26,7 @@ public class CreateUserActivity extends AppCompatActivity {
 
         fName = findViewById(R.id.fName);
         lName = findViewById(R.id.lName);
-        emailId = findViewById(R.id.lName);
+        emailId = findViewById(R.id.emailId);
         createUserOkBtn = findViewById(R.id.createUserOkBtn);
         createUserOkBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -34,12 +34,19 @@ public class CreateUserActivity extends AppCompatActivity {
                 // CREATE User and add them in the DB
                 Call<UserResponse> call = Client
                         .getInstance().getApi().createUser(fName.getText().toString(),lName.getText().toString(),emailId.getText().toString());
-
+                System.out.println(fName.getText().toString());
+                System.out.println(lName.getText().toString());
+                System.out.println(emailId.getText().toString());
+                System.out.println("Hi guys I'm outside!");
                 call.enqueue(new Callback<UserResponse>() {
                     @Override
                     public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
                         UserResponse userResponse = response.body();
-
+                        System.out.println("This is my response: " + response);
+                        System.out.println("Hi guys onResponse now!");
+                        if (userResponse==null){
+                            System.out.println("User response is null");
+                        }
                         if (!userResponse.isError()) {
 
                             Toast.makeText(CreateUserActivity.this, "Something WRONG", Toast.LENGTH_LONG).show();
@@ -51,7 +58,8 @@ public class CreateUserActivity extends AppCompatActivity {
 
                     @Override
                     public void onFailure(Call<UserResponse> call, Throwable t) {
-
+                        System.out.println("Hi guys I Failed :( !");
+                        System.out.println(t.getMessage());
                     }
                 });
 
