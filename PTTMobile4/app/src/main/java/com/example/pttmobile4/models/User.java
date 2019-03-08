@@ -5,9 +5,9 @@ import com.google.gson.annotations.SerializedName;
 
 public class User {
 
+    // TODO: change to integer
     @SerializedName("id")
     @Expose
-    //TODO: change to integer
     private String id;
     @SerializedName("firstName")
     @Expose

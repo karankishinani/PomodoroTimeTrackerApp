@@ -29,7 +29,6 @@ public class CreateUserActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_user);
-
         fName = findViewById(R.id.fName);
         lName = findViewById(R.id.lName);
         emailId = findViewById(R.id.emailId);
@@ -42,7 +41,6 @@ public class CreateUserActivity extends AppCompatActivity {
                 params.put("lastName", lName.getText().toString());
                 params.put("email", emailId.getText().toString());
                 RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"),(new JSONObject(params)).toString());
-                //User newuser = new User(fName.getText().toString(),lName.getText().toString(),emailId.getText().toString());
                 // CREATE User and add them in the DB
                 Call<User> call = Client
                         .getInstance().getApi().createUser(body);
@@ -54,9 +52,6 @@ public class CreateUserActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<User> call, Response<User> response) {
                         User user = response.body();
-                        System.out.println("This is my response: " + response);
-                        System.out.println("This is my call: " + call);
-                        System.out.println("Hi guys onResponse now!");
                         if (user==null){
                             System.out.println("User response is null");
                         }
@@ -67,8 +62,6 @@ public class CreateUserActivity extends AppCompatActivity {
 
                     @Override
                     public void onFailure(Call<User> call, Throwable t) {
-                        System.out.println("Hi guys I Failed :( !");
-                        System.out.println(t.getMessage());
                     }
                 });
 
