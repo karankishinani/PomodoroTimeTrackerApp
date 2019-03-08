@@ -1,4 +1,4 @@
-package com.example.pttmobile4.adapter;
+package com.example.pttmobile4.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;

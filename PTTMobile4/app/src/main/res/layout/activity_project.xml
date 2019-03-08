@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".user.ProjectActivity">
+    tools:context=".activities.ProjectActivity">
 
     <TextView
         android:text="Project Name"

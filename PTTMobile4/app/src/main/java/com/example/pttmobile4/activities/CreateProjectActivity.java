@@ -1,4 +1,4 @@
-package com.example.pttmobile4.user;
+package com.example.pttmobile4.activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
