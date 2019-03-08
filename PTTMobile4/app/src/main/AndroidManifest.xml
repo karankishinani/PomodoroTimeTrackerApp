@@ -17,7 +17,7 @@
         <activity android:name=".activities.AdminActivity" />
 
         <activity android:name=".activities.CreateProjectActivity" />
-        <activity android:name=".activities.ProjectActivity" />
+        <activity android:name=".activities.EditProjectActivity" />
         <activity android:name=".activities.UserActivity" />
         <activity android:name=".activities.UserLoginActivity" />
 

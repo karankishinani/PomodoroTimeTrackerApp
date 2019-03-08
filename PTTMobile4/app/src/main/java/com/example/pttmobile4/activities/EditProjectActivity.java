@@ -5,7 +5,7 @@ import android.os.Bundle;
 
 import com.example.pttmobile4.R;
 
-public class ProjectActivity extends AppCompatActivity {
+public class EditProjectActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
