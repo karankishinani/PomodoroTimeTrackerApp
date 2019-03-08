@@ -4,6 +4,7 @@ import com.example.pttmobile4.models.User;
 import com.example.pttmobile4.models.UserResponse;
 
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.Headers;
@@ -13,10 +14,6 @@ public interface APIInterface {
 
     @FormUrlEncoded
     @POST("users")
-    Call<User> createUser(
-            @Field("firstName") String firstName,
-            @Field("lastName") String lastName,
-            @Field("email") String email
-    );
+    Call<User> createUser(@Body User user);
 
 }

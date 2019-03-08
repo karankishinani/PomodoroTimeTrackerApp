@@ -32,9 +32,10 @@ public class CreateUserActivity extends AppCompatActivity {
         createUserOkBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                User newuser = new User(fName.getText().toString(),lName.getText().toString(),emailId.getText().toString());
                 // CREATE User and add them in the DB
                 Call<User> call = Client
-                        .getInstance().getApi().createUser(fName.getText().toString(),lName.getText().toString(),emailId.getText().toString());
+                        .getInstance().getApi().createUser(newuser);
                 System.out.println(fName.getText().toString());
                 System.out.println(lName.getText().toString());
                 System.out.println(emailId.getText().toString());
