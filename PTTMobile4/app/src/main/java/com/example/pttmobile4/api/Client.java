@@ -1,7 +1,9 @@
 package com.example.pttmobile4.api;
 
 import android.util.Base64;
+
 import java.io.IOException;
+
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -9,16 +11,16 @@ import okhttp3.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class RetrofitClient {
+public class Client {
 
     private static final String AUTH = "Basic " + Base64.encodeToString(("").getBytes(), Base64.NO_WRAP);
 
     private static final String BASE_URL = "http://locahost:8080/ptt/api";
-    private static RetrofitClient mInstance;
+    private static Client mInstance;
     private Retrofit retrofit;
 
 
-    private RetrofitClient() {
+    private Client() {
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
                 .addInterceptor(
                         new Interceptor() {
@@ -43,15 +45,15 @@ public class RetrofitClient {
                 .build();
     }
 
-    public static synchronized RetrofitClient getInstance() {
+    public static synchronized Client getInstance() {
         if (mInstance == null) {
-            mInstance = new RetrofitClient();
+            mInstance = new Client();
         }
         return mInstance;
     }
 
-    public Api getApi() {
-        return retrofit.create(Api.class);
+    public APIInterface getApi() {
+        return retrofit.create(APIInterface.class);
     }
 
 }
