@@ -13,8 +13,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Client {
 
-    private static final String AUTH = "Basic " + Base64.encodeToString(("").getBytes(), Base64.NO_WRAP);
-
     private static final String BASE_URL = "http://locahost:8080/ptt/api";
     private static Client mInstance;
     private Retrofit retrofit;
@@ -29,7 +27,6 @@ public class Client {
                                 Request original = chain.request();
 
                                 Request.Builder requestBuilder = original.newBuilder()
-                                        .addHeader("Authorization", AUTH)
                                         .method(original.method(), original.body());
 
                                 Request request = requestBuilder.build();
