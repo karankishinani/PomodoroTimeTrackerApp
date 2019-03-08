@@ -1,17 +1,20 @@
 package com.example.pttmobile4.api;
 
+import com.example.pttmobile4.models.UserResponse;
+
 import retrofit2.Call;
-import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
-import retrofit2.http.GET;
 import retrofit2.http.POST;
-import retrofit2.http.PUT;
-import retrofit2.http.Path;
 
 public interface APIInterface {
 
-
-
+    @FormUrlEncoded
+    @POST("users")
+    Call<UserResponse> createUser(
+            @Field("firstName") String firstName,
+            @Field("lastName") String lastName,
+            @Field("email") String email
+    );
 
 }
