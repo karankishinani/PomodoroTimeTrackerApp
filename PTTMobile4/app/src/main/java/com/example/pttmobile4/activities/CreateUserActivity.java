@@ -33,32 +33,28 @@ public class CreateUserActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // CREATE User and add them in the DB
-                Call<UserResponse> call = Client
+                Call<User> call = Client
                         .getInstance().getApi().createUser(fName.getText().toString(),lName.getText().toString(),emailId.getText().toString());
                 System.out.println(fName.getText().toString());
                 System.out.println(lName.getText().toString());
                 System.out.println(emailId.getText().toString());
                 System.out.println("Hi guys I'm outside!");
-                call.enqueue(new Callback<UserResponse>() {
+                call.enqueue(new Callback<User>() {
                     @Override
-                    public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
-                        UserResponse userResponse = response.body();
+                    public void onResponse(Call<User> call, Response<User> response) {
+                        User user = response.body();
                         System.out.println("This is my response: " + response);
                         System.out.println("Hi guys onResponse now!");
-                        if (userResponse==null){
+                        if (user==null){
                             System.out.println("User response is null");
                         }
-                        if (!userResponse.isError()) {
-
-                            Toast.makeText(CreateUserActivity.this, "Something WRONG", Toast.LENGTH_LONG).show();
-
-                        } else {
-                            Toast.makeText(CreateUserActivity.this,  "Created: " + userResponse.getUsers().getEmail(), Toast.LENGTH_LONG).show();
+                         else {
+                            Toast.makeText(CreateUserActivity.this,  "Created: " + user.getEmail(), Toast.LENGTH_LONG).show();
                         }
                     }
 
                     @Override
-                    public void onFailure(Call<UserResponse> call, Throwable t) {
+                    public void onFailure(Call<User> call, Throwable t) {
                         System.out.println("Hi guys I Failed :( !");
                         System.out.println(t.getMessage());
                     }

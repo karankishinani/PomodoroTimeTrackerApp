@@ -1,5 +1,6 @@
 package com.example.pttmobile4.api;
 
+import com.example.pttmobile4.models.User;
 import com.example.pttmobile4.models.UserResponse;
 
 import retrofit2.Call;
@@ -12,7 +13,7 @@ public interface APIInterface {
 
     @FormUrlEncoded
     @POST("users")
-    Call<UserResponse> createUser(
+    Call<User> createUser(
             @Field("firstName") String firstName,
             @Field("lastName") String lastName,
             @Field("email") String email
