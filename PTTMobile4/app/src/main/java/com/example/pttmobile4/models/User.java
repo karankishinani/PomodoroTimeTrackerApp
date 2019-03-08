@@ -8,7 +8,7 @@ public class User {
     // TODO: change to integer
     @SerializedName("id")
     @Expose
-    private String id;
+    private Integer id;
     @SerializedName("firstName")
     @Expose
     private String firstName;
@@ -25,11 +25,11 @@ public class User {
         this.email = email;
     }
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

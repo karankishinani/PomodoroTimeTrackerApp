@@ -44,10 +44,7 @@ public class CreateUserActivity extends AppCompatActivity {
                 // CREATE User and add them in the DB
                 Call<User> call = Client
                         .getInstance().getApi().createUser(body);
-                System.out.println(fName.getText().toString());
-                System.out.println(lName.getText().toString());
-                System.out.println(emailId.getText().toString());
-                System.out.println("Hi guys I'm outside!");
+
                 call.enqueue(new Callback<User>() {
                     @Override
                     public void onResponse(Call<User> call, Response<User> response) {
