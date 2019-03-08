@@ -25,7 +25,7 @@ public class Client {
 
                                 Request.Builder requestBuilder = original.newBuilder()
                                         .method(original.method(), original.body());
-
+                                requestBuilder.header("Content-Type", "application/json");
                                 Request request = requestBuilder.build();
                                 return chain.proceed(request);
                             }
