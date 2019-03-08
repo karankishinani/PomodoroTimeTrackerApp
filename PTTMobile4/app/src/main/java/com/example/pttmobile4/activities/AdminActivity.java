@@ -24,7 +24,7 @@ public class AdminActivity extends AppCompatActivity {
         createUserBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AdminActivity.this, EditUserActivity.class);
+                Intent intent = new Intent(AdminActivity.this, CreateUserActivity.class);
                 startActivity(intent);
             }
         });
