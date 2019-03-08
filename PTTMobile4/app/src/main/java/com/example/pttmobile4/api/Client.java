@@ -1,9 +1,6 @@
 package com.example.pttmobile4.api;
 
-import android.util.Base64;
-
 import java.io.IOException;
-
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
