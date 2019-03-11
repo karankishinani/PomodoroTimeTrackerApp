@@ -18,6 +18,8 @@ import retrofit2.http.Query;
 
 public interface APIInterface {
 
+    // USERS
+
     @POST("users")
     @Headers("Content-Type: application/json")
     Call<User> createUser(@Body RequestBody body);
@@ -38,6 +40,7 @@ public interface APIInterface {
     @Headers("Content-Type: application/json")
     Call<User> deleteUser(@Path("userId") int id);
 
+    // PROJECTS
 
     @POST("users/{userId}/projects")
     @Headers("Content-Type: application/json")
@@ -59,6 +62,8 @@ public interface APIInterface {
     @Headers("Content-Type: application/json")
     Call<Project> deleteProject(@Path("userId") int userId, @Path("projectId") int projectId);
 
+    // SESSIONS
+
     @POST("users/{userId}/projects/{projectId}/sessions")
     @Headers("Content-Type: application/json")
     Call<Session> createSession(@Path("userId") int userId, @Path("projectId") int projectId, @Body RequestBody body);
@@ -66,6 +71,8 @@ public interface APIInterface {
     @PUT("users/{userId}/projects/{projectId}/sessions/{sessionId}")
     @Headers("Content-Type: application/json")
     Call<Session> updateSession(@Path("userId") int userId, @Path("projectId") int projectId, @Path("sessionId") int sessionId, @Body RequestBody body);
+
+    // REPORT
 
     //TODO: When backend is done, double check
     @GET("users/{userId}/projects/{projectId}/report")
