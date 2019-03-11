@@ -1,8 +1,9 @@
 package com.example.pttmobile4.api;
 
 import com.example.pttmobile4.models.Project;
-import com.example.pttmobile4.models.User;
+import com.example.pttmobile4.models.Report;
 import com.example.pttmobile4.models.Session;
+import com.example.pttmobile4.models.User;
 
 import okhttp3.RequestBody;
 import retrofit2.Call;
@@ -13,6 +14,7 @@ import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface APIInterface {
 
@@ -65,10 +67,9 @@ public interface APIInterface {
     @Headers("Content-Type: application/json")
     Call<Session> updateSession(@Path("userId") int userId, @Path("projectId") int projectId, @Path("sessionId") int sessionId, @Body RequestBody body);
 
-//TODO: When backend is done
-//    @GET("users/{userId}/projects/{projectId}/report?from={from}&to={to}&includeCompletedPomodoros={includeCompletedPomodoros}&includeTotalHoursWorkedOnProject={includeTotalHoursWorkedOnProject}")
-//    @Headers("Content-Type: application/json")
-//    Call<Report> updateSession(@Path("userId") int userId, @Path("projectId") int projectId, @Path("from") String from, @Path("to") String to, );
-
+    //TODO: When backend is done, double check
+    @GET("users/{userId}/projects/{projectId}/report")
+    @Headers("Content-Type: application/json")
+    Call<Report> getReport(@Path("userId") int userId, @Path("projectId") int projectId, @Query("from") String from, @Query("to") String to, @Query("includeCompletedPomodoros") boolean includeCompletedPomodoros, @Query("includeTotalHoursWorkedOnProject") boolean includeTotalHoursWorkedOnProject);
 
 }
