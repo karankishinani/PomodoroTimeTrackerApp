@@ -31,7 +31,7 @@ class ProjectController {
     // Single item
 
     @GetMapping("ptt/api/users/{userid}/projects/{id}")
-    Project one(@PathVariable String id) {
+    Project one(@PathVariable Long id) {
 
         return repository.findById(id)
                 .orElseThrow(() -> new UserNotFoundException());
@@ -39,7 +39,7 @@ class ProjectController {
     }
 
     @PutMapping("ptt/api/users/{userid}/projects/{id}")
-    Project replaceProject(@RequestBody Project newProject, @PathVariable String id) {
+    Project replaceProject(@RequestBody Project newProject, @PathVariable Long id) {
 
         return repository.findById(id)
                 .map(Project -> {
@@ -52,7 +52,7 @@ class ProjectController {
     }
 
     @DeleteMapping("ptt/api/users/{userid}/projects/{id}")
-    Project deleteProjects(@PathVariable String id) {
+    Project deleteProjects(@PathVariable Long id) {
 
         Project result = repository.findById(id)
                 .orElseThrow(() -> new UserNotFoundException());

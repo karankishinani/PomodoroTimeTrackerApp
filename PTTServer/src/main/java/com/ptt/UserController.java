@@ -31,7 +31,7 @@ class UserController {
     // Single item
 
     @GetMapping("ptt/api/users/{id}")
-    User one(@PathVariable String id) {
+    User one(@PathVariable Long id) {
 
         return repository.findById(id)
                     .orElseThrow(() -> new UserNotFoundException());
@@ -39,7 +39,7 @@ class UserController {
     }
 
     @PutMapping("ptt/api/users/{id}")
-    User replaceUser(@RequestBody User newUser, @PathVariable String id) {
+    User replaceUser(@RequestBody User newUser, @PathVariable Long id) {
 
         return repository.findById(id)
                     .map(User -> {
@@ -54,7 +54,7 @@ class UserController {
     }
 
     @DeleteMapping("ptt/api/users/{id}")
-    User deleteUsers(@PathVariable String id) {
+    User deleteUsers(@PathVariable Long id) {
 
         User result = repository.findById(id)
                 .orElseThrow(() -> new UserNotFoundException());
