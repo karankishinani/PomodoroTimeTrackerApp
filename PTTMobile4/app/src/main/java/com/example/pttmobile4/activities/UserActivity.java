@@ -32,7 +32,7 @@ public class UserActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getApplicationContext(),"HELLO hihiihi",Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(getApplicationContext(), CreateProjectActivity.class);
+                Intent intent = new Intent(UserActivity.this, CreateProjectActivity.class);
                 startActivity(intent);
             }
         });

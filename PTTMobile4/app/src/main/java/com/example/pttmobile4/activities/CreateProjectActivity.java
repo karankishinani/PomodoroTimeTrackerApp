@@ -25,7 +25,7 @@ import retrofit2.Response;
 
 public class CreateProjectActivity extends AppCompatActivity {
 
-    Button createProjectBtn;
+    Button createProjectOkBtn;
     EditText projectName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,8 +33,8 @@ public class CreateProjectActivity extends AppCompatActivity {
         setContentView(R.layout.activity_create_project);
 
         projectName = findViewById(R.id.projectName);
-        createProjectBtn = findViewById(R.id.createProjectBtn);
-        createProjectBtn.setOnClickListener(new View.OnClickListener() {
+        createProjectOkBtn = findViewById(R.id.createProjectOkBtn);
+        createProjectOkBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Map<String,Object> params = new ArrayMap<>();
@@ -57,6 +57,7 @@ public class CreateProjectActivity extends AppCompatActivity {
 
                     @Override
                     public void onFailure(Call<Project> call, Throwable t) {
+                        Toast.makeText(CreateProjectActivity.this,  "Failed! ", Toast.LENGTH_LONG).show();
                     }
                 });
 
