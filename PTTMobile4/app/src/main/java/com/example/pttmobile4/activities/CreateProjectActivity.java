@@ -38,7 +38,8 @@ public class CreateProjectActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Map<String,Object> params = new ArrayMap<>();
-                params.put("projectname", projectName.getText().toString());
+                // TODO: change to projectname
+                params.put("projectName", projectName.getText().toString());
                 RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"),(new JSONObject(params)).toString());
 
                 Call<Project> call = Client
