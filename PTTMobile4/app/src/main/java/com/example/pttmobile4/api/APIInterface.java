@@ -5,6 +5,8 @@ import com.example.pttmobile4.models.Report;
 import com.example.pttmobile4.models.Session;
 import com.example.pttmobile4.models.User;
 
+import java.util.List;
+
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -34,7 +36,7 @@ public interface APIInterface {
 
     @GET("users")
     @Headers("Content-Type: application/json")
-    Call<User> getUsers();
+    Call<List<User>> getUsers();
 
     @DELETE("users/{userId}")
     @Headers("Content-Type: application/json")
@@ -44,11 +46,11 @@ public interface APIInterface {
 
     @POST("users/{userId}/projects")
     @Headers("Content-Type: application/json")
-    Call<Project> createProject(@Path("userId") int id, @Body RequestBody body);
+    Call<List<Project>> createProject(@Path("userId") int id, @Body RequestBody body);
 
     @GET("users/{userId}/projects")
     @Headers("Content-Type: application/json")
-    Call<Project> getProjects(@Path("userId") int id);
+    Call<List<Project>> getProjects(@Path("userId") int id);
 
     @GET("users/{userId}/projects/{projectId}")
     @Headers("Content-Type: application/json")
