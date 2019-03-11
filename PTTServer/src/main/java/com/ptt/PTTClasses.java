@@ -34,9 +34,9 @@ class Project {
 
     private
     @Id @GeneratedValue(strategy= GenerationType.AUTO) long id;
-    private String projectName;
+    private String projectname;
 
     Project(String projectName) {
-        this.projectName = projectName;
+        this.projectname = projectName;
     }
 }

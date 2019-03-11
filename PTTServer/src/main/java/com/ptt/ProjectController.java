@@ -43,7 +43,7 @@ class ProjectController {
 
         return repository.findById(id)
                 .map(Project -> {
-                    Project.setProjectName(newProject.getProjectName());
+                    Project.setProjectname(newProject.getProjectname());
                     return repository.save(Project);
                 })
                 .orElseThrow(() -> new UserNotFoundException());
