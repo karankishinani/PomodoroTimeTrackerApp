@@ -32,11 +32,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <ListView
+
+        <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:layout_editor_absoluteX="8dp"
-            tools:layout_editor_absoluteY="8dp" />
+            android:id="@+id/projectList"
+            android:scrollbars="vertical">
+        </android.support.v7.widget.RecyclerView>
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
