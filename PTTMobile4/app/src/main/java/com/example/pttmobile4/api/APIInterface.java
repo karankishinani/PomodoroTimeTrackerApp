@@ -5,6 +5,7 @@ import com.example.pttmobile4.models.Report;
 import com.example.pttmobile4.models.Session;
 import com.example.pttmobile4.models.User;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import okhttp3.RequestBody;
@@ -36,7 +37,7 @@ public interface APIInterface {
 
     @GET("users")
     @Headers("Content-Type: application/json")
-    Call<List<User>> getUsers();
+    Call<ArrayList<User>> getUsers();
 
     @DELETE("users/{userId}")
     @Headers("Content-Type: application/json")
