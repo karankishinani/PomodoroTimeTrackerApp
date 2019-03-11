@@ -5,7 +5,6 @@ import com.google.gson.annotations.SerializedName;
 
 public class User {
 
-    // TODO: change to integer
     @SerializedName("id")
     @Expose
     private Integer id;
