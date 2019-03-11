@@ -1,6 +1,7 @@
 package com.example.pttmobile4.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -15,6 +16,7 @@ import com.example.pttmobile4.R;
 import com.example.pttmobile4.activities.AdminActivity;
 import com.example.pttmobile4.activities.CreateProjectActivity;
 import com.example.pttmobile4.activities.CreateUserActivity;
+import com.example.pttmobile4.activities.EditUserActivity;
 import com.example.pttmobile4.models.User;
 
 import java.util.ArrayList;
@@ -51,17 +53,27 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.UserLi
         holder.mLayout.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                updateUserClick(holder);
+//                updateUserClick(holder);
                 return true;
             }
         });
         holder.mLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(selectingMultipleUsers)
-                    updateUserClick(holder);
+                if(selectingMultipleUsers){
+//                    updateUserClick(holder);
+                    Toast.makeText((AdminActivity)context,  "Selected multiple users ", Toast.LENGTH_LONG).show();
+                }
                 else{
                     Toast.makeText((AdminActivity)context,  "Click on one user! ", Toast.LENGTH_LONG).show();
+                    int pos = holder.getAdapterPosition();
+                    // todo:
+//                    int id = userList.get(pos).getId();
+                    String id = "1";
+
+                    Intent intent = new Intent(context, EditUserActivity.class);
+                    intent.putExtra("USER_ID",id);
+                    context.startActivity(intent);
 
 //                    userList.get(position).setSelected(true);
 //                    ((FindUserActivity)context).createChat();
@@ -71,28 +83,28 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.UserLi
         });
     }
 
-    private void updateUserClick(UserListViewHolder holder){
-        int position = holder.getAdapterPosition();
+//    private void updateUserClick(UserListViewHolder holder){
+//        int position = holder.getAdapterPosition();
+//
+//        userList.get(position).setSelected(!userList.get(position).getSelected());
+//
+//        if(userList.get(position).getSelected())
+//            holder.mSelected.setBackground(context.getResources().getDrawable(R.drawable.ic_check));
+//        else
+//            holder.mSelected.setBackground(null);
+//
+//        updateSelectingMultipleUsers();
+//    }
 
-        userList.get(position).setSelected(!userList.get(position).getSelected());
-
-        if(userList.get(position).getSelected())
-            holder.mSelected.setBackground(context.getResources().getDrawable(R.drawable.ic_check));
-        else
-            holder.mSelected.setBackground(null);
-
-        updateSelectingMultipleUsers();
-    }
-
-    private void updateSelectingMultipleUsers() {
-        for(User mUser : userList){
-            if(mUser.getSelected()){
-                selectingMultipleUsers = true;
-                return;
-            }
-        }
-        selectingMultipleUsers = false;
-    }
+//    private void updateSelectingMultipleUsers() {
+//        for(User mUser : userList){
+//            if(mUser.getSelected()){
+//                selectingMultipleUsers = true;
+//                return;
+//            }
+//        }
+//        selectingMultipleUsers = false;
+//    }
 
     @Override
     public int getItemCount() {
