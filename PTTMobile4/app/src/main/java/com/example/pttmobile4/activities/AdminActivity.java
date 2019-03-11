@@ -98,5 +98,6 @@ public class AdminActivity extends AppCompatActivity {
         mUserList.setLayoutManager(mUserListLayoutManager);
         mUserListAdapter = new UserListAdapter(this, userList);
         mUserList.setAdapter(mUserListAdapter);
+        mUserListAdapter.notifyDataSetChanged();
     }
 }
