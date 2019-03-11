@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.pttmobile4.R;
+import com.example.pttmobile4.activities.AdminActivity;
 import com.example.pttmobile4.activities.CreateProjectActivity;
 import com.example.pttmobile4.activities.CreateUserActivity;
 import com.example.pttmobile4.models.User;
@@ -60,7 +61,8 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.UserLi
                 if(selectingMultipleUsers)
                     updateUserClick(holder);
                 else{
-                    Toast.makeText((CreateUserActivity)context,  "Click on one user! ", Toast.LENGTH_LONG).show();
+                    Toast.makeText((AdminActivity)context,  "Click on one user! ", Toast.LENGTH_LONG).show();
+
 //                    userList.get(position).setSelected(true);
 //                    ((FindUserActivity)context).createChat();
                 }
