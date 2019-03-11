@@ -36,8 +36,8 @@ public class EditUserActivity extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             String userid = extras.getString("USER_ID");
-            Toast.makeText(EditUserActivity.this,  "User to be edited is " + id, Toast.LENGTH_LONG).show();
             id = Integer.valueOf(userid);
+            Toast.makeText(EditUserActivity.this,  "User to be edited is " + id, Toast.LENGTH_LONG).show();
             //The key argument here must match that used in the other activity
         }
 
