@@ -12,9 +12,15 @@ import android.widget.ListView;
 
 import com.example.pttmobile4.R;
 import com.example.pttmobile4.adapters.UserListAdapter;
+import com.example.pttmobile4.api.Client;
 import com.example.pttmobile4.models.User;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class AdminActivity extends AppCompatActivity {
 
@@ -28,6 +34,8 @@ public class AdminActivity extends AppCompatActivity {
     private RecyclerView.Adapter mUserListAdapter;
     private RecyclerView.LayoutManager mUserListLayoutManager;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +46,9 @@ public class AdminActivity extends AppCompatActivity {
         mUserList = findViewById(R.id.userList);
         createUserBtn = findViewById(R.id.createUserBtn);
         adminLogoutBtn = findViewById(R.id.adminLogoutBtn);
+
+
+
         createUserBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -52,10 +63,35 @@ public class AdminActivity extends AppCompatActivity {
                 finish();
             }
         });
-        loadRecyclerView();
+
+        loadUsers();
 //        userList.setAdapter();
     }
 
+    private void loadUsers(){
+        // GET REQUEST to populate fields initially
+
+        Call<ArrayList<User>> call = Client
+                .getInstance().getApi().getUsers();
+
+        call.enqueue(new Callback<ArrayList<User>>() {
+            @Override
+            public void onResponse(Call<ArrayList<User>> call, Response<ArrayList<User>> response) {
+                userList = response.body();
+                if (userList==null){
+                    System.out.println("Userlist is null");
+                }
+                else {
+                    loadRecyclerView();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<User>> call, Throwable t) {
+            }
+
+        });
+    }
     private void loadRecyclerView() {
         mUserList.setNestedScrollingEnabled(false);
         mUserList.setHasFixedSize(false);
