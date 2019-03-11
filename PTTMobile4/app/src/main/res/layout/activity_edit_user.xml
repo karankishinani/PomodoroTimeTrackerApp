@@ -36,9 +36,8 @@
         android:id="@+id/emailId"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="example@abc.com"
         android:ems="10"
-        android:inputType="none" />
+        android:enabled="false" />
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"

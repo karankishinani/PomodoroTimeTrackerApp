@@ -26,8 +26,7 @@ public class EditUserActivity extends AppCompatActivity {
     Button updateUserBtn;
     Button deleteUserBtn;
     EditText fName, lName, emailId;
-    // TODO: generalize
-    int id = -1;
+    int id;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

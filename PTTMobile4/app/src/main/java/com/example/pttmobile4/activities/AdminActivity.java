@@ -32,9 +32,9 @@ public class AdminActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin);
-        userList.add(new User("Bosheng","Jian","bosheng@gatech.edu"));
-        userList.add(new User("B","J","bj@gatech.edu"));
-        userList.add(new User("Alex","Orso","random@gt.cc"));
+        userList.add(new User(1, "Bosheng","Jian","bosheng@gatech.edu"));
+        userList.add(new User(2231, "B","J","bj@gatech.edu"));
+        userList.add(new User(3234, "Alex","Orso","random@gt.cc"));
         mUserList = findViewById(R.id.userList);
         createUserBtn = findViewById(R.id.createUserBtn);
         adminLogoutBtn = findViewById(R.id.adminLogoutBtn);
