@@ -30,7 +30,7 @@ public class EditProjectActivity extends AppCompatActivity {
     Button updateProjectBtn;
     Button deleteProjectBtn;
 
-    // TODO
+    // TODO: get real IDs
     int userId = 1;
     int projectId = 2;
 
@@ -41,6 +41,7 @@ public class EditProjectActivity extends AppCompatActivity {
 
         projectName = findViewById(R.id.projectName);
 
+        // TODO: test the synchronous version, perhaps change the EditUserActivity to synchronous version
         // populate the EditText
         Call<Project> call = Client
                 .getInstance().getApi().getProject(userId, projectId);
@@ -96,6 +97,8 @@ public class EditProjectActivity extends AppCompatActivity {
         deleteProjectBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                // TODO: add confirmation before deleting project
 
                 Call<Project> call = Client
                         .getInstance().getApi().deleteProject(userId, projectId);
