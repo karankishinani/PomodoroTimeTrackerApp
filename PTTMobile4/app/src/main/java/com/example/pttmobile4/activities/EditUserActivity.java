@@ -114,6 +114,9 @@ public class EditUserActivity extends AppCompatActivity {
         deleteUserBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                // TODO: Ask for confirmation before delete if there are projects associated to user
+
                 // Delete User
                 Call<User> call = Client
                         .getInstance().getApi().deleteUser(id);
