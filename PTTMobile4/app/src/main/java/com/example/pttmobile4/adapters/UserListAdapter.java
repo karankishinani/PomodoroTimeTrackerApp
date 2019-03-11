@@ -65,12 +65,18 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.UserLi
                     Toast.makeText((AdminActivity)context,  "Selected multiple users ", Toast.LENGTH_LONG).show();
                 }
                 else{
-                    Toast.makeText((AdminActivity)context,  "Click on one user! ", Toast.LENGTH_LONG).show();
                     int pos = holder.getAdapterPosition();
                     // todo:
-//                    int id = userList.get(pos).getId();
-                    String id = "1";
+                    try {
+                        int id = userList.get(pos).getId();
+                        if (id == 0){
+                            Toast.makeText((AdminActivity)context,  "This User's id is 0!!!!!!!!! ", Toast.LENGTH_LONG).show();
+                        }
+                    } catch (Exception e){
+                        e.printStackTrace();
+                    }
 
+                    String id = "" + userList.get(pos).getId();
                     Intent intent = new Intent(context, EditUserActivity.class);
                     intent.putExtra("USER_ID",id);
                     context.startActivity(intent);
