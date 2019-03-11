@@ -19,6 +19,8 @@ public class User {
     @Expose
     private String email;
 
+    private Boolean selected = false;
+
     public User(String firstName, String lastName, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -55,6 +57,13 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public void setSelected(boolean selected){
+        this.selected = selected;
+    }
+    public boolean getSelected(){
+        return selected;
     }
 
 }
