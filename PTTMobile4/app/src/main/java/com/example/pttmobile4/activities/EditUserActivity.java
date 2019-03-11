@@ -44,8 +44,37 @@ public class EditUserActivity extends AppCompatActivity {
         fName = findViewById(R.id.fName);
         lName = findViewById(R.id.lName);
         emailId = findViewById(R.id.emailId);
+
+        // GET REQUEST to populate fields initially
+
+        Call<User> call = Client
+                .getInstance().getApi().getUser(id);
+
+        call.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                User user = response.body();
+                if (user==null){
+                    System.out.println("User response is null");
+                }
+                else {
+                    fName.setText(user.getFirstName());
+                    lName.setText(user.getLastName());
+                    emailId.setText(user.getEmail());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+            }
+
+        });
+
+
         updateUserBtn = findViewById(R.id.updateUserBtn);
         deleteUserBtn = findViewById(R.id.deleteUserBtn);
+
+        // Update a user
 
         updateUserBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,7 +84,7 @@ public class EditUserActivity extends AppCompatActivity {
                 params.put("lastName", lName.getText().toString());
                 params.put("email", emailId.getText().toString());
                 RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"),(new JSONObject(params)).toString());
-                // CREATE User and add them in the DB
+                // Edit User and add them in the DB
                 Call<User> call = Client
                         .getInstance().getApi().editUser(id, body);
 
@@ -68,6 +97,37 @@ public class EditUserActivity extends AppCompatActivity {
                         }
                         else {
                             Toast.makeText(EditUserActivity.this,  "Updated: " + user.getEmail(), Toast.LENGTH_LONG).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<User> call, Throwable t) {
+                    }
+                });
+
+                // Go back to Last Activity
+                finish();
+            }
+        });
+
+        // Delete a user
+
+        deleteUserBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Delete User
+                Call<User> call = Client
+                        .getInstance().getApi().deleteUser(id);
+
+                call.enqueue(new Callback<User>() {
+                    @Override
+                    public void onResponse(Call<User> call, Response<User> response) {
+                        User user = response.body();
+                        if (user==null){
+                            System.out.println("User response is null");
+                        }
+                        else {
+                            Toast.makeText(EditUserActivity.this,  "Deleted: " + user.getEmail(), Toast.LENGTH_LONG).show();
                         }
                     }
 
