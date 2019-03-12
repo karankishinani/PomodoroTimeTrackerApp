@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 
 import com.example.pttmobile4.R;
 import com.example.pttmobile4.api.Client;
@@ -123,27 +125,60 @@ public class EditProjectActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                // TODO: add confirmation before deleting project
-
-                Call<Project> call = Client
-                        .getInstance().getApi().deleteProject(userId, projectId);
-                call.enqueue(new Callback<Project>() {
-                    @Override
-                    public void onResponse(Call<Project> call, Response<Project> response) {
-                        Project project = response.body();
-                        if (project==null){
-                            System.out.println("Project response is null");
+                // TODO: Currently, it always ask for confirmation.
+                boolean hasTime = true;
+                if (hasTime) {
+                    DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            switch (which) {
+                                case DialogInterface.BUTTON_POSITIVE:
+                                    Call<Project> call = Client
+                                            .getInstance().getApi().deleteProject(userId, projectId);
+                                    call.enqueue(new Callback<Project>() {
+                                        @Override
+                                        public void onResponse(Call<Project> call, Response<Project> response) {
+                                            Project project = response.body();
+                                            if (project == null) {
+                                                System.out.println("Project response is null");
+                                            } else {
+                                                Toast.makeText(EditProjectActivity.this, "Deleted: " + project.getProjectname(), Toast.LENGTH_LONG).show();
+                                            }
+                                        }
+                                        @Override
+                                        public void onFailure(Call<Project> call, Throwable t) {
+                                            Toast.makeText(EditProjectActivity.this, "Failed! ", Toast.LENGTH_LONG).show();
+                                        }
+                                    });
+                                    break;
+                                case DialogInterface.BUTTON_NEGATIVE:
+                                    break;
+                            }
                         }
-                        else {
-                            Toast.makeText(EditProjectActivity.this,  "Deleted: " + project.getProjectname(), Toast.LENGTH_LONG).show();
+                    };
+                    // TODO: double check the context argument
+                    AlertDialog.Builder builder = new AlertDialog.Builder(EditProjectActivity.this);
+                    builder.setMessage("The project has time already logged to it. Do you really want to delete it?").setPositiveButton("Yes", dialogClickListener).setNegativeButton("No", dialogClickListener).show();
+                } else {
+                    Call<Project> call = Client
+                            .getInstance().getApi().deleteProject(userId, projectId);
+                    call.enqueue(new Callback<Project>() {
+                        @Override
+                        public void onResponse(Call<Project> call, Response<Project> response) {
+                            Project project = response.body();
+                            if (project == null) {
+                                System.out.println("Project response is null");
+                            } else {
+                                Toast.makeText(EditProjectActivity.this, "Deleted: " + project.getProjectname(), Toast.LENGTH_LONG).show();
+                            }
                         }
-                    }
 
-                    @Override
-                    public void onFailure(Call<Project> call, Throwable t) {
-                        Toast.makeText(EditProjectActivity.this,  "Failed! ", Toast.LENGTH_LONG).show();
-                    }
-                });
+                        @Override
+                        public void onFailure(Call<Project> call, Throwable t) {
+                            Toast.makeText(EditProjectActivity.this, "Failed! ", Toast.LENGTH_LONG).show();
+                        }
+                    });
+                }
 
                 // Go back to Last Activity
                 finish();
