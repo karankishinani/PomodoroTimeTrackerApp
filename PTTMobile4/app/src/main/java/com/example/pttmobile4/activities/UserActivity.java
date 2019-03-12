@@ -57,7 +57,7 @@ public class UserActivity extends AppCompatActivity {
             }
         });
 
-        loadProjects();
+        //loadProjects();
 
     }
 

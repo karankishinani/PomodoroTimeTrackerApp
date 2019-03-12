@@ -58,7 +58,7 @@ public class AdminActivity extends AppCompatActivity {
             }
         });
 
-        loadUsers();
+        //loadUsers();
 //        userList.setAdapter();
     }
 
