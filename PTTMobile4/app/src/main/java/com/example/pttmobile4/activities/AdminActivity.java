@@ -1,14 +1,13 @@
 package com.example.pttmobile4.activities;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 
 import com.example.pttmobile4.R;
 import com.example.pttmobile4.adapters.UserListAdapter;
@@ -16,7 +15,6 @@ import com.example.pttmobile4.api.Client;
 import com.example.pttmobile4.models.User;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -63,6 +61,12 @@ public class AdminActivity extends AppCompatActivity {
 
         loadUsers();
 //        userList.setAdapter();
+    }
+
+    public void onResume()
+    {
+        super.onResume();
+        loadUsers();
     }
 
     private void loadUsers(){
