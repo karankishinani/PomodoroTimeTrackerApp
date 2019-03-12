@@ -1,9 +1,8 @@
 package com.example.pttmobile4.activities;
 
-import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.util.ArrayMap;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,7 +11,6 @@ import android.widget.Toast;
 import com.example.pttmobile4.R;
 import com.example.pttmobile4.api.Client;
 import com.example.pttmobile4.models.Project;
-import com.example.pttmobile4.models.User;
 
 import org.json.JSONObject;
 
@@ -60,6 +58,9 @@ public class CreateProjectActivity extends AppCompatActivity {
                         Toast.makeText(CreateProjectActivity.this,  "Failed! ", Toast.LENGTH_LONG).show();
                     }
                 });
+
+                // Go back to Last Activity
+                finish();
 
             }
         });

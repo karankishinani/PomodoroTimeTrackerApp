@@ -7,15 +7,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.pttmobile4.R;
 import com.example.pttmobile4.activities.AdminActivity;
-import com.example.pttmobile4.activities.CreateProjectActivity;
-import com.example.pttmobile4.activities.CreateProjectActivity;
 import com.example.pttmobile4.activities.EditProjectActivity;
 import com.example.pttmobile4.models.Project;
 
@@ -76,7 +73,7 @@ public class ProjectListAdapter extends RecyclerView.Adapter<ProjectListAdapter.
 
                     String id = "" + projectList.get(pos).getId();
                     Intent intent = new Intent(context, EditProjectActivity.class);
-                    intent.putExtra("USER_ID",id);
+                    intent.putExtra("PROJECT_ID",id);
                     context.startActivity(intent);
 
 //                    projectList.get(position).setSelected(true);

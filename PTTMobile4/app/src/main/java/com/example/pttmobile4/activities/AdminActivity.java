@@ -38,24 +38,23 @@ public class AdminActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin);
+
         mUserList = findViewById(R.id.userList);
         createUserBtn = findViewById(R.id.createUserBtn);
         adminLogoutBtn = findViewById(R.id.adminLogoutBtn);
 
-
+        adminLogoutBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         createUserBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(AdminActivity.this, CreateUserActivity.class);
                 startActivity(intent);
-            }
-        });
-
-        adminLogoutBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
             }
         });
 

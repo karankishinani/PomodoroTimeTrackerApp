@@ -28,11 +28,11 @@ public interface APIInterface {
 
     @PUT("users/{userId}")
     @Headers("Content-Type: application/json")
-    Call<User> editUser(@Path("userId") int id, @Body RequestBody body);
+    Call<User> editUser(@Path("userId") int userId, @Body RequestBody body);
 
     @GET("users/{userId}")
     @Headers("Content-Type: application/json")
-    Call<User> getUser(@Path("userId") int id);
+    Call<User> getUser(@Path("userId") int userId);
 
     @GET("users")
     @Headers("Content-Type: application/json")
@@ -40,17 +40,17 @@ public interface APIInterface {
 
     @DELETE("users/{userId}")
     @Headers("Content-Type: application/json")
-    Call<User> deleteUser(@Path("userId") int id);
+    Call<User> deleteUser(@Path("userId") int userId);
 
     // PROJECTS
 
     @POST("users/{userId}/projects")
     @Headers("Content-Type: application/json")
-    Call<Project> createProject(@Path("userId") int id, @Body RequestBody body);
+    Call<Project> createProject(@Path("userId") int userId, @Body RequestBody body);
 
     @GET("users/{userId}/projects")
     @Headers("Content-Type: application/json")
-    Call<ArrayList<Project>> getProjects(@Path("userId") int id);
+    Call<ArrayList<Project>> getProjects(@Path("userId") int userId);
 
     @GET("users/{userId}/projects/{projectId}")
     @Headers("Content-Type: application/json")

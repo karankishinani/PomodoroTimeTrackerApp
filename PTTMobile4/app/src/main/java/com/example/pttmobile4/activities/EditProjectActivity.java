@@ -1,9 +1,8 @@
 package com.example.pttmobile4.activities;
 
-import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.util.ArrayMap;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,11 +11,9 @@ import android.widget.Toast;
 import com.example.pttmobile4.R;
 import com.example.pttmobile4.api.Client;
 import com.example.pttmobile4.models.Project;
-import com.example.pttmobile4.models.User;
 
 import org.json.JSONObject;
 
-import java.io.IOException;
 import java.util.Map;
 
 import okhttp3.RequestBody;
@@ -32,12 +29,19 @@ public class EditProjectActivity extends AppCompatActivity {
 
     // TODO: get real IDs
     int userId = 1;
-    int projectId = 2;
+    int projectId = 3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_project);
+
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            projectId = Integer.valueOf(extras.getString("PROJECT_ID"));
+            Toast.makeText(EditProjectActivity.this,  "Project to be edited is " + projectId, Toast.LENGTH_LONG).show();
+            //The key argument here must match that used in the other activity
+        }
 
         projectName = findViewById(R.id.projectName);
 
@@ -45,7 +49,26 @@ public class EditProjectActivity extends AppCompatActivity {
         // populate the EditText
         Call<Project> call = Client
                 .getInstance().getApi().getProject(userId, projectId);
-        Response<Project> response = null;
+
+        call.enqueue(new Callback<Project>() {
+            @Override
+            public void onResponse(Call<Project> call, Response<Project> response) {
+                Project project = response.body();
+                if (project==null){
+                    System.out.println("Project response is null");
+                }
+                else {
+                    projectName.setText(project.getProjectname());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Project> call, Throwable t) {
+            }
+
+        });
+
+        /*Response<Project> response = null;
         try {
             response = call.execute();
         } catch (Throwable e) {
@@ -56,7 +79,7 @@ public class EditProjectActivity extends AppCompatActivity {
             System.out.println("Project response is null");
         } else {
             projectName.setText(project.getProjectname());
-        }
+        }*/
 
 
         updateProjectBtn = findViewById(R.id.updateProjectBtn);
@@ -90,6 +113,8 @@ public class EditProjectActivity extends AppCompatActivity {
                     }
                 });
 
+                // Go back to Last Activity
+                finish();
             }
         });
 
@@ -120,6 +145,8 @@ public class EditProjectActivity extends AppCompatActivity {
                     }
                 });
 
+                // Go back to Last Activity
+                finish();
             }
         });
 
