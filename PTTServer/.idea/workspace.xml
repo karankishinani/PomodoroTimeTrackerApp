@@ -2,12 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ec373961-e160-4bf6-8be0-b8b73a6b8b67" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../PTTMobile4/app/src/main/java/com/example/pttmobile4/activities/CreateProjectActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../PTTMobile4/app/src/main/java/com/example/pttmobile4/activities/CreateProjectActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PTTMobile4/app/src/main/java/com/example/pttmobile4/activities/EditProjectActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../PTTMobile4/app/src/main/java/com/example/pttmobile4/activities/EditProjectActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PTTMobile4/app/src/main/java/com/example/pttmobile4/activities/UserActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../PTTMobile4/app/src/main/java/com/example/pttmobile4/activities/UserActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PTTMobile4/app/src/main/java/com/example/pttmobile4/activities/UserLoginActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../PTTMobile4/app/src/main/java/com/example/pttmobile4/activities/UserLoginActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PTTMobile4/app/src/main/java/com/example/pttmobile4/adapters/ProjectListAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/../PTTMobile4/app/src/main/java/com/example/pttmobile4/adapters/ProjectListAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PTTMobile4/app/src/main/java/com/example/pttmobile4/api/APIInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/../PTTMobile4/app/src/main/java/com/example/pttmobile4/api/APIInterface.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
@@ -250,7 +244,7 @@
       <workItem from="1552319384041" duration="1996000" />
       <workItem from="1552353642920" duration="234000" />
       <workItem from="1552363288977" duration="1431000" />
-      <workItem from="1552496459341" duration="569000" />
+      <workItem from="1552496459341" duration="1557000" />
     </task>
     <task id="LOCAL-00001" summary="Maven Build">
       <created>1552319557551</created>
@@ -277,10 +271,11 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="4230000" />
+    <option name="totallyTimeSpent" value="5218000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2532189" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
