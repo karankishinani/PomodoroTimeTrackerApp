@@ -1,7 +1,9 @@
 package com.example.pttmobile4.activities;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.util.ArrayMap;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -10,6 +12,7 @@ import android.widget.Toast;
 
 import com.example.pttmobile4.R;
 import com.example.pttmobile4.api.Client;
+import com.example.pttmobile4.models.Project;
 import com.example.pttmobile4.models.User;
 
 import org.json.JSONObject;
@@ -118,29 +121,63 @@ public class EditUserActivity extends AppCompatActivity {
                 // TODO: Ask for confirmation before delete if there are projects associated to user
 
                 // Delete User
-                Call<User> call = Client
-                        .getInstance().getApi().deleteUser(id);
-
-                call.enqueue(new Callback<User>() {
-                    @Override
-                    public void onResponse(Call<User> call, Response<User> response) {
-                        User user = response.body();
-                        if (user==null){
-                            System.out.println("User response is null");
+                boolean hasTime = true;
+                if (hasTime){
+                    DialogInterface.OnClickListener dialogClickListener= new DialogInterface.OnClickListener(){
+                        @Override
+                        public void onClick(DialogInterface dialog, int which){
+                            switch (which){
+                                case DialogInterface.BUTTON_POSITIVE:
+                                    Call<User> call = Client.getInstance().getApi().deleteUser(id);
+                                    call.enqueue(new Callback<User>() {
+                                        @Override
+                                        public void onResponse(Call<User> call, Response<User> response) {
+                                            User user = response.body();
+                                            if (user == null) {
+                                                System.out.println("Project response is null");
+                                            } else {
+                                                Toast.makeText(EditUserActivity.this, "Deleted: " + user.getEmail(), Toast.LENGTH_LONG).show();
+                                            }
+                                        }
+                                        @Override
+                                        public void onFailure(Call<User> call, Throwable t) {
+                                            Toast.makeText(EditUserActivity.this, "Failed! ", Toast.LENGTH_LONG).show();
+                                        }
+                                    });
+                                    break;
+                                case DialogInterface.BUTTON_NEGATIVE:
+                                    break;
+                            }
+                            finish();
                         }
-                        else {
-                            Toast.makeText(EditUserActivity.this,  "Deleted: " + user.getEmail(), Toast.LENGTH_LONG).show();
+                    };
+                    AlertDialog.Builder builder = new AlertDialog.Builder(EditUserActivity.this);
+                    builder.setMessage("The User has projects associated to it. Do you really want to delete it?").setPositiveButton("Yes", dialogClickListener).setNegativeButton("No", dialogClickListener).show();
+                } else{
+                    Call<User> call = Client
+                            .getInstance().getApi().deleteUser(id);
+                    call.enqueue(new Callback<User>() {
+                        @Override
+                        public void onResponse(Call<User> call, Response<User> response) {
+                            User user = response.body();
+                            if (user==null){
+                                System.out.println("User response is null");
+                            }
+                            else {
+                                Toast.makeText(EditUserActivity.this,  "Deleted: " + user.getEmail(), Toast.LENGTH_LONG).show();
+                            }
                         }
-                    }
 
-                    @Override
-                    public void onFailure(Call<User> call, Throwable t) {
-                    }
-                });
+                        @Override
+                        public void onFailure(Call<User> call, Throwable t) {
+                        }
+                    });
 
-                // Go back to Last Activity
-                finish();
+                    finish();
+                }
             }
+
+
         });
     }
 }
