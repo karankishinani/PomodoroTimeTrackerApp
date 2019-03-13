@@ -35,6 +35,8 @@ public class UserLoginActivity extends AppCompatActivity {
         userLoginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (!isValid()) return;
+
                 Intent intent = new Intent(getApplicationContext(), UserActivity.class);
                 intent.putExtra("userId",userId);
                 startActivity(intent);
