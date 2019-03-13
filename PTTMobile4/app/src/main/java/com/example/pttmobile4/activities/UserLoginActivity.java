@@ -35,7 +35,10 @@ public class UserLoginActivity extends AppCompatActivity {
         userLoginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!isValid()) return;
+                if (!isValid()) {
+                    Toast.makeText(UserLoginActivity.this, "user email id incorrect", Toast.LENGTH_LONG).show();
+                    return;
+                }
 
                 Intent intent = new Intent(getApplicationContext(), UserActivity.class);
                 intent.putExtra("userId",userId);
@@ -44,12 +47,12 @@ public class UserLoginActivity extends AppCompatActivity {
         });
     }
 
-    boolean ans = false;
+    boolean ans;
 
     private boolean isValid(){
+        ans = false;
         final String useremail = userEmail.getText().toString();
         if (useremail == null || useremail.length() == 0){
-            Toast.makeText(UserLoginActivity.this, "user email id incorrect", Toast.LENGTH_LONG).show();
             return ans;
         }
 
