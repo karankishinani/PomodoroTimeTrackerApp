@@ -61,6 +61,7 @@ public class UserActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(UserActivity.this, CreateProjectActivity.class);
+                intent.putExtra("userId", userId);
                 startActivity(intent);
             }
         });
@@ -75,9 +76,8 @@ public class UserActivity extends AppCompatActivity {
 
     private void loadProjects(){
         // GET REQUEST to populate fields initially
-        // TODO: user ID for projects
         Call<ArrayList<Project>> call = Client
-                .getInstance().getApi().getProjects(1);
+                .getInstance().getApi().getProjects(Integer.valueOf(userId));
 
         call.enqueue(new Callback<ArrayList<Project>>() {
             @Override

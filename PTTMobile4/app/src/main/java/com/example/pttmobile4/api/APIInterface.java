@@ -27,7 +27,7 @@ public interface APIInterface {
     Call<User> createUser(@Body RequestBody body);
 
     @PUT("users/{userId}")
-    @Headers("Content-Type: application/json")
+    @Headers("Content-Type: application/jsons")
     Call<User> editUser(@Path("userId") int userId, @Body RequestBody body);
 
     @GET("users/{userId}")

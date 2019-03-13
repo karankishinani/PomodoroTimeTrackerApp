@@ -25,10 +25,17 @@ public class CreateProjectActivity extends AppCompatActivity {
 
     Button createProjectOkBtn;
     EditText projectName;
+    String userId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_project);
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            userId = extras.getString("userId");
+            //Toast.makeText(CreateProjectActivity.this,  "User logged in successfully, user id is " + userId, Toast.LENGTH_LONG).show();
+            //The key argument here must match that used in the other activity
+        }
 
         projectName = findViewById(R.id.projectName);
         createProjectOkBtn = findViewById(R.id.createProjectOkBtn);
@@ -40,7 +47,7 @@ public class CreateProjectActivity extends AppCompatActivity {
                 RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"),(new JSONObject(params)).toString());
 
                 Call<Project> call = Client
-                        .getInstance().getApi().createProject(1, body);
+                        .getInstance().getApi().createProject(Integer.valueOf(userId), body);
                 call.enqueue(new Callback<Project>() {
                     @Override
                     public void onResponse(Call<Project> call, Response<Project> response) {

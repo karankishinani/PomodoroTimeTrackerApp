@@ -29,9 +29,8 @@ public class EditProjectActivity extends AppCompatActivity {
     Button updateProjectBtn;
     Button deleteProjectBtn;
 
-    // TODO: get real IDs
-    int userId = 1;
-    int projectId = 3;
+    int userId;
+    int projectId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +40,7 @@ public class EditProjectActivity extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             projectId = Integer.valueOf(extras.getString("PROJECT_ID"));
+            userId = Integer.valueOf(extras.getString("userId"));
             Toast.makeText(EditProjectActivity.this,  "Project to be edited is " + projectId, Toast.LENGTH_LONG).show();
             //The key argument here must match that used in the other activity
         }
@@ -154,6 +154,7 @@ public class EditProjectActivity extends AppCompatActivity {
                                 case DialogInterface.BUTTON_NEGATIVE:
                                     break;
                             }
+                            finish();
                         }
                     };
                     // TODO: double check the context argument
@@ -178,10 +179,11 @@ public class EditProjectActivity extends AppCompatActivity {
                             Toast.makeText(EditProjectActivity.this, "Failed! ", Toast.LENGTH_LONG).show();
                         }
                     });
+                    finish();
                 }
 
                 // Go back to Last Activity
-                finish();
+                //
             }
         });
 
