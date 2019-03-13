@@ -63,7 +63,6 @@ public class ProjectListAdapter extends RecyclerView.Adapter<ProjectListAdapter.
                 }
                 else{
                     int pos = holder.getAdapterPosition();
-                    // todo:
                     try {
                         int id = projectList.get(pos).getId();
                         if (id == 0){

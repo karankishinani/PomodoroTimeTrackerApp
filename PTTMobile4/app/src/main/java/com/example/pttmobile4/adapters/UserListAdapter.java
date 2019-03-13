@@ -14,8 +14,6 @@ import android.widget.Toast;
 
 import com.example.pttmobile4.R;
 import com.example.pttmobile4.activities.AdminActivity;
-import com.example.pttmobile4.activities.CreateProjectActivity;
-import com.example.pttmobile4.activities.CreateUserActivity;
 import com.example.pttmobile4.activities.EditUserActivity;
 import com.example.pttmobile4.models.User;
 
@@ -66,7 +64,6 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.UserLi
                 }
                 else{
                     int pos = holder.getAdapterPosition();
-                    // todo:
                     try {
                         int id = userList.get(pos).getId();
                         if (id == 0){

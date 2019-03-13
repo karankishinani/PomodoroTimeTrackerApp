@@ -24,6 +24,8 @@ import retrofit2.Response;
 public class CreateProjectActivity extends AppCompatActivity {
 
     Button createProjectOkBtn;
+    Button cancelCreateProjectBtn;
+
     EditText projectName;
     String userId;
     @Override
@@ -33,9 +35,16 @@ public class CreateProjectActivity extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             userId = extras.getString("userId");
-            //Toast.makeText(CreateProjectActivity.this,  "User logged in successfully, user id is " + userId, Toast.LENGTH_LONG).show();
-            //The key argument here must match that used in the other activity
+
         }
+
+        cancelCreateProjectBtn = findViewById(R.id.cancelCreateProjectBtn);
+        cancelCreateProjectBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         projectName = findViewById(R.id.projectName);
         createProjectOkBtn = findViewById(R.id.createProjectOkBtn);

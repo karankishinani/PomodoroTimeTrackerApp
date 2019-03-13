@@ -3,9 +3,11 @@ package com.example.pttmobile4.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.pttmobile4.R;
 import com.example.pttmobile4.api.Client;
@@ -53,13 +55,19 @@ public class UserLoginActivity extends AppCompatActivity {
 
     private void userLogin() {
 
-        final String useremail = userEmail.getText().toString();
-
-        if (useremail == null || useremail.length() == 0){
+        final String useremail = userEmail.getText().toString().trim();
+        if (useremail.isEmpty()) {
+            userEmail.setError("Email is required");
+            userEmail.requestFocus();
             return;
         }
 
-        System.out.println("Email inputted is " + useremail);
+        if (!Patterns.EMAIL_ADDRESS.matcher(useremail).matches()) {
+            userEmail.setError("Enter a valid email");
+            userEmail.requestFocus();
+            return;
+        }
+
 
         Call<ArrayList<User>> call = Client
                 .getInstance().getApi().getUsers();
@@ -89,45 +97,18 @@ public class UserLoginActivity extends AppCompatActivity {
                         Intent intent = new Intent(getApplicationContext(), UserActivity.class);
                         intent.putExtra("userId", userId);
                         startActivity(intent);
+                    } else {
+                        Toast.makeText(UserLoginActivity.this,"Email not found",Toast.LENGTH_LONG).show();
                     }
                 }
             }
 
-            // TODO: toast login failed
-
             @Override
             public void onFailure(Call<ArrayList<User>> call, Throwable t) {
+
             }
 
         });
     }
 
-    /*userLoginBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!isValid()) {
-                    Toast.makeText(UserLoginActivity.this, "user email id incorrect " + userId, Toast.LENGTH_LONG).show();
-                    return;
-                }
-
-                Intent intent = new Intent(getApplicationContext(), UserActivity.class);
-                intent.putExtra("userId",userId);
-                startActivity(intent);
-            }
-        });
-    }
-
-    boolean ans;
-
-    private boolean isValid(){
-        userId = "";
-        ans = false;
-        final String useremail = userEmail.getText().toString();
-        if (useremail == null || useremail.length() == 0){
-            return ans;
-        }
-
-        System.out.println(ans);
-        return ans;
-    }*/
 }

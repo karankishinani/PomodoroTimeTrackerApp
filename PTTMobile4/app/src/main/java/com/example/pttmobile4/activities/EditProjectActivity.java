@@ -41,8 +41,6 @@ public class EditProjectActivity extends AppCompatActivity {
         if (extras != null) {
             projectId = Integer.valueOf(extras.getString("PROJECT_ID"));
             userId = Integer.valueOf(extras.getString("userId"));
-            Toast.makeText(EditProjectActivity.this,  "Project to be edited is " + projectId, Toast.LENGTH_LONG).show();
-            //The key argument here must match that used in the other activity
         }
 
         projectName = findViewById(R.id.projectName);
@@ -70,18 +68,6 @@ public class EditProjectActivity extends AppCompatActivity {
 
         });
 
-        /*Response<Project> response = null;
-        try {
-            response = call.execute();
-        } catch (Throwable e) {
-            Toast.makeText(EditProjectActivity.this,  "Failed! ", Toast.LENGTH_LONG).show();
-        }
-        Project project = response.body();
-        if (project == null) {
-            System.out.println("Project response is null");
-        } else {
-            projectName.setText(project.getProjectname());
-        }*/
 
 
         updateProjectBtn = findViewById(R.id.updateProjectBtn);
@@ -157,7 +143,6 @@ public class EditProjectActivity extends AppCompatActivity {
                             finish();
                         }
                     };
-                    // TODO: double check the context argument
                     AlertDialog.Builder builder = new AlertDialog.Builder(EditProjectActivity.this);
                     builder.setMessage("The project has time already logged to it. Do you really want to delete it?").setPositiveButton("Yes", dialogClickListener).setNegativeButton("No", dialogClickListener).show();
                 } else {

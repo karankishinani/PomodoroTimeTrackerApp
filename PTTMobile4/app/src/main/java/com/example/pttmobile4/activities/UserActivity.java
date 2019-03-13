@@ -9,7 +9,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import com.example.pttmobile4.R;
 import com.example.pttmobile4.adapters.ProjectListAdapter;
@@ -42,8 +41,6 @@ public class UserActivity extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             userId = extras.getString("userId");
-            Toast.makeText(UserActivity.this,  "User logged in successfully, user id is " + userId, Toast.LENGTH_LONG).show();
-            //The key argument here must match that used in the other activity
         }
 
         mProjectList = findViewById(R.id.projectList);

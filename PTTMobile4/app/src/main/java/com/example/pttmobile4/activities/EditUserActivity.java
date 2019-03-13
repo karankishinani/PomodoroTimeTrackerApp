@@ -17,6 +17,7 @@ import com.example.pttmobile4.models.User;
 
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 import okhttp3.RequestBody;
@@ -30,6 +31,7 @@ public class EditUserActivity extends AppCompatActivity {
     Button deleteUserBtn;
     EditText fName, lName, emailId;
     int id;
+    ArrayList<Project> projectList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,8 +41,6 @@ public class EditUserActivity extends AppCompatActivity {
         if (extras != null) {
             String userid = extras.getString("USER_ID");
             id = Integer.valueOf(userid);
-            Toast.makeText(EditUserActivity.this,  "User to be edited is " + id, Toast.LENGTH_LONG).show();
-            //The key argument here must match that used in the other activity
         }
 
         fName = findViewById(R.id.fName);
@@ -87,6 +87,9 @@ public class EditUserActivity extends AppCompatActivity {
                 params.put("email", emailId.getText().toString());
                 RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"),(new JSONObject(params)).toString());
                 // Edit User and add them in the DB
+
+
+
                 Call<User> call = Client
                         .getInstance().getApi().editUser(id, body);
 
@@ -118,66 +121,87 @@ public class EditUserActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                // TODO: Ask for confirmation before delete if there are projects associated to user
+                Call<ArrayList<Project>> call = Client
+                        .getInstance().getApi().getProjects(Integer.valueOf(id));
 
-                // Delete User
-                boolean hasTime = true;
-                if (hasTime){
-                    DialogInterface.OnClickListener dialogClickListener= new DialogInterface.OnClickListener(){
-                        @Override
-                        public void onClick(DialogInterface dialog, int which){
-                            switch (which){
-                                case DialogInterface.BUTTON_POSITIVE:
-                                    Call<User> call = Client.getInstance().getApi().deleteUser(id);
-                                    call.enqueue(new Callback<User>() {
-                                        @Override
-                                        public void onResponse(Call<User> call, Response<User> response) {
-                                            User user = response.body();
-                                            if (user == null) {
-                                                System.out.println("Project response is null");
-                                            } else {
-                                                Toast.makeText(EditUserActivity.this, "Deleted: " + user.getEmail(), Toast.LENGTH_LONG).show();
-                                            }
+                call.enqueue(new Callback<ArrayList<Project>>() {
+                    @Override
+                    public void onResponse(Call<ArrayList<Project>> call, Response<ArrayList<Project>> response) {
+                        projectList = response.body();
+                        if (projectList==null){
+                            System.out.println("Projectlist is null");
+                        }
+                        else if (projectList.size() > 0) {
+                            // Delete User
+                            System.out.println("I am here!!!");
+                            DialogInterface.OnClickListener dialogClickListener= new DialogInterface.OnClickListener(){
+                                @Override
+                                public void onClick(DialogInterface dialog, int which){
+                                    switch (which){
+                                        case DialogInterface.BUTTON_POSITIVE:
+                                            Call<User> call2 = Client.getInstance().getApi().deleteUser(id);
+                                            call2.enqueue(new Callback<User>() {
+                                                @Override
+                                                public void onResponse(Call<User> call, Response<User> response) {
+                                                    User user = response.body();
+                                                    if (user == null) {
+                                                        System.out.println("Project response is null");
+                                                    } else {
+                                                        Toast.makeText(EditUserActivity.this, "Deleted: " + user.getEmail(), Toast.LENGTH_LONG).show();
+                                                    }
+                                                }
+                                                @Override
+                                                public void onFailure(Call<User> call, Throwable t) {
+                                                    Toast.makeText(EditUserActivity.this, "Failed! ", Toast.LENGTH_LONG).show();
+                                                }
+                                            });
+                                            break;
+                                        case DialogInterface.BUTTON_NEGATIVE:
+                                            break;
+                                    }
+                                    finish();
+                                }
+                            };
+                            AlertDialog.Builder builder = new AlertDialog.Builder(EditUserActivity.this);
+                            builder.setMessage("The User has projects associated to it. Do you really want to delete it?").setPositiveButton("Yes", dialogClickListener).setNegativeButton("No", dialogClickListener).show();
+                            } else if (projectList.size() == 0){
+                                Call<User> call2 = Client
+                                        .getInstance().getApi().deleteUser(id);
+                                call2.enqueue(new Callback<User>() {
+                                    @Override
+                                    public void onResponse(Call<User> call, Response<User> response) {
+                                        User user = response.body();
+                                        if (user==null){
+                                            System.out.println("User response is null");
                                         }
-                                        @Override
-                                        public void onFailure(Call<User> call, Throwable t) {
-                                            Toast.makeText(EditUserActivity.this, "Failed! ", Toast.LENGTH_LONG).show();
+                                        else {
+                                            Toast.makeText(EditUserActivity.this,  "Deleted: " + user.getEmail(), Toast.LENGTH_LONG).show();
                                         }
-                                    });
-                                    break;
-                                case DialogInterface.BUTTON_NEGATIVE:
-                                    break;
-                            }
-                            finish();
-                        }
-                    };
-                    AlertDialog.Builder builder = new AlertDialog.Builder(EditUserActivity.this);
-                    builder.setMessage("The User has projects associated to it. Do you really want to delete it?").setPositiveButton("Yes", dialogClickListener).setNegativeButton("No", dialogClickListener).show();
-                } else{
-                    Call<User> call = Client
-                            .getInstance().getApi().deleteUser(id);
-                    call.enqueue(new Callback<User>() {
-                        @Override
-                        public void onResponse(Call<User> call, Response<User> response) {
-                            User user = response.body();
-                            if (user==null){
-                                System.out.println("User response is null");
-                            }
-                            else {
-                                Toast.makeText(EditUserActivity.this,  "Deleted: " + user.getEmail(), Toast.LENGTH_LONG).show();
-                            }
-                        }
+                                    }
 
-                        @Override
-                        public void onFailure(Call<User> call, Throwable t) {
-                        }
-                    });
+                                    @Override
+                                    public void onFailure(Call<User> call, Throwable t) {
+                                    }
+                                });
 
-                    finish();
-                }
+                                finish();
+
+                                }
+
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<ArrayList<Project>> call, Throwable t) {
+                    }
+
+                });
+
             }
 
 
         });
     }
+
+
 }
