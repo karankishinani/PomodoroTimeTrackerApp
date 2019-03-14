@@ -13,7 +13,7 @@ import android.content.DialogInterface;
 import com.example.pttmobile4.R;
 import com.example.pttmobile4.api.Client;
 import com.example.pttmobile4.models.Project;
-import com.example.pttmobile4.utils.CustomWarningToast;
+import com.example.pttmobile4.utils.CustomToast;
 
 import org.json.JSONObject;
 
@@ -92,13 +92,14 @@ public class EditProjectActivity extends AppCompatActivity {
                             System.out.println("Project response is null");
                         }
                         else {
-                            Toast.makeText(EditProjectActivity.this,  "Updated: " + project.getProjectname(), Toast.LENGTH_LONG).show();
+                            new CustomToast().Show_Toast(false,getApplicationContext(),findViewById(R.id.editProjectLayout) ,"Updated: " + project.getProjectname());
+
                         }
                     }
 
                     @Override
                     public void onFailure(Call<Project> call, Throwable t) {
-                        new CustomWarningToast().Show_Toast(getApplicationContext(),findViewById(R.id.editProjectLayout) ,"Edit Project Failed");
+                        new CustomToast().Show_Toast(false,getApplicationContext(),findViewById(R.id.editProjectLayout) ,"Edit Project Failed");
                     }
                 });
 
@@ -129,12 +130,12 @@ public class EditProjectActivity extends AppCompatActivity {
                                             if (project == null) {
                                                 System.out.println("Project response is null");
                                             } else {
-                                                Toast.makeText(EditProjectActivity.this, "Deleted: " + project.getProjectname(), Toast.LENGTH_LONG).show();
+                                                new CustomToast().Show_Toast(false,getApplicationContext(),findViewById(R.id.editProjectLayout) ,"Deleted: " + project.getProjectname());
                                             }
                                         }
                                         @Override
                                         public void onFailure(Call<Project> call, Throwable t) {
-                                            new CustomWarningToast().Show_Toast(getApplicationContext(),findViewById(R.id.editProjectLayout) ,"Failed!");
+                                            new CustomToast().Show_Toast(false,getApplicationContext(),findViewById(R.id.editProjectLayout) ,"Failed!");
                                         }
                                     });
                                     break;
@@ -156,13 +157,14 @@ public class EditProjectActivity extends AppCompatActivity {
                             if (project == null) {
                                 System.out.println("Project response is null");
                             } else {
-                                Toast.makeText(EditProjectActivity.this, "Deleted: " + project.getProjectname(), Toast.LENGTH_LONG).show();
+                                new CustomToast().Show_Toast(true,getApplicationContext(),findViewById(R.id.editProjectLayout) ,"Deleted: " + project.getProjectname());
+
                             }
                         }
 
                         @Override
                         public void onFailure(Call<Project> call, Throwable t) {
-                            new CustomWarningToast().Show_Toast(getApplicationContext(),findViewById(R.id.editProjectLayout) ,"Failed!");
+                            new CustomToast().Show_Toast(false,getApplicationContext(),findViewById(R.id.editProjectLayout) ,"Failed!");
                         }
                     });
                     finish();

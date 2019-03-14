@@ -12,7 +12,7 @@ import android.widget.Toast;
 import com.example.pttmobile4.R;
 import com.example.pttmobile4.api.Client;
 import com.example.pttmobile4.models.User;
-import com.example.pttmobile4.utils.CustomWarningToast;
+import com.example.pttmobile4.utils.CustomToast;
 
 import org.json.JSONObject;
 
@@ -79,13 +79,14 @@ public class CreateUserActivity extends AppCompatActivity {
                             System.out.println("User response is null");
                         }
                          else {
-                            Toast.makeText(CreateUserActivity.this,  "Created: " + user.getEmail(), Toast.LENGTH_LONG).show();
+                            new CustomToast().Show_Toast(true,getApplicationContext(),findViewById(R.id.createUserLayout) ,"Created: " + user.getEmail());
+
                         }
                     }
 
                     @Override
                     public void onFailure(Call<User> call, Throwable t) {
-                        new CustomWarningToast().Show_Toast(getApplicationContext(),findViewById(R.id.createUserLayout) ,"Create User Failed");
+                        new CustomToast().Show_Toast(false,getApplicationContext(),findViewById(R.id.createUserLayout) ,"Create User Failed");
 
                     }
                 });

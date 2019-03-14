@@ -8,13 +8,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.example.pttmobile4.R;
 import com.example.pttmobile4.api.Client;
 import com.example.pttmobile4.models.Project;
 import com.example.pttmobile4.models.User;
-import com.example.pttmobile4.utils.CustomWarningToast;
+import com.example.pttmobile4.utils.CustomToast;
 
 import org.json.JSONObject;
 
@@ -102,7 +101,8 @@ public class EditUserActivity extends AppCompatActivity {
                             System.out.println("User response is null");
                         }
                         else {
-                            Toast.makeText(EditUserActivity.this,  "Updated: " + user.getEmail(), Toast.LENGTH_LONG).show();
+                            new CustomToast().Show_Toast(true,getApplicationContext(),findViewById(R.id.editUserLayout) ,"Updated: " + user.getEmail());
+
                         }
                     }
 
@@ -148,12 +148,13 @@ public class EditUserActivity extends AppCompatActivity {
                                                     if (user == null) {
                                                         System.out.println("Project response is null");
                                                     } else {
-                                                        Toast.makeText(EditUserActivity.this, "Deleted: " + user.getEmail(), Toast.LENGTH_LONG).show();
+                                                        new CustomToast().Show_Toast(true,getApplicationContext(),findViewById(R.id.editUserLayout) ,"Deleted: " + user.getEmail());
+
                                                     }
                                                 }
                                                 @Override
                                                 public void onFailure(Call<User> call, Throwable t) {
-                                                    new CustomWarningToast().Show_Toast(getApplicationContext(),findViewById(R.id.editUserLayout) ,"Failed!");
+                                                    new CustomToast().Show_Toast(false,getApplicationContext(),findViewById(R.id.editUserLayout) ,"Failed!");
                                                 }
                                             });
                                             break;
@@ -176,13 +177,13 @@ public class EditUserActivity extends AppCompatActivity {
                                             System.out.println("User response is null");
                                         }
                                         else {
-                                            Toast.makeText(EditUserActivity.this,  "Deleted: " + user.getEmail(), Toast.LENGTH_LONG).show();
+                                            new CustomToast().Show_Toast(true,getApplicationContext(),findViewById(R.id.editUserLayout) ,"Deleted: " + user.getEmail());
                                         }
                                     }
 
                                     @Override
                                     public void onFailure(Call<User> call, Throwable t) {
-                                        new CustomWarningToast().Show_Toast(getApplicationContext(),findViewById(R.id.editUserLayout) ,"Failed!");
+                                        new CustomToast().Show_Toast(false,getApplicationContext(),findViewById(R.id.editUserLayout) ,"Failed!");
                                     }
                                 });
 
@@ -195,7 +196,7 @@ public class EditUserActivity extends AppCompatActivity {
 
                     @Override
                     public void onFailure(Call<ArrayList<Project>> call, Throwable t) {
-                        new CustomWarningToast().Show_Toast(getApplicationContext(),findViewById(R.id.editUserLayout) ,"Failed!");
+                        new CustomToast().Show_Toast(false,getApplicationContext(),findViewById(R.id.editUserLayout) ,"Failed!");
 
                     }
 

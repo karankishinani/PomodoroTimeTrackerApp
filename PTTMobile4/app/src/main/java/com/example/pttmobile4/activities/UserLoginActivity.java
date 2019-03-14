@@ -7,12 +7,11 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.example.pttmobile4.R;
 import com.example.pttmobile4.api.Client;
 import com.example.pttmobile4.models.User;
-import com.example.pttmobile4.utils.CustomWarningToast;
+import com.example.pttmobile4.utils.CustomToast;
 
 import java.util.ArrayList;
 
@@ -99,14 +98,14 @@ public class UserLoginActivity extends AppCompatActivity {
                         intent.putExtra("userId", userId);
                         startActivity(intent);
                     } else {
-                        new CustomWarningToast().Show_Toast(getApplicationContext(),findViewById(R.id.userLoginLayout) ,"Email not found!");
+                        new CustomToast().Show_Toast(false,getApplicationContext(),findViewById(R.id.userLoginLayout) ,"Email not found!");
                     }
                 }
             }
 
             @Override
             public void onFailure(Call<ArrayList<User>> call, Throwable t) {
-                new CustomWarningToast().Show_Toast(getApplicationContext(),findViewById(R.id.userLoginLayout) ,"Failed!");
+                new CustomToast().Show_Toast(false,getApplicationContext(),findViewById(R.id.userLoginLayout) ,"Failed!");
 
             }
 

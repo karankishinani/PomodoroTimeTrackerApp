@@ -11,7 +11,7 @@ import android.widget.Toast;
 import com.example.pttmobile4.R;
 import com.example.pttmobile4.api.Client;
 import com.example.pttmobile4.models.Project;
-import com.example.pttmobile4.utils.CustomWarningToast;
+import com.example.pttmobile4.utils.CustomToast;
 
 import org.json.JSONObject;
 
@@ -63,16 +63,18 @@ public class CreateProjectActivity extends AppCompatActivity {
                     public void onResponse(Call<Project> call, Response<Project> response) {
                         Project project = response.body();
                         if (project==null){
-                            new CustomWarningToast().Show_Toast(getApplicationContext(),findViewById(R.id.createProjectLayout) ,"Create Project Response is null");
+                            new CustomToast().Show_Toast(false, getApplicationContext(),findViewById(R.id.createProjectLayout) ,"Create Project Response is null");
                         }
                         else {
-                            Toast.makeText(CreateProjectActivity.this,  "Created: " + project.getProjectname(), Toast.LENGTH_LONG).show();
+
+                            new CustomToast().Show_Toast(true, getApplicationContext(),findViewById(R.id.createProjectLayout) ,"Created: " + project.getProjectname());
+
                         }
                     }
 
                     @Override
                     public void onFailure(Call<Project> call, Throwable t) {
-                        new CustomWarningToast().Show_Toast(getApplicationContext(),findViewById(R.id.createProjectLayout) ,"Create Project Failed");
+                        new CustomToast().Show_Toast(false,getApplicationContext(),findViewById(R.id.createProjectLayout) ,"Create Project Failed");
                     }
                 });
 
