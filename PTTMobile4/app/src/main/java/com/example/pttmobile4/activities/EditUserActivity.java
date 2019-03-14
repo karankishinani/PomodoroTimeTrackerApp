@@ -14,6 +14,7 @@ import com.example.pttmobile4.R;
 import com.example.pttmobile4.api.Client;
 import com.example.pttmobile4.models.Project;
 import com.example.pttmobile4.models.User;
+import com.example.pttmobile4.utils.CustomWarningToast;
 
 import org.json.JSONObject;
 
@@ -152,7 +153,7 @@ public class EditUserActivity extends AppCompatActivity {
                                                 }
                                                 @Override
                                                 public void onFailure(Call<User> call, Throwable t) {
-                                                    Toast.makeText(EditUserActivity.this, "Failed! ", Toast.LENGTH_LONG).show();
+                                                    new CustomWarningToast().Show_Toast(getApplicationContext(),findViewById(R.id.editUserLayout) ,"Failed!");
                                                 }
                                             });
                                             break;
@@ -181,6 +182,7 @@ public class EditUserActivity extends AppCompatActivity {
 
                                     @Override
                                     public void onFailure(Call<User> call, Throwable t) {
+                                        new CustomWarningToast().Show_Toast(getApplicationContext(),findViewById(R.id.editUserLayout) ,"Failed!");
                                     }
                                 });
 
@@ -193,6 +195,8 @@ public class EditUserActivity extends AppCompatActivity {
 
                     @Override
                     public void onFailure(Call<ArrayList<Project>> call, Throwable t) {
+                        new CustomWarningToast().Show_Toast(getApplicationContext(),findViewById(R.id.editUserLayout) ,"Failed!");
+
                     }
 
                 });

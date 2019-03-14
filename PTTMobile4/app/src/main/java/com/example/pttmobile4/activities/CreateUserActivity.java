@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.example.pttmobile4.R;
 import com.example.pttmobile4.api.Client;
 import com.example.pttmobile4.models.User;
+import com.example.pttmobile4.utils.CustomWarningToast;
 
 import org.json.JSONObject;
 
@@ -84,6 +85,8 @@ public class CreateUserActivity extends AppCompatActivity {
 
                     @Override
                     public void onFailure(Call<User> call, Throwable t) {
+                        new CustomWarningToast().Show_Toast(getApplicationContext(),findViewById(R.id.createUserLayout) ,"Create User Failed");
+
                     }
                 });
 

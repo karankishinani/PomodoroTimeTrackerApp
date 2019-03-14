@@ -13,6 +13,7 @@ import android.content.DialogInterface;
 import com.example.pttmobile4.R;
 import com.example.pttmobile4.api.Client;
 import com.example.pttmobile4.models.Project;
+import com.example.pttmobile4.utils.CustomWarningToast;
 
 import org.json.JSONObject;
 
@@ -97,7 +98,7 @@ public class EditProjectActivity extends AppCompatActivity {
 
                     @Override
                     public void onFailure(Call<Project> call, Throwable t) {
-                        Toast.makeText(EditProjectActivity.this,  "Failed! ", Toast.LENGTH_LONG).show();
+                        new CustomWarningToast().Show_Toast(getApplicationContext(),findViewById(R.id.editProjectLayout) ,"Edit Project Failed");
                     }
                 });
 
@@ -133,7 +134,7 @@ public class EditProjectActivity extends AppCompatActivity {
                                         }
                                         @Override
                                         public void onFailure(Call<Project> call, Throwable t) {
-                                            Toast.makeText(EditProjectActivity.this, "Failed! ", Toast.LENGTH_LONG).show();
+                                            new CustomWarningToast().Show_Toast(getApplicationContext(),findViewById(R.id.editProjectLayout) ,"Failed!");
                                         }
                                     });
                                     break;
@@ -161,7 +162,7 @@ public class EditProjectActivity extends AppCompatActivity {
 
                         @Override
                         public void onFailure(Call<Project> call, Throwable t) {
-                            Toast.makeText(EditProjectActivity.this, "Failed! ", Toast.LENGTH_LONG).show();
+                            new CustomWarningToast().Show_Toast(getApplicationContext(),findViewById(R.id.editProjectLayout) ,"Failed!");
                         }
                     });
                     finish();
