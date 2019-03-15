@@ -92,7 +92,7 @@ public class EditProjectActivity extends AppCompatActivity {
                             System.out.println("Project response is null");
                         }
                         else {
-                            new CustomToast().Show_Toast(false,getApplicationContext(),findViewById(R.id.editProjectLayout) ,"Updated: " + project.getProjectname());
+                            new CustomToast().Show_Toast(true,getApplicationContext(),findViewById(R.id.editProjectLayout) ,"Updated: " + project.getProjectname());
 
                         }
                         // Go back to Last Activity
@@ -133,7 +133,7 @@ public class EditProjectActivity extends AppCompatActivity {
                                             if (project == null) {
                                                 System.out.println("Project response is null");
                                             } else {
-                                                new CustomToast().Show_Toast(false,getApplicationContext(),findViewById(R.id.editProjectLayout) ,"Deleted: " + project.getProjectname());
+                                                new CustomToast().Show_Toast(true,getApplicationContext(),findViewById(R.id.editProjectLayout) ,"Deleted: " + project.getProjectname());
                                             }
                                         }
                                         @Override
