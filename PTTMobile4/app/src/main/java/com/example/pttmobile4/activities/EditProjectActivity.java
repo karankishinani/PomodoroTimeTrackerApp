@@ -1,14 +1,13 @@
 package com.example.pttmobile4.activities;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.util.ArrayMap;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 
 import com.example.pttmobile4.R;
 import com.example.pttmobile4.api.Client;
@@ -96,16 +95,19 @@ public class EditProjectActivity extends AppCompatActivity {
                             new CustomToast().Show_Toast(false,getApplicationContext(),findViewById(R.id.editProjectLayout) ,"Updated: " + project.getProjectname());
 
                         }
+                        // Go back to Last Activity
+                        finish();
                     }
 
                     @Override
                     public void onFailure(Call<Project> call, Throwable t) {
                         new CustomToast().Show_Toast(false,getApplicationContext(),findViewById(R.id.editProjectLayout) ,"Edit Project Failed");
+                        // Go back to Last Activity
+                        finish();
                     }
                 });
 
-                // Go back to Last Activity
-                finish();
+
             }
         });
 
@@ -139,11 +141,13 @@ public class EditProjectActivity extends AppCompatActivity {
                                             new CustomToast().Show_Toast(false,getApplicationContext(),findViewById(R.id.editProjectLayout) ,"Failed!");
                                         }
                                     });
+                                    // Go back to Last Activity
+                                    finish();
                                     break;
                                 case DialogInterface.BUTTON_NEGATIVE:
                                     break;
                             }
-                            finish();
+
                         }
                     };
                     AlertDialog.Builder builder = new AlertDialog.Builder(EditProjectActivity.this);

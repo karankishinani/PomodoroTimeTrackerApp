@@ -7,7 +7,6 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.example.pttmobile4.R;
 import com.example.pttmobile4.api.Client;
@@ -82,17 +81,19 @@ public class CreateUserActivity extends AppCompatActivity {
                             new CustomToast().Show_Toast(true,getApplicationContext(),findViewById(R.id.createUserLayout) ,"Created: " + user.getEmail());
 
                         }
+                        // Go back to Last Activity
+                        finish();
                     }
 
                     @Override
                     public void onFailure(Call<User> call, Throwable t) {
                         new CustomToast().Show_Toast(false,getApplicationContext(),findViewById(R.id.createUserLayout) ,"Create User Failed");
-
+                        // Go back to Last Activity
+                        finish();
                     }
                 });
 
-                // Go back to Last Activity
-                finish();
+
             }
         });
 

@@ -6,7 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.example.pttmobile4.R;
 import com.example.pttmobile4.api.Client;
@@ -71,16 +70,18 @@ public class CreateProjectActivity extends AppCompatActivity {
                             new CustomToast().Show_Toast(true, getApplicationContext(),findViewById(R.id.createProjectLayout) ,"Created: " + project.getProjectname());
 
                         }
+                        // Go back to Last Activity
+                        finish();
                     }
 
                     @Override
                     public void onFailure(Call<Project> call, Throwable t) {
                         new CustomToast().Show_Toast(false,getApplicationContext(),findViewById(R.id.createProjectLayout) ,"Create Project Failed");
+                        // Go back to Last Activity
+                        finish();
                     }
                 });
 
-                // Go back to Last Activity
-                finish();
 
             }
         });

@@ -104,15 +104,18 @@ public class EditUserActivity extends AppCompatActivity {
                             new CustomToast().Show_Toast(true,getApplicationContext(),findViewById(R.id.editUserLayout) ,"Updated: " + user.getEmail());
 
                         }
+                        // Go back to Last Activity
+                        finish();
                     }
 
                     @Override
                     public void onFailure(Call<User> call, Throwable t) {
+                        // Go back to Last Activity
+                        finish();
                     }
                 });
 
-                // Go back to Last Activity
-                finish();
+
             }
         });
 
@@ -157,11 +160,13 @@ public class EditUserActivity extends AppCompatActivity {
                                                     new CustomToast().Show_Toast(false,getApplicationContext(),findViewById(R.id.editUserLayout) ,"Failed!");
                                                 }
                                             });
+                                            // Go back to Last Activity
+                                            finish();
                                             break;
                                         case DialogInterface.BUTTON_NEGATIVE:
                                             break;
                                     }
-                                    finish();
+
                                 }
                             };
                             AlertDialog.Builder builder = new AlertDialog.Builder(EditUserActivity.this);
