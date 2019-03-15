@@ -80,6 +80,7 @@ public class EditProjectActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Map<String,Object> params = new ArrayMap<>();
                 params.put("projectname", projectName.getText().toString());
+                params.put("userId", userId);
                 RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"),(new JSONObject(params)).toString());
 
                 Call<Project> call = Client
