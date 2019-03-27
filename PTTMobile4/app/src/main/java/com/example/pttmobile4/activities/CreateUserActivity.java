@@ -1,8 +1,6 @@
 package com.example.pttmobile4.activities;
 
 import android.os.Bundle;
-import android.support.v4.util.ArrayMap;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -17,6 +15,8 @@ import org.json.JSONObject;
 
 import java.util.Map;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.collection.ArrayMap;
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
