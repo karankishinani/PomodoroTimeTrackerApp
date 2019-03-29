@@ -16,6 +16,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import androidx.test.espresso.ViewInteraction;
+import androidx.test.espresso.contrib.RecyclerViewActions;
 import androidx.test.filters.LargeTest;
 import androidx.test.rule.ActivityTestRule;
 import androidx.test.runner.AndroidJUnit4;
@@ -32,6 +33,7 @@ import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.is;
+import com.example.pttmobile4.utils.CustomMatcher;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
@@ -125,6 +127,10 @@ public class CreateProjectTest {
                                 2),
                         isDisplayed()));
         recyclerView.check(matches(isDisplayed()));
+
+        //TODO:
+        recyclerView
+                .perform(RecyclerViewActions.actionOnHolderItem(CustomMatcher.withUser("Bosheng", "Jian", "email@123.com"), click()));
 
         ViewInteraction appCompatButton4 = onView(
                 allOf(withId(R.id.adminLogoutBtn), withText("Log Out"),

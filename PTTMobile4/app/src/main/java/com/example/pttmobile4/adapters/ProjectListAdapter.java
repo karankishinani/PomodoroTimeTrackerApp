@@ -124,8 +124,8 @@ public class ProjectListAdapter extends RecyclerView.Adapter<ProjectListAdapter.
     }
 
 
-    class ProjectListViewHolder extends RecyclerView.ViewHolder{
-        TextView mProjectName;
+    public class ProjectListViewHolder extends RecyclerView.ViewHolder{
+        public TextView mProjectName;
         LinearLayout mLayout;
         ProjectListViewHolder(View view){
             super(view);
