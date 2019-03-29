@@ -8,11 +8,13 @@ import android.widget.EditText;
 
 import com.example.pttmobile4.R;
 import com.example.pttmobile4.api.Client;
+import com.example.pttmobile4.models.Project;
 import com.example.pttmobile4.models.User;
 import com.example.pttmobile4.utils.CustomToast;
 
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -64,6 +66,31 @@ public class CreateUserActivity extends AppCompatActivity {
                     emailId.requestFocus();
                     return;
                 }
+
+                // addition check begin
+                Call<ArrayList<User>> preCall = Client
+                        .getInstance().getApi().getUsers();
+
+                preCall.enqueue(new Callback<ArrayList<User>>() {
+                    @Override
+                    public void onResponse(Call<ArrayList<User>> call, Response<ArrayList<User>> response) {
+                        ArrayList<User> userList = response.body();
+                        ArrayList<String> emailList = new ArrayList<String>();
+                        for (User user : userList) {
+                            emailList.add(user.getEmail());
+                        }
+                        if (emailList.contains(emailId.getText())) {
+                            new CustomToast().Show_Toast(true,getApplicationContext(),findViewById(R.id.createUserLayout) ,"Duplicate email!");
+                            finish();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ArrayList<User>> call, Throwable t) {
+                    }
+
+                });
+                // addition check end
 
                 RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"),(new JSONObject(params)).toString());
                 // CREATE User and add them in the DB
