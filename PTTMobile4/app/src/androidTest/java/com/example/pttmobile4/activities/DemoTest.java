@@ -54,6 +54,7 @@ public class DemoTest {
                         childAtPosition(
                                 withClassName(is("android.widget.LinearLayout")),
                                 2)));
+
         recyclerView.perform(actionOnItemAtPosition(0, click()));
 
         ViewInteraction appCompatButton2 = onView(
