@@ -24,7 +24,6 @@ import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.Espresso.pressBack;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
-import static androidx.test.espresso.action.ViewActions.longClick;
 import static androidx.test.espresso.action.ViewActions.replaceText;
 import static androidx.test.espresso.action.ViewActions.scrollTo;
 import static androidx.test.espresso.assertion.ViewAssertions.doesNotExist;
@@ -305,16 +304,12 @@ public class EditProjectTest {
 
         SystemClock.sleep(500);
 
-        ViewInteraction linearLayout2 = onView(
-                allOf(withId(R.id.layout),
-                        childAtPosition(
-                                allOf(withId(R.id.userList),
-                                        childAtPosition(
-                                                withClassName(is("android.widget.LinearLayout")),
-                                                2)),
-                                0),
-                        isDisplayed()));
-        linearLayout2.perform(click());
+
+
+        ViewInteraction checkUser= onView(allOf(withId(R.id.email),withText("a@d.m"), isDisplayed()));
+        checkUser.check(matches(isDisplayed()));
+        checkUser.perform(click());
+        SystemClock.sleep(500);
 
         ViewInteraction appCompatButton12 = onView(
                 allOf(withId(R.id.deleteUserBtn), withText("Delete"),

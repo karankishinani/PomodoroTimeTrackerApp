@@ -14,6 +14,7 @@ import com.example.pttmobile4.utils.CustomToast;
 
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -77,33 +78,58 @@ public class EditProjectActivity extends AppCompatActivity {
         updateProjectBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Map<String,Object> params = new ArrayMap<>();
+                final Map<String,Object> params = new ArrayMap<>();
                 params.put("projectname", projectName.getText().toString());
                 params.put("userId", userId);
-                RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"),(new JSONObject(params)).toString());
 
-                Call<Project> call = Client
-                        .getInstance().getApi().updateProject(userId, projectId, body);
-                call.enqueue(new Callback<Project>() {
+                // addition check begin
+                Call<ArrayList<Project>> preCall = Client
+                        .getInstance().getApi().getProjects(Integer.valueOf(userId));
+
+                preCall.enqueue(new Callback<ArrayList<Project>>() {
                     @Override
-                    public void onResponse(Call<Project> call, Response<Project> response) {
-                        Project project = response.body();
-                        if (project==null){
-                            System.out.println("Project response is null");
+                    public void onResponse(Call<ArrayList<Project>> call, Response<ArrayList<Project>> response) {
+                        ArrayList<Project> projectList = response.body();
+                        ArrayList<String> projectNameList = new ArrayList<String>();
+                        for (Project project : projectList) {
+                            projectNameList.add(project.getProjectname());
                         }
-                        else {
-                            new CustomToast().Show_Toast(true,getApplicationContext(),findViewById(R.id.editProjectLayout) ,"Updated: " + project.getProjectname());
+                        if (projectNameList.contains(projectName.getText().toString())) {
+                            new CustomToast().Show_Toast(false,getApplicationContext(),findViewById(R.id.editProjectLayout) ,"Duplicate project name!");
+                            finish();
+                        }
+                        else{
+                            RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"),(new JSONObject(params)).toString());
 
+                            Call<Project> call2 = Client
+                                    .getInstance().getApi().updateProject(userId, projectId, body);
+                            call2.enqueue(new Callback<Project>() {
+                                @Override
+                                public void onResponse(Call<Project> call, Response<Project> response) {
+                                    Project project = response.body();
+                                    if (project==null){
+                                        System.out.println("Project response is null");
+                                    }
+                                    else {
+                                        new CustomToast().Show_Toast(true,getApplicationContext(),findViewById(R.id.editProjectLayout) ,"Updated: " + project.getProjectname());
+
+                                    }
+                                    // Go back to Last Activity
+                                    finish();
+                                }
+
+                                @Override
+                                public void onFailure(Call<Project> call, Throwable t) {
+                                    new CustomToast().Show_Toast(false,getApplicationContext(),findViewById(R.id.editProjectLayout) ,"Edit Project Failed");
+                                    // Go back to Last Activity
+                                    finish();
+                                }
+                            });
                         }
-                        // Go back to Last Activity
-                        finish();
                     }
 
                     @Override
-                    public void onFailure(Call<Project> call, Throwable t) {
-                        new CustomToast().Show_Toast(false,getApplicationContext(),findViewById(R.id.editProjectLayout) ,"Edit Project Failed");
-                        // Go back to Last Activity
-                        finish();
+                    public void onFailure(Call<ArrayList<Project>> call, Throwable t) {
                     }
                 });
 

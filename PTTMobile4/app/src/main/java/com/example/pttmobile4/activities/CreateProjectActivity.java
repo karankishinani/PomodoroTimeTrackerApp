@@ -53,7 +53,7 @@ public class CreateProjectActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Map<String,Object> params = new ArrayMap<>();
+                final Map<String,Object> params = new ArrayMap<>();
                 params.put("projectname", projectName.getText().toString());
                 params.put("userId", Integer.parseInt(userId));
 
@@ -69,9 +69,37 @@ public class CreateProjectActivity extends AppCompatActivity {
                         for (Project project : projectList) {
                             projectNameList.add(project.getProjectname());
                         }
-                        if (projectNameList.contains(projectName.getText())) {
+                        if (projectNameList.contains(projectName.getText().toString())) {
                             new CustomToast().Show_Toast(false,getApplicationContext(),findViewById(R.id.createProjectLayout) ,"Duplicate project name!");
                             finish();
+                        } else {
+                            RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"),(new JSONObject(params)).toString());
+
+                            Call<Project> call2 = Client
+                                    .getInstance().getApi().createProject(Integer.valueOf(userId), body);
+                            call2.enqueue(new Callback<Project>() {
+                                @Override
+                                public void onResponse(Call<Project> call, Response<Project> response) {
+                                    Project project = response.body();
+                                    if (project==null){
+                                        new CustomToast().Show_Toast(false, getApplicationContext(),findViewById(R.id.createProjectLayout) ,"Create Project Response is null");
+                                    }
+                                    else {
+
+                                        new CustomToast().Show_Toast(true, getApplicationContext(),findViewById(R.id.createProjectLayout) ,"Created: " + project.getProjectname());
+
+                                    }
+                                    // Go back to Last Activity
+                                    finish();
+                                }
+
+                                @Override
+                                public void onFailure(Call<Project> call, Throwable t) {
+                                    new CustomToast().Show_Toast(false,getApplicationContext(),findViewById(R.id.createProjectLayout) ,"Create Project Failed");
+                                    // Go back to Last Activity
+                                    finish();
+                                }
+                            });
                         }
                     }
 
@@ -82,33 +110,7 @@ public class CreateProjectActivity extends AppCompatActivity {
                 });
                 // addition check end
 
-                RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"),(new JSONObject(params)).toString());
 
-                Call<Project> call = Client
-                        .getInstance().getApi().createProject(Integer.valueOf(userId), body);
-                call.enqueue(new Callback<Project>() {
-                    @Override
-                    public void onResponse(Call<Project> call, Response<Project> response) {
-                        Project project = response.body();
-                        if (project==null){
-                            new CustomToast().Show_Toast(false, getApplicationContext(),findViewById(R.id.createProjectLayout) ,"Create Project Response is null");
-                        }
-                        else {
-
-                            new CustomToast().Show_Toast(true, getApplicationContext(),findViewById(R.id.createProjectLayout) ,"Created: " + project.getProjectname());
-
-                        }
-                        // Go back to Last Activity
-                        finish();
-                    }
-
-                    @Override
-                    public void onFailure(Call<Project> call, Throwable t) {
-                        new CustomToast().Show_Toast(false,getApplicationContext(),findViewById(R.id.createProjectLayout) ,"Create Project Failed");
-                        // Go back to Last Activity
-                        finish();
-                    }
-                });
 
 
             }

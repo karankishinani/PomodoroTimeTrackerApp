@@ -283,7 +283,7 @@ public class MainActivityTest {
                                                 0)),
                                 1),
                         isDisplayed()));
-        appCompatEditText2.perform(replaceText("b@c.s"), closeSoftKeyboard());
+        appCompatEditText2.perform(replaceText("bftrgr43sefs@c.s"), closeSoftKeyboard());
 
         ViewInteraction appCompatButton6 = onView(
                 allOf(withId(R.id.userLoginBtn), withText("Login"),

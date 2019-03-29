@@ -8,7 +8,6 @@ import android.widget.EditText;
 
 import com.example.pttmobile4.R;
 import com.example.pttmobile4.api.Client;
-import com.example.pttmobile4.models.Project;
 import com.example.pttmobile4.models.User;
 import com.example.pttmobile4.utils.CustomToast;
 
@@ -49,7 +48,7 @@ public class CreateUserActivity extends AppCompatActivity {
         createUserOkBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Map<String,Object> params = new ArrayMap<>();
+                final Map<String,Object> params = new ArrayMap<>();
                 params.put("firstName", fName.getText().toString());
                 params.put("lastName", lName.getText().toString());
                 params.put("email", emailId.getText().toString());
@@ -79,10 +78,42 @@ public class CreateUserActivity extends AppCompatActivity {
                         for (User user : userList) {
                             emailList.add(user.getEmail());
                         }
-                        if (emailList.contains(emailId.getText())) {
-                            new CustomToast().Show_Toast(true,getApplicationContext(),findViewById(R.id.createUserLayout) ,"Duplicate email!");
+                        if (emailList.contains(emailId.getText().toString())) {
+                            new CustomToast().Show_Toast(false,getApplicationContext(),findViewById(R.id.createUserLayout) ,"Duplicate email!");
                             finish();
                         }
+                        else{
+                            RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"),(new JSONObject(params)).toString());
+                            // CREATE User and add them in the DB
+                            Call<User> call2 = Client
+                                    .getInstance().getApi().createUser(body);
+
+                            call2.enqueue(new Callback<User>() {
+                                @Override
+                                public void onResponse(Call<User> call, Response<User> response) {
+                                    User user = response.body();
+                                    if (user==null){
+                                        System.out.println("User response is null");
+                                    }
+                                    else {
+                                        new CustomToast().Show_Toast(true,getApplicationContext(),findViewById(R.id.createUserLayout) ,"Created: " + user.getEmail());
+
+                                    }
+                                    // Go back to Last Activity
+                                    finish();
+                                }
+
+                                @Override
+                                public void onFailure(Call<User> call, Throwable t) {
+                                    new CustomToast().Show_Toast(false,getApplicationContext(),findViewById(R.id.createUserLayout) ,"Create User Failed");
+                                    // Go back to Last Activity
+                                    finish();
+                                }
+                            });
+
+                        }
+
+
                     }
 
                     @Override
@@ -92,33 +123,7 @@ public class CreateUserActivity extends AppCompatActivity {
                 });
                 // addition check end
 
-                RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"),(new JSONObject(params)).toString());
-                // CREATE User and add them in the DB
-                Call<User> call = Client
-                        .getInstance().getApi().createUser(body);
 
-                call.enqueue(new Callback<User>() {
-                    @Override
-                    public void onResponse(Call<User> call, Response<User> response) {
-                        User user = response.body();
-                        if (user==null){
-                            System.out.println("User response is null");
-                        }
-                         else {
-                            new CustomToast().Show_Toast(true,getApplicationContext(),findViewById(R.id.createUserLayout) ,"Created: " + user.getEmail());
-
-                        }
-                        // Go back to Last Activity
-                        finish();
-                    }
-
-                    @Override
-                    public void onFailure(Call<User> call, Throwable t) {
-                        new CustomToast().Show_Toast(false,getApplicationContext(),findViewById(R.id.createUserLayout) ,"Create User Failed");
-                        // Go back to Last Activity
-                        finish();
-                    }
-                });
 
 
             }

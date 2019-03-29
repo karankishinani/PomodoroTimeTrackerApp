@@ -290,16 +290,11 @@ public class DeleteProjectTest {
 
         SystemClock.sleep(500);
 
-        ViewInteraction linearLayout2 = onView(
-                allOf(withId(R.id.layout),
-                        childAtPosition(
-                                allOf(withId(R.id.userList),
-                                        childAtPosition(
-                                                withClassName(is("android.widget.LinearLayout")),
-                                                2)),
-                                0),
-                        isDisplayed()));
-        linearLayout2.perform(click());
+        ViewInteraction checkUser= onView(allOf(withId(R.id.email),withText("a@s.m"), isDisplayed()));
+        checkUser.check(matches(isDisplayed()));
+        checkUser.perform(click());
+
+        SystemClock.sleep(500);
 
         ViewInteraction appCompatButton13 = onView(
                 allOf(withId(R.id.deleteUserBtn), withText("Delete"),
@@ -316,6 +311,8 @@ public class DeleteProjectTest {
         ViewInteraction deleteCheck = onView(allOf(withId(R.id.email),withText("a@s.m"), isDisplayed()));
         deleteCheck.check(doesNotExist());
 
+        SystemClock.sleep(500);
+
         ViewInteraction appCompatButton14 = onView(
                 allOf(withId(R.id.adminLogoutBtn), withText("Log Out"),
                         childAtPosition(
@@ -325,6 +322,8 @@ public class DeleteProjectTest {
                                 0),
                         isDisplayed()));
         appCompatButton14.perform(click());
+
+        //TODO: check for project with time logged in deliverable part b
     }
 
     private static Matcher<View> childAtPosition(
