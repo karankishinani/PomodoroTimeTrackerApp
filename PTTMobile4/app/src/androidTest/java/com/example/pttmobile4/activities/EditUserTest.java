@@ -25,6 +25,7 @@ import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static androidx.test.espresso.action.ViewActions.longClick;
 import static androidx.test.espresso.action.ViewActions.replaceText;
+import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
@@ -124,16 +125,13 @@ public class EditUserTest {
 
         SystemClock.sleep(500);
 
-        ViewInteraction linearLayout = onView(
-                allOf(withId(R.id.layout),
-                        childAtPosition(
-                                allOf(withId(R.id.userList),
-                                        childAtPosition(
-                                                withClassName(is("android.widget.LinearLayout")),
-                                                2)),
-                                0),
-                        isDisplayed()));
-        linearLayout.perform(click());
+
+        ViewInteraction checkUser = onView(allOf(withId(R.id.email),withText("f@d.u"), isDisplayed()));
+        checkUser.check(matches(isDisplayed()));
+        checkUser.perform(click());
+
+
+
 
         ViewInteraction appCompatEditText5 = onView(
                 allOf(withId(R.id.fName),
@@ -212,6 +210,15 @@ public class EditUserTest {
         appCompatButton4.perform(click());
 
         SystemClock.sleep(500);
+
+        ViewInteraction fNameCheck = onView(allOf(withId(R.id.firstname),withText("g"), isDisplayed()));
+        fNameCheck.check(matches(isDisplayed()));
+        ViewInteraction lNameCheck = onView(allOf(withId(R.id.lastname),withText("h"), isDisplayed()));
+        lNameCheck.check(matches(isDisplayed()));
+
+
+        SystemClock.sleep(500);
+
 
         ViewInteraction appCompatButton5 = onView(
                 allOf(withId(R.id.adminLogoutBtn), withText("Log Out"),

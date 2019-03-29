@@ -26,6 +26,8 @@ import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static androidx.test.espresso.action.ViewActions.replaceText;
 import static androidx.test.espresso.action.ViewActions.scrollTo;
+import static androidx.test.espresso.assertion.ViewAssertions.doesNotExist;
+import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
@@ -215,7 +217,7 @@ public class DeleteProjectTest {
                                                 0)),
                                 1),
                         isDisplayed()));
-        appCompatEditText8.perform(replaceText("p2"), closeSoftKeyboard());
+        appCompatEditText8.perform(replaceText("project to be deleted"), closeSoftKeyboard());
 
         ViewInteraction appCompatButton8 = onView(
                 allOf(withId(R.id.createProjectOkBtn), withText("OK"),
@@ -229,16 +231,10 @@ public class DeleteProjectTest {
 
         SystemClock.sleep(500);
 
-        ViewInteraction linearLayout = onView(
-                allOf(withId(R.id.layout),
-                        childAtPosition(
-                                allOf(withId(R.id.projectList),
-                                        childAtPosition(
-                                                withClassName(is("android.widget.LinearLayout")),
-                                                2)),
-                                0),
-                        isDisplayed()));
-        linearLayout.perform(click());
+        ViewInteraction checkProj = onView(allOf(withId(R.id.project_name),withText("project to be deleted"), isDisplayed()));
+        checkProj.check(matches(isDisplayed()));
+        checkProj.perform(click());
+
 
         ViewInteraction appCompatButton9 = onView(
                 allOf(withId(R.id.deleteProjectBtn), withText("Delete"),
@@ -262,6 +258,9 @@ public class DeleteProjectTest {
         appCompatButton10.perform(scrollTo(), click());
 
         SystemClock.sleep(500);
+
+        ViewInteraction deleteProj = onView(allOf(withId(R.id.project_name),withText("project to be deleted"), isDisplayed()));
+        deleteProj.check(doesNotExist());
 
         ViewInteraction appCompatButton11 = onView(
                 allOf(withId(R.id.userLogoutBtn), withText("Log Out"),
@@ -313,6 +312,9 @@ public class DeleteProjectTest {
         appCompatButton13.perform(click());
 
         SystemClock.sleep(500);
+
+        ViewInteraction deleteCheck = onView(allOf(withId(R.id.email),withText("a@s.m"), isDisplayed()));
+        deleteCheck.check(doesNotExist());
 
         ViewInteraction appCompatButton14 = onView(
                 allOf(withId(R.id.adminLogoutBtn), withText("Log Out"),

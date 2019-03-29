@@ -27,6 +27,8 @@ import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static androidx.test.espresso.action.ViewActions.longClick;
 import static androidx.test.espresso.action.ViewActions.replaceText;
 import static androidx.test.espresso.action.ViewActions.scrollTo;
+import static androidx.test.espresso.assertion.ViewAssertions.doesNotExist;
+import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
@@ -216,7 +218,7 @@ public class EditProjectTest {
                                                 0)),
                                 1),
                         isDisplayed()));
-        appCompatEditText8.perform(replaceText("p1"), closeSoftKeyboard());
+        appCompatEditText8.perform(replaceText("P1"), closeSoftKeyboard());
 
         ViewInteraction appCompatButton8 = onView(
                 allOf(withId(R.id.createProjectOkBtn), withText("OK"),
@@ -230,30 +232,15 @@ public class EditProjectTest {
 
         SystemClock.sleep(500);
 
-        ViewInteraction linearLayout = onView(
-                allOf(withId(R.id.layout),
-                        childAtPosition(
-                                allOf(withId(R.id.projectList),
-                                        childAtPosition(
-                                                withClassName(is("android.widget.LinearLayout")),
-                                                2)),
-                                0),
-                        isDisplayed()));
-        linearLayout.perform(click());
 
-        ViewInteraction appCompatEditText9 = onView(
-                allOf(withId(R.id.projectName), withText("p1"),
-                        childAtPosition(
-                                allOf(withId(R.id.editProjectLayout),
-                                        childAtPosition(
-                                                withId(android.R.id.content),
-                                                0)),
-                                1),
-                        isDisplayed()));
-        appCompatEditText9.perform(longClick());
+        ViewInteraction checkProj = onView(allOf(withId(R.id.project_name),withText("P1"), isDisplayed()));
+        checkProj.check(matches(isDisplayed()));
+        checkProj.perform(click());
+
+        SystemClock.sleep(500);
 
         ViewInteraction appCompatEditText10 = onView(
-                allOf(withId(R.id.projectName), withText("p1"),
+                allOf(withId(R.id.projectName), withText("P1"),
                         childAtPosition(
                                 allOf(withId(R.id.editProjectLayout),
                                         childAtPosition(
@@ -261,10 +248,11 @@ public class EditProjectTest {
                                                 0)),
                                 1),
                         isDisplayed()));
-        appCompatEditText10.perform(replaceText("p2"));
+        appCompatEditText10.perform(replaceText("P2"));
+
 
         ViewInteraction appCompatEditText11 = onView(
-                allOf(withId(R.id.projectName), withText("p2"),
+                allOf(withId(R.id.projectName), withText("P2"),
                         childAtPosition(
                                 allOf(withId(R.id.editProjectLayout),
                                         childAtPosition(
@@ -285,6 +273,9 @@ public class EditProjectTest {
         appCompatButton9.perform(click());
 
         SystemClock.sleep(500);
+
+        ViewInteraction checkUpdate = onView(allOf(withId(R.id.project_name),withText("P2"), isDisplayed()));
+        checkUpdate.check(matches(isDisplayed()));
 
         ViewInteraction appCompatButton10 = onView(
                 allOf(withId(R.id.userLogoutBtn), withText("Log Out"),
@@ -347,6 +338,11 @@ public class EditProjectTest {
         appCompatButton13.perform(scrollTo(), click());
 
         SystemClock.sleep(500);
+
+
+        ViewInteraction deleteCheck = onView(allOf(withId(R.id.email),withText("a@d.m"), isDisplayed()));
+        deleteCheck.check(doesNotExist());
+
 
         ViewInteraction appCompatButton14 = onView(
                 allOf(withId(R.id.adminLogoutBtn), withText("Log Out"),

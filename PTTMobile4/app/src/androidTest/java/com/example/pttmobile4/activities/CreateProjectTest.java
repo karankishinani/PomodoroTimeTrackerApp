@@ -124,21 +124,10 @@ public class CreateProjectTest {
 
         SystemClock.sleep(500);
 
-        ViewInteraction recyclerView = onView(
-                allOf(withId(R.id.userList),
-                        childAtPosition(
-                                childAtPosition(
-                                        IsInstanceOf.<View>instanceOf(android.view.ViewGroup.class),
-                                        0),
-                                2),
-                        isDisplayed()));
-        recyclerView.check(matches(isDisplayed()));
+        ViewInteraction checkUser = onView(allOf(withId(R.id.email),withText("email@123.com"), isDisplayed()));
+        checkUser.check(matches(isDisplayed()));
 
-        //TODO:
-        // recyclerView.perform(RecyclerViewActions.actionOnHolderItem(CustomMatcher.withUser("Bosheng", "Jian", "email@123.com"), click()));
 
-        //pressBack();
-        SystemClock.sleep(500);
 
         ViewInteraction appCompatButton4 = onView(
                 allOf(withId(R.id.adminLogoutBtn), withText("Log Out"),
@@ -225,6 +214,7 @@ public class CreateProjectTest {
 
         SystemClock.sleep(500);
 
+
         ViewInteraction linearLayout = onView(
                 allOf(withId(R.id.layout),
                         childAtPosition(
@@ -236,16 +226,10 @@ public class CreateProjectTest {
                         isDisplayed()));
         linearLayout.check(matches(isDisplayed()));
 
-        ViewInteraction linearLayout2 = onView(
-                allOf(withId(R.id.layout),
-                        childAtPosition(
-                                allOf(withId(R.id.projectList),
-                                        childAtPosition(
-                                                IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class),
-                                                2)),
-                                0),
-                        isDisplayed()));
-        linearLayout2.check(matches(isDisplayed()));
+        ViewInteraction checkProj = onView(allOf(withId(R.id.project_name),withText("P1"), isDisplayed()));
+        checkProj.check(matches(isDisplayed()));
+
+
 
         ViewInteraction button = onView(
                 allOf(withId(R.id.userLogoutBtn),

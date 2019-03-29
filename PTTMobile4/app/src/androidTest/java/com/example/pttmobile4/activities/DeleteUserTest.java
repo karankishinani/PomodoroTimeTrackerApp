@@ -20,6 +20,8 @@ import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static androidx.test.espresso.action.ViewActions.replaceText;
+import static androidx.test.espresso.assertion.ViewAssertions.doesNotExist;
+import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
@@ -117,16 +119,10 @@ public class DeleteUserTest {
 
         SystemClock.sleep(500);
 
-        ViewInteraction linearLayout = onView(
-                allOf(withId(R.id.layout),
-                        childAtPosition(
-                                allOf(withId(R.id.userList),
-                                        childAtPosition(
-                                                withClassName(is("android.widget.LinearLayout")),
-                                                2)),
-                                0),
-                        isDisplayed()));
-        linearLayout.perform(click());
+        ViewInteraction createCheck = onView(allOf(withId(R.id.email),withText("b@c.m"), isDisplayed()));
+        createCheck.check(matches(isDisplayed()));
+        createCheck.perform(click());
+
 
         SystemClock.sleep(500);
 
@@ -141,6 +137,9 @@ public class DeleteUserTest {
         appCompatButton4.perform(click());
 
         SystemClock.sleep(500);
+
+        ViewInteraction deleteCheck = onView(allOf(withId(R.id.email),withText("b@c.m"), isDisplayed()));
+        deleteCheck.check(doesNotExist());
 
         ViewInteraction appCompatButton5 = onView(
                 allOf(withId(R.id.adminLogoutBtn), withText("Log Out"),
