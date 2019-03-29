@@ -1,6 +1,7 @@
 package com.example.pttmobile4.activities;
 
 
+import android.os.SystemClock;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
@@ -41,6 +42,9 @@ public class CreateUserTest {
 
     @Test
     public void createUserTest() {
+
+        SystemClock.sleep(500);
+
         ViewInteraction appCompatButton = onView(
                 allOf(withId(R.id.mainAdminLoginBtn), withText("Admin"),
                         childAtPosition(
@@ -51,6 +55,9 @@ public class CreateUserTest {
                         isDisplayed()));
         appCompatButton.perform(click());
 
+        SystemClock.sleep(500);
+
+
         ViewInteraction appCompatButton2 = onView(
                 allOf(withId(R.id.createUserBtn), withText("Create"),
                         childAtPosition(
@@ -60,6 +67,8 @@ public class CreateUserTest {
                                 1),
                         isDisplayed()));
         appCompatButton2.perform(click());
+
+        SystemClock.sleep(500);
 
         ViewInteraction firstName = onView(
                 allOf(withId(R.id.fName),
@@ -108,6 +117,8 @@ public class CreateUserTest {
                                 1),
                         isDisplayed()));
         appCompatButton3.perform(click());
+
+        SystemClock.sleep(500);
 
         ViewInteraction userList = onView(
                 allOf(withId(R.id.userList),

@@ -1,6 +1,7 @@
 package com.example.pttmobile4.activities;
 
 
+import android.os.SystemClock;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
@@ -43,6 +44,8 @@ public class MainActivityTest {
     @Test
     public void mainActivityTest() {
 
+        SystemClock.sleep(500);
+
         ViewInteraction button = onView(
                 allOf(withId(R.id.mainUserLoginBtn),
                         childAtPosition(
@@ -74,6 +77,8 @@ public class MainActivityTest {
                         isDisplayed()));
         appCompatButton.perform(click());
 
+        SystemClock.sleep(500);
+
         ViewInteraction button3 = onView(
                 allOf(withId(R.id.createUserBtn),
                         childAtPosition(
@@ -103,6 +108,8 @@ public class MainActivityTest {
                                 1),
                         isDisplayed()));
         appCompatButton2.perform(click());
+
+        SystemClock.sleep(500);
 
         ViewInteraction editText = onView(
                 allOf(withId(R.id.fName),
@@ -167,6 +174,8 @@ public class MainActivityTest {
                         isDisplayed()));
         appCompatButton3.perform(click());
 
+        SystemClock.sleep(500);
+
         ViewInteraction button7 = onView(
                 allOf(withId(R.id.createUserBtn),
                         childAtPosition(
@@ -197,6 +206,8 @@ public class MainActivityTest {
                         isDisplayed()));
         appCompatButton4.perform(click());
 
+        SystemClock.sleep(500);
+
         ViewInteraction button9 = onView(
                 allOf(withId(R.id.mainUserLoginBtn),
                         childAtPosition(
@@ -226,6 +237,8 @@ public class MainActivityTest {
                                 1),
                         isDisplayed()));
         appCompatButton5.perform(click());
+
+        SystemClock.sleep(500);
 
         ViewInteraction editText4 = onView(
                 allOf(withId(R.id.userEmail),
@@ -259,6 +272,8 @@ public class MainActivityTest {
                         isDisplayed()));
         appCompatEditText.perform(click());
 
+        SystemClock.sleep(500);
+
         ViewInteraction appCompatEditText2 = onView(
                 allOf(withId(R.id.userEmail),
                         childAtPosition(
@@ -280,7 +295,11 @@ public class MainActivityTest {
                         isDisplayed()));
         appCompatButton6.perform(click());
 
+        SystemClock.sleep(500);
+
         pressBack();
+
+        SystemClock.sleep(500);
 
         ViewInteraction button12 = onView(
                 allOf(withId(R.id.mainUserLoginBtn),
