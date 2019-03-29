@@ -116,8 +116,8 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.UserLi
     }
 
 
-    class UserListViewHolder extends RecyclerView.ViewHolder{
-        TextView mFistName, mLastName, mEmail;
+    public class UserListViewHolder extends RecyclerView.ViewHolder{
+        public TextView mFistName, mLastName, mEmail;
         ImageView mSelected;
         LinearLayout mLayout;
         UserListViewHolder(View view){
