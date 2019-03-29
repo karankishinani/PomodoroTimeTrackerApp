@@ -1,6 +1,7 @@
 package com.example.pttmobile4.activities;
 
 
+import android.os.SystemClock;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
@@ -64,6 +65,7 @@ public class CreateProjectTest {
                         isDisplayed()));
         appCompatButton2.perform(click());
 
+        SystemClock.sleep(500);
         ViewInteraction appCompatEditText = onView(
                 allOf(withId(R.id.fName),
                         childAtPosition(
@@ -118,6 +120,8 @@ public class CreateProjectTest {
                         isDisplayed()));
         appCompatButton3.perform(click());
 
+        SystemClock.sleep(500);
+
         ViewInteraction recyclerView = onView(
                 allOf(withId(R.id.userList),
                         childAtPosition(
@@ -129,8 +133,10 @@ public class CreateProjectTest {
         recyclerView.check(matches(isDisplayed()));
 
         //TODO:
-        recyclerView
-                .perform(RecyclerViewActions.actionOnHolderItem(CustomMatcher.withUser("Bosheng", "Jian", "email@123.com"), click()));
+        recyclerView.perform(RecyclerViewActions.actionOnHolderItem(CustomMatcher.withUser("Bosheng", "Jian", "email@123.com"), click()));
+
+        pressBack();
+        SystemClock.sleep(500);
 
         ViewInteraction appCompatButton4 = onView(
                 allOf(withId(R.id.adminLogoutBtn), withText("Log Out"),
@@ -142,6 +148,8 @@ public class CreateProjectTest {
                         isDisplayed()));
         appCompatButton4.perform(click());
 
+        SystemClock.sleep(500);
+
         ViewInteraction appCompatButton5 = onView(
                 allOf(withId(R.id.mainUserLoginBtn), withText("USER"),
                         childAtPosition(
@@ -152,6 +160,7 @@ public class CreateProjectTest {
                         isDisplayed()));
         appCompatButton5.perform(click());
 
+        SystemClock.sleep(500);
 
         ViewInteraction appCompatEditText8 = onView(
                 allOf(withId(R.id.userEmail),
@@ -175,6 +184,8 @@ public class CreateProjectTest {
                         isDisplayed()));
         appCompatButton6.perform(click());
 
+        SystemClock.sleep(500);
+
         ViewInteraction appCompatButton7 = onView(
                 allOf(withId(R.id.createProjectBtn), withText("Create"),
                         childAtPosition(
@@ -185,6 +196,8 @@ public class CreateProjectTest {
                         isDisplayed()));
         appCompatButton7.perform(click());
 
+
+        SystemClock.sleep(500);
 
         ViewInteraction appCompatEditText11 = onView(
                 allOf(withId(R.id.projectName),
@@ -206,6 +219,8 @@ public class CreateProjectTest {
                                 1),
                         isDisplayed()));
         appCompatButton8.perform(click());
+
+        SystemClock.sleep(500);
 
         ViewInteraction linearLayout = onView(
                 allOf(withId(R.id.layout),
@@ -259,7 +274,11 @@ public class CreateProjectTest {
                         isDisplayed()));
         appCompatButton9.perform(click());
 
+        SystemClock.sleep(500);
+
         pressBack();
+
+        SystemClock.sleep(500);
 
         ViewInteraction button12 = onView(
                 allOf(withId(R.id.mainUserLoginBtn),
