@@ -58,7 +58,7 @@ public class Client {
 
     private static final String AUTH = "Basic " + Base64.encodeToString(("").getBytes(), Base64.NO_WRAP);
 
-    private static final String BASE_URL = "http://10.0.2.2:8080/ptt/api/";  //"http://192.168.43.213:8080/ptt/api/";
+    private static final String BASE_URL = "http://128.61.49.55:8080/ptt/api/"; //"http://10.0.2.2:8080/ptt/api/";
     private static Client mInstance;
     private Retrofit retrofit;
 
