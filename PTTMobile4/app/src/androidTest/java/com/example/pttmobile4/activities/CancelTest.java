@@ -275,6 +275,7 @@ public class CancelTest {
                         isDisplayed()));
         appCompatButton10.perform(click());
 
+        SystemClock.sleep(2000);
 
         ViewInteraction appCompatEditText11 = onView(
                 allOf(withId(R.id.userEmail),
