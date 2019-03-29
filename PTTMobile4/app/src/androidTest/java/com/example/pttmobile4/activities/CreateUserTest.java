@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.view.ViewParent;
 
 import com.example.pttmobile4.R;
+import com.example.pttmobile4.utils.OurMatcher;
 
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
@@ -16,22 +17,27 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.test.espresso.ViewInteraction;
 import androidx.test.filters.LargeTest;
 import androidx.test.rule.ActivityTestRule;
 import androidx.test.runner.AndroidJUnit4;
 
 import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.Espresso.pressBack;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static androidx.test.espresso.action.ViewActions.replaceText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.contrib.RecyclerViewActions.actionOnHolderItem;
+import static androidx.test.espresso.contrib.RecyclerViewActions.scrollToHolder;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.not;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
@@ -129,6 +135,27 @@ public class CreateUserTest {
                                 2),
                         isDisplayed()));
         userList.check(matches(isDisplayed()));
+
+        SystemClock.sleep(500);
+
+        ViewInteraction recyclerView = onView(
+                allOf(withId(R.id.userList),
+                        childAtPosition(
+                                childAtPosition(
+                                        IsInstanceOf.<View>instanceOf(android.view.ViewGroup.class),
+                                        0),
+                                2),
+                        isDisplayed()));
+        recyclerView.check(matches(isDisplayed()));
+
+        SystemClock.sleep(500);
+
+
+        ViewInteraction checkUser = onView(allOf(withId(R.id.email),withText("bosheng@gatech.edu"), isDisplayed()));
+        checkUser.check(matches(isDisplayed()));
+
+        pressBack();
+
     }
 
     private static Matcher<View> childAtPosition(
