@@ -43,7 +43,7 @@ public class EditUserTest {
     @Test
     public void editUserTest() {
 
-        SystemClock.sleep(500);
+        SystemClock.sleep(2000);
 
         ViewInteraction appCompatButton = onView(
                 allOf(withId(R.id.mainAdminLoginBtn), withText("Admin"),
@@ -55,7 +55,7 @@ public class EditUserTest {
                         isDisplayed()));
         appCompatButton.perform(click());
 
-        SystemClock.sleep(500);
+        SystemClock.sleep(2000);
 
         ViewInteraction appCompatButton2 = onView(
                 allOf(withId(R.id.createUserBtn), withText("Create"),
@@ -67,7 +67,7 @@ public class EditUserTest {
                         isDisplayed()));
         appCompatButton2.perform(click());
 
-        SystemClock.sleep(500);
+        SystemClock.sleep(2000);
 
         ViewInteraction appCompatEditText = onView(
                 allOf(withId(R.id.fName),
@@ -123,7 +123,7 @@ public class EditUserTest {
                         isDisplayed()));
         appCompatButton3.perform(click());
 
-        SystemClock.sleep(500);
+        SystemClock.sleep(2000);
 
 
         ViewInteraction checkUser = onView(allOf(withId(R.id.email),withText("f@d.u"), isDisplayed()));
@@ -209,7 +209,7 @@ public class EditUserTest {
                         isDisplayed()));
         appCompatButton4.perform(click());
 
-        SystemClock.sleep(500);
+        SystemClock.sleep(2000);
 
         ViewInteraction fNameCheck = onView(allOf(withId(R.id.firstname),withText("g"), isDisplayed()));
         fNameCheck.check(matches(isDisplayed()));
@@ -217,7 +217,7 @@ public class EditUserTest {
         lNameCheck.check(matches(isDisplayed()));
 
 
-        SystemClock.sleep(500);
+        SystemClock.sleep(2000);
 
 
         ViewInteraction appCompatButton5 = onView(

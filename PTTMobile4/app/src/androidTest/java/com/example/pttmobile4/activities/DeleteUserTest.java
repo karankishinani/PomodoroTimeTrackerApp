@@ -37,7 +37,7 @@ public class DeleteUserTest {
     @Test
     public void deleteUserTest() {
 
-        SystemClock.sleep(500);
+        SystemClock.sleep(2000);
 
         ViewInteraction appCompatButton = onView(
                 allOf(withId(R.id.mainAdminLoginBtn), withText("Admin"),
@@ -49,7 +49,7 @@ public class DeleteUserTest {
                         isDisplayed()));
         appCompatButton.perform(click());
 
-        SystemClock.sleep(500);
+        SystemClock.sleep(2000);
 
         ViewInteraction appCompatButton2 = onView(
                 allOf(withId(R.id.createUserBtn), withText("Create"),
@@ -61,7 +61,7 @@ public class DeleteUserTest {
                         isDisplayed()));
         appCompatButton2.perform(click());
 
-        SystemClock.sleep(500);
+        SystemClock.sleep(2000);
 
         ViewInteraction appCompatEditText = onView(
                 allOf(withId(R.id.fName),
@@ -117,14 +117,14 @@ public class DeleteUserTest {
                         isDisplayed()));
         appCompatButton3.perform(click());
 
-        SystemClock.sleep(500);
+        SystemClock.sleep(2000);
 
         ViewInteraction createCheck = onView(allOf(withId(R.id.email),withText("b@c.m"), isDisplayed()));
         createCheck.check(matches(isDisplayed()));
         createCheck.perform(click());
 
 
-        SystemClock.sleep(500);
+        SystemClock.sleep(2000);
 
         ViewInteraction appCompatButton4 = onView(
                 allOf(withId(R.id.deleteUserBtn), withText("Delete"),
@@ -136,7 +136,7 @@ public class DeleteUserTest {
                         isDisplayed()));
         appCompatButton4.perform(click());
 
-        SystemClock.sleep(500);
+        SystemClock.sleep(2000);
 
         ViewInteraction deleteCheck = onView(allOf(withId(R.id.email),withText("b@c.m"), isDisplayed()));
         deleteCheck.check(doesNotExist());

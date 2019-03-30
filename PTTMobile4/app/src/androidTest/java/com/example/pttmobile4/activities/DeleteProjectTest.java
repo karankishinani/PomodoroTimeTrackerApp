@@ -288,7 +288,7 @@ public class DeleteProjectTest {
                         isDisplayed()));
         appCompatButton12.perform(click());
 
-        SystemClock.sleep(500);
+        SystemClock.sleep(2000);
 
         ViewInteraction checkUser= onView(allOf(withId(R.id.email),withText("a@s.m"), isDisplayed()));
         checkUser.check(matches(isDisplayed()));

@@ -45,7 +45,7 @@ public class EditProjectTest {
     @Test
     public void editProjectTest() {
 
-        SystemClock.sleep(500);
+        SystemClock.sleep(2000);
 
         ViewInteraction appCompatButton = onView(
                 allOf(withId(R.id.mainAdminLoginBtn), withText("Admin"),
@@ -57,7 +57,7 @@ public class EditProjectTest {
                         isDisplayed()));
         appCompatButton.perform(click());
 
-        SystemClock.sleep(500);
+        SystemClock.sleep(2000);
 
         ViewInteraction appCompatButton2 = onView(
                 allOf(withId(R.id.createUserBtn), withText("Create"),
@@ -69,7 +69,7 @@ public class EditProjectTest {
                         isDisplayed()));
         appCompatButton2.perform(click());
 
-        SystemClock.sleep(500);
+        SystemClock.sleep(2000);
 
         ViewInteraction appCompatEditText = onView(
                 allOf(withId(R.id.fName),
@@ -125,7 +125,7 @@ public class EditProjectTest {
                         isDisplayed()));
         appCompatButton3.perform(click());
 
-        SystemClock.sleep(500);
+        SystemClock.sleep(2000);
 
         ViewInteraction appCompatButton4 = onView(
                 allOf(withId(R.id.adminLogoutBtn), withText("Log Out"),
@@ -137,7 +137,7 @@ public class EditProjectTest {
                         isDisplayed()));
         appCompatButton4.perform(click());
 
-        SystemClock.sleep(500);
+        SystemClock.sleep(2000);
 
         ViewInteraction appCompatButton5 = onView(
                 allOf(withId(R.id.mainUserLoginBtn), withText("USER"),
@@ -149,7 +149,7 @@ public class EditProjectTest {
                         isDisplayed()));
         appCompatButton5.perform(click());
 
-        SystemClock.sleep(500);
+        SystemClock.sleep(2000);
 
         ViewInteraction appCompatEditText5 = onView(
                 allOf(withId(R.id.userEmail),
@@ -183,7 +183,7 @@ public class EditProjectTest {
                         isDisplayed()));
         appCompatButton6.perform(click());
 
-        SystemClock.sleep(500);
+        SystemClock.sleep(2000);
 
         ViewInteraction appCompatButton7 = onView(
                 allOf(withId(R.id.createProjectBtn), withText("Create"),
@@ -195,7 +195,7 @@ public class EditProjectTest {
                         isDisplayed()));
         appCompatButton7.perform(click());
 
-        SystemClock.sleep(500);
+        SystemClock.sleep(2000);
 
         ViewInteraction appCompatEditText7 = onView(
                 allOf(withId(R.id.projectName),
@@ -229,14 +229,14 @@ public class EditProjectTest {
                         isDisplayed()));
         appCompatButton8.perform(click());
 
-        SystemClock.sleep(500);
+        SystemClock.sleep(2000);
 
 
         ViewInteraction checkProj = onView(allOf(withId(R.id.project_name),withText("P1"), isDisplayed()));
         checkProj.check(matches(isDisplayed()));
         checkProj.perform(click());
 
-        SystemClock.sleep(500);
+        SystemClock.sleep(2000);
 
         ViewInteraction appCompatEditText10 = onView(
                 allOf(withId(R.id.projectName), withText("P1"),
@@ -271,7 +271,7 @@ public class EditProjectTest {
                         isDisplayed()));
         appCompatButton9.perform(click());
 
-        SystemClock.sleep(500);
+        SystemClock.sleep(2000);
 
         ViewInteraction checkUpdate = onView(allOf(withId(R.id.project_name),withText("P2"), isDisplayed()));
         checkUpdate.check(matches(isDisplayed()));
@@ -286,11 +286,11 @@ public class EditProjectTest {
                         isDisplayed()));
         appCompatButton10.perform(click());
 
-        SystemClock.sleep(500);
+        SystemClock.sleep(2000);
 
         pressBack();
 
-        SystemClock.sleep(500);
+        SystemClock.sleep(2000);
 
         ViewInteraction appCompatButton11 = onView(
                 allOf(withId(R.id.mainAdminLoginBtn), withText("Admin"),
@@ -302,14 +302,14 @@ public class EditProjectTest {
                         isDisplayed()));
         appCompatButton11.perform(click());
 
-        SystemClock.sleep(500);
+        SystemClock.sleep(2000);
 
 
 
         ViewInteraction checkUser= onView(allOf(withId(R.id.email),withText("a@d.m"), isDisplayed()));
         checkUser.check(matches(isDisplayed()));
         checkUser.perform(click());
-        SystemClock.sleep(500);
+        SystemClock.sleep(2000);
 
         ViewInteraction appCompatButton12 = onView(
                 allOf(withId(R.id.deleteUserBtn), withText("Delete"),
@@ -321,7 +321,7 @@ public class EditProjectTest {
                         isDisplayed()));
         appCompatButton12.perform(click());
 
-        SystemClock.sleep(500);
+        SystemClock.sleep(2000);
 
         ViewInteraction appCompatButton13 = onView(
                 allOf(withId(android.R.id.button1), withText("Yes"),
@@ -332,7 +332,7 @@ public class EditProjectTest {
                                 3)));
         appCompatButton13.perform(scrollTo(), click());
 
-        SystemClock.sleep(500);
+        SystemClock.sleep(2000);
 
 
         ViewInteraction deleteCheck = onView(allOf(withId(R.id.email),withText("a@d.m"), isDisplayed()));

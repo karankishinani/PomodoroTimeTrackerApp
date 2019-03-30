@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import android.view.ViewParent;
 
 import com.example.pttmobile4.R;
-import com.example.pttmobile4.utils.OurMatcher;
 
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
@@ -17,7 +16,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.test.espresso.ViewInteraction;
 import androidx.test.filters.LargeTest;
 import androidx.test.rule.ActivityTestRule;
@@ -29,15 +27,12 @@ import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static androidx.test.espresso.action.ViewActions.replaceText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
-import static androidx.test.espresso.contrib.RecyclerViewActions.actionOnHolderItem;
-import static androidx.test.espresso.contrib.RecyclerViewActions.scrollToHolder;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.not;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
@@ -49,7 +44,7 @@ public class CreateUserTest {
     @Test
     public void createUserTest() {
 
-        SystemClock.sleep(500);
+        SystemClock.sleep(2000);
 
         ViewInteraction appCompatButton = onView(
                 allOf(withId(R.id.mainAdminLoginBtn), withText("Admin"),
@@ -61,7 +56,7 @@ public class CreateUserTest {
                         isDisplayed()));
         appCompatButton.perform(click());
 
-        SystemClock.sleep(500);
+        SystemClock.sleep(2000);
 
 
         ViewInteraction appCompatButton2 = onView(
@@ -74,7 +69,7 @@ public class CreateUserTest {
                         isDisplayed()));
         appCompatButton2.perform(click());
 
-        SystemClock.sleep(500);
+        SystemClock.sleep(2000);
 
         ViewInteraction firstName = onView(
                 allOf(withId(R.id.fName),
@@ -124,7 +119,7 @@ public class CreateUserTest {
                         isDisplayed()));
         appCompatButton3.perform(click());
 
-        SystemClock.sleep(500);
+        SystemClock.sleep(2000);
 
         ViewInteraction userList = onView(
                 allOf(withId(R.id.userList),
@@ -136,7 +131,7 @@ public class CreateUserTest {
                         isDisplayed()));
         userList.check(matches(isDisplayed()));
 
-        SystemClock.sleep(500);
+        SystemClock.sleep(2000);
 
         ViewInteraction recyclerView = onView(
                 allOf(withId(R.id.userList),
@@ -148,7 +143,7 @@ public class CreateUserTest {
                         isDisplayed()));
         recyclerView.check(matches(isDisplayed()));
 
-        SystemClock.sleep(500);
+        SystemClock.sleep(2000);
 
 
         ViewInteraction checkUser = onView(allOf(withId(R.id.email),withText("bosheng@gatech.edu"), isDisplayed()));

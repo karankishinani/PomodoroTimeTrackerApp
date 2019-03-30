@@ -44,7 +44,7 @@ public class MainActivityTest {
     @Test
     public void mainActivityTest() {
 
-        SystemClock.sleep(500);
+        SystemClock.sleep(2000);
 
         ViewInteraction button = onView(
                 allOf(withId(R.id.mainUserLoginBtn),
@@ -77,7 +77,7 @@ public class MainActivityTest {
                         isDisplayed()));
         appCompatButton.perform(click());
 
-        SystemClock.sleep(500);
+        SystemClock.sleep(2000);
 
         ViewInteraction button3 = onView(
                 allOf(withId(R.id.createUserBtn),
@@ -109,7 +109,7 @@ public class MainActivityTest {
                         isDisplayed()));
         appCompatButton2.perform(click());
 
-        SystemClock.sleep(500);
+        SystemClock.sleep(2000);
 
         ViewInteraction editText = onView(
                 allOf(withId(R.id.fName),
@@ -174,7 +174,7 @@ public class MainActivityTest {
                         isDisplayed()));
         appCompatButton3.perform(click());
 
-        SystemClock.sleep(500);
+        SystemClock.sleep(2000);
 
         ViewInteraction button7 = onView(
                 allOf(withId(R.id.createUserBtn),
@@ -206,7 +206,7 @@ public class MainActivityTest {
                         isDisplayed()));
         appCompatButton4.perform(click());
 
-        SystemClock.sleep(500);
+        SystemClock.sleep(2000);
 
         ViewInteraction button9 = onView(
                 allOf(withId(R.id.mainUserLoginBtn),
@@ -238,7 +238,7 @@ public class MainActivityTest {
                         isDisplayed()));
         appCompatButton5.perform(click());
 
-        SystemClock.sleep(500);
+        SystemClock.sleep(2000);
 
         ViewInteraction editText4 = onView(
                 allOf(withId(R.id.userEmail),
@@ -272,7 +272,7 @@ public class MainActivityTest {
                         isDisplayed()));
         appCompatEditText.perform(click());
 
-        SystemClock.sleep(500);
+        SystemClock.sleep(2000);
 
         ViewInteraction appCompatEditText2 = onView(
                 allOf(withId(R.id.userEmail),
@@ -295,11 +295,11 @@ public class MainActivityTest {
                         isDisplayed()));
         appCompatButton6.perform(click());
 
-        SystemClock.sleep(500);
+        SystemClock.sleep(2000);
 
         pressBack();
 
-        SystemClock.sleep(500);
+        SystemClock.sleep(2000);
 
         ViewInteraction button12 = onView(
                 allOf(withId(R.id.mainUserLoginBtn),

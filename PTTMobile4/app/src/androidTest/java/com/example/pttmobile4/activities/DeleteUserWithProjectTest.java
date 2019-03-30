@@ -26,6 +26,7 @@ import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static androidx.test.espresso.action.ViewActions.replaceText;
 import static androidx.test.espresso.action.ViewActions.scrollTo;
+import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
@@ -43,7 +44,7 @@ public class DeleteUserWithProjectTest {
     @Test
     public void deleteUserWithProjectTest() {
 
-        SystemClock.sleep(500);
+        SystemClock.sleep(2000);
 
         ViewInteraction appCompatButton = onView(
                 allOf(withId(R.id.mainAdminLoginBtn), withText("Admin"),
@@ -55,7 +56,7 @@ public class DeleteUserWithProjectTest {
                         isDisplayed()));
         appCompatButton.perform(click());
 
-        SystemClock.sleep(500);
+        SystemClock.sleep(2000);
 
         ViewInteraction appCompatButton2 = onView(
                 allOf(withId(R.id.createUserBtn), withText("Create"),
@@ -67,7 +68,7 @@ public class DeleteUserWithProjectTest {
                         isDisplayed()));
         appCompatButton2.perform(click());
 
-        SystemClock.sleep(500);
+        SystemClock.sleep(2000);
 
         ViewInteraction appCompatEditText = onView(
                 allOf(withId(R.id.fName),
@@ -123,7 +124,7 @@ public class DeleteUserWithProjectTest {
                         isDisplayed()));
         appCompatButton3.perform(click());
 
-        SystemClock.sleep(500);
+        SystemClock.sleep(2000);
 
         ViewInteraction appCompatButton4 = onView(
                 allOf(withId(R.id.adminLogoutBtn), withText("Log Out"),
@@ -135,7 +136,7 @@ public class DeleteUserWithProjectTest {
                         isDisplayed()));
         appCompatButton4.perform(click());
 
-        SystemClock.sleep(500);
+        SystemClock.sleep(2000);
 
         ViewInteraction appCompatButton5 = onView(
                 allOf(withId(R.id.mainUserLoginBtn), withText("USER"),
@@ -147,7 +148,7 @@ public class DeleteUserWithProjectTest {
                         isDisplayed()));
         appCompatButton5.perform(click());
 
-        SystemClock.sleep(500);
+        SystemClock.sleep(2000);
 
         ViewInteraction appCompatEditText5 = onView(
                 allOf(withId(R.id.userEmail),
@@ -181,7 +182,7 @@ public class DeleteUserWithProjectTest {
                         isDisplayed()));
         appCompatButton6.perform(click());
 
-        SystemClock.sleep(500);
+        SystemClock.sleep(2000);
 
         ViewInteraction appCompatButton7 = onView(
                 allOf(withId(R.id.createProjectBtn), withText("Create"),
@@ -193,7 +194,7 @@ public class DeleteUserWithProjectTest {
                         isDisplayed()));
         appCompatButton7.perform(click());
 
-        SystemClock.sleep(500);
+        SystemClock.sleep(2000);
 
         ViewInteraction appCompatEditText7 = onView(
                 allOf(withId(R.id.projectName),
@@ -227,7 +228,7 @@ public class DeleteUserWithProjectTest {
                         isDisplayed()));
         appCompatButton8.perform(click());
 
-        SystemClock.sleep(500);
+        SystemClock.sleep(2000);
 
         ViewInteraction appCompatButton9 = onView(
                 allOf(withId(R.id.userLogoutBtn), withText("Log Out"),
@@ -239,11 +240,11 @@ public class DeleteUserWithProjectTest {
                         isDisplayed()));
         appCompatButton9.perform(click());
 
-        SystemClock.sleep(500);
+        SystemClock.sleep(2000);
 
         pressBack();
 
-        SystemClock.sleep(500);
+        SystemClock.sleep(2000);
 
         ViewInteraction appCompatButton10 = onView(
                 allOf(withId(R.id.mainAdminLoginBtn), withText("Admin"),
@@ -255,9 +256,13 @@ public class DeleteUserWithProjectTest {
                         isDisplayed()));
         appCompatButton10.perform(click());
 
-        SystemClock.sleep(500);
+        SystemClock.sleep(2000);
 
-        ViewInteraction linearLayout = onView(
+        ViewInteraction deleteClick = onView(allOf(withId(R.id.email),withText("s@a.m"), isDisplayed()));
+        deleteClick.check(matches(isDisplayed()));
+        deleteClick.perform(click());
+
+        /*ViewInteraction linearLayout = onView(
                 allOf(withId(R.id.layout),
                         childAtPosition(
                                 allOf(withId(R.id.userList),
@@ -266,9 +271,9 @@ public class DeleteUserWithProjectTest {
                                                 2)),
                                 0),
                         isDisplayed()));
-        linearLayout.perform(click());
+        linearLayout.perform(click());*/
 
-        SystemClock.sleep(500);
+        SystemClock.sleep(2000);
 
         ViewInteraction appCompatButton11 = onView(
                 allOf(withId(R.id.deleteUserBtn), withText("Delete"),
@@ -280,7 +285,7 @@ public class DeleteUserWithProjectTest {
                         isDisplayed()));
         appCompatButton11.perform(click());
 
-        SystemClock.sleep(500);
+        SystemClock.sleep(2000);
 
         ViewInteraction appCompatButton12 = onView(
                 allOf(withId(android.R.id.button1), withText("Yes"),
@@ -291,7 +296,7 @@ public class DeleteUserWithProjectTest {
                                 3)));
         appCompatButton12.perform(scrollTo(), click());
 
-        SystemClock.sleep(500);
+        SystemClock.sleep(2000);
 
         ViewInteraction appCompatButton13 = onView(
                 allOf(withId(R.id.adminLogoutBtn), withText("Log Out"),
