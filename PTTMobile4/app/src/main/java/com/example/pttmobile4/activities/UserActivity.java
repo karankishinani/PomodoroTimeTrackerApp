@@ -1,5 +1,7 @@
 package com.example.pttmobile4.activities;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -68,9 +70,25 @@ public class UserActivity extends AppCompatActivity {
         startPomodoroBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(UserActivity.this, SelectProjectActivity.class);
-                intent.putExtra("userId", userId);
-                startActivity(intent);
+                DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        switch (which) {
+                            case DialogInterface.BUTTON_POSITIVE:
+                                Intent yes_intent = new Intent(UserActivity.this, SelectProjectActivity.class);
+                                yes_intent.putExtra("userId",userId);
+                                startActivity(yes_intent);
+                                break;
+                            case DialogInterface.BUTTON_NEGATIVE:
+                                Intent no_intent = new Intent(UserActivity.this, PomodoroActivity.class);
+                                no_intent.putExtra("userId",userId);
+                                startActivity(no_intent);
+                                break;
+                        }
+                    }
+                };
+                AlertDialog.Builder builder = new AlertDialog.Builder(UserActivity.this);
+                builder.setMessage("Do you want to associate it to a project?").setPositiveButton("Yes", dialogClickListener).setNegativeButton("No", dialogClickListener).show();
             }
         });
         //loadProjects();
