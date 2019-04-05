@@ -6,16 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".activities.PomodoroActivity">
-    <TextView
-        android:text="Project ID"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <EditText
-        android:id="@+id/projectID"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:enabled="false" />
+
     <TextView
         android:text="Project Name"
         android:layout_width="match_parent"
