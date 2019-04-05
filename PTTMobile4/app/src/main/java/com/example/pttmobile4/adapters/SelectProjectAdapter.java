@@ -87,6 +87,9 @@ public class SelectProjectAdapter  extends RecyclerView.Adapter<SelectProjectAda
                     Intent intent = new Intent(context, PomodoroActivity.class);
                     intent.putExtra("userId", userId);
                     intent.putExtra("PROJECT_ID",id);
+
+                    //finish the current activity
+                    ((SelectProjectActivity) context).finish();
                     context.startActivity(intent);
 
                 }
