@@ -12,7 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activities.GenerateReportActivity"></activity>
+        <activity android:name=".activities.ReportActivity"></activity>
+        <activity android:name=".activities.GenerateReportActivity" />
         <activity android:name=".activities.SelectProjectActivity" />
         <activity android:name=".activities.PomodoroActivity" />
         <activity android:name=".activities.EditUserActivity" />

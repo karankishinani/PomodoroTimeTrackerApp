@@ -101,7 +101,7 @@ public class UserActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(UserActivity.this, GenerateReportActivity.class);
-                //intent.putExtra("userId", userId);
+                intent.putExtra("userId", userId);
                 startActivity(intent);
             }
         });
