@@ -14,6 +14,7 @@ import com.example.pttmobile4.R;
 import com.example.pttmobile4.activities.AdminActivity;
 import com.example.pttmobile4.activities.EditProjectActivity;
 import com.example.pttmobile4.activities.PomodoroActivity;
+import com.example.pttmobile4.activities.SelectProjectActivity;
 import com.example.pttmobile4.activities.UserActivity;
 import com.example.pttmobile4.models.Project;
 
@@ -75,7 +76,7 @@ public class SelectProjectAdapter  extends RecyclerView.Adapter<SelectProjectAda
                     }
                     String userId = "";
 
-                    Bundle extras = ((UserActivity) context).getIntent().getExtras();
+                    Bundle extras = ((SelectProjectActivity) context).getIntent().getExtras();
                     if (extras != null) {
                         userId = extras.getString("userId");
                         //Toast.makeText(UserActivity.this,  "User logged in successfully, user id is " + userId, Toast.LENGTH_LONG).show();

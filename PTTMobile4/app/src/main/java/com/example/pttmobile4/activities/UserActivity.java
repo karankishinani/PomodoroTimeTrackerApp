@@ -49,6 +49,7 @@ public class UserActivity extends AppCompatActivity {
         mProjectList = findViewById(R.id.projectList);
         createProjectBtn = findViewById(R.id.createProjectBtn);
         userLogoutBtn = findViewById(R.id.userLogoutBtn);
+        startPomodoroBtn = findViewById(R.id.startPomodoroBtn);
 
         userLogoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override

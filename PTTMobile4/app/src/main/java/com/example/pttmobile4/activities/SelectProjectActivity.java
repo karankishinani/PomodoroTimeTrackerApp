@@ -31,6 +31,7 @@ public class SelectProjectActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_project);
+
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             userId = extras.getString("userId");
