@@ -43,8 +43,7 @@ public class SessionListAdapter extends RecyclerView.Adapter<SessionListAdapter.
     public void onBindViewHolder(@NonNull final SessionListViewHolder holder, final int position) {
         holder.mStartTime.setText(sessionList.get(position).getStartTime());
         holder.mEndtime.setText(sessionList.get(position).getEndTime());
-
-        holder.mTimeWorked.setText(sessionList.get(position).getCounter());
+        holder.mTimeWorked.setText(sessionList.get(position).getTimeWorked());
 
         holder.mLayout.setOnLongClickListener(new View.OnLongClickListener() {
             @Override

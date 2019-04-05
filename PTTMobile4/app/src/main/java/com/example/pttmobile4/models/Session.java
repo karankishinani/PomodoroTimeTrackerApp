@@ -39,9 +39,11 @@ public class Session {
     public String getEndTime() {
         return endTime;
     }
-//    public void getTimeWorked(){
-//        return (endTime-startTime);
-//    }
+
+    //TODO: Get time worked
+    public String getTimeWorked(){
+        return "10 hours";
+    }
     public void setEndTime(String endTime) {
         this.endTime = endTime;
     }
