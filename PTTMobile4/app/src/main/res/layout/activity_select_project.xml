@@ -14,30 +14,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <Button
-                android:id="@+id/userLogoutBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Log Out" />
-
-            <Button
-                android:id="@+id/createProjectBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Create" />
-
-            <Button
-                android:id="@+id/startPomodoroBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Start Pomodoro" />
         </LinearLayout>
         <TextView
             android:text="PROJECTS:"
             android:textAlignment="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
-
 
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
