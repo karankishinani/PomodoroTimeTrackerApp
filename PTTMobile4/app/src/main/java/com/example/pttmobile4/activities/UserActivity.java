@@ -34,6 +34,7 @@ public class UserActivity extends AppCompatActivity {
     Button userLogoutBtn;
     Button createProjectBtn;
     Button startPomodoroBtn;
+    Button startReportBtn;
     String userId;
 
     @Override
@@ -94,6 +95,16 @@ public class UserActivity extends AppCompatActivity {
             }
         });
         //loadProjects();
+
+        startReportBtn = findViewById(R.id.startReportBtn);
+        startReportBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(UserActivity.this, GenerateReportActivity.class);
+                //intent.putExtra("userId", userId);
+                startActivity(intent);
+            }
+        });
     }
 
     public void onResume()

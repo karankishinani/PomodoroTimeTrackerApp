@@ -31,6 +31,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Start Pomodoro" />
+
+            <Button
+                android:id="@+id/startReportBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Report" />
         </LinearLayout>
         <TextView
             android:text="PROJECTS:"
