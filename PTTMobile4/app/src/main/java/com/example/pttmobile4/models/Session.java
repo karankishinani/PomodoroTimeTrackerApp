@@ -36,7 +36,7 @@ public class Session {
         return startTime;
     }
 
-    public String getEndTame() {
+    public String getEndTime() {
         return endTime;
     }
 
