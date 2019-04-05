@@ -83,6 +83,7 @@ public class UserActivity extends AppCompatActivity {
                             case DialogInterface.BUTTON_NEGATIVE:
                                 Intent no_intent = new Intent(UserActivity.this, PomodoroActivity.class);
                                 no_intent.putExtra("userId",userId);
+                                no_intent.putExtra("SeperatePomodoro", true);
                                 startActivity(no_intent);
                                 break;
                         }
