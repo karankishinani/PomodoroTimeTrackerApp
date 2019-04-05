@@ -37,7 +37,7 @@ public class PomodoroActivity extends AppCompatActivity {
         timerTextView = (TextView) findViewById(R.id.timerText);
         stopPomodoroBtn = findViewById(R.id.stopPomodoroBtn);
 
-        timer = new CountDownTimer(25 * 60 * 1000, 1000) {
+        timer = new CountDownTimer(30 * 1000, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
                 long totalRemainingSeconds = millisUntilFinished / 1000;
@@ -45,9 +45,9 @@ public class PomodoroActivity extends AppCompatActivity {
                 long seconds = totalRemainingSeconds % 60;
                 String minutesString;
                 String secondsString;
-                if (totalRemainingSeconds > 5 * 60) {
-                    minutesString = Long.toString(minutes - 5);
-                    secondsString = Long.toString(seconds);
+                if (totalRemainingSeconds > 10) {
+                    minutesString = Long.toString(minutes);
+                    secondsString = Long.toString(seconds - 10);
                     timerTextView.setText("Remaining Working Time: " + minutesString + ":" + secondsString);
                 } else {
                     minutesString = Long.toString(minutes);

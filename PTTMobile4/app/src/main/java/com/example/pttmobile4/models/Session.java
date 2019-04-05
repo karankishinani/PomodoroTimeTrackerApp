@@ -39,7 +39,9 @@ public class Session {
     public String getEndTime() {
         return endTime;
     }
-
+//    public void getTimeWorked(){
+//        return (endTime-startTime);
+//    }
     public void setEndTime(String endTime) {
         this.endTime = endTime;
     }
