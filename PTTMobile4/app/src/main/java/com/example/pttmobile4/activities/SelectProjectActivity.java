@@ -12,7 +12,7 @@ import android.os.Bundle;
 import android.widget.LinearLayout;
 
 import com.example.pttmobile4.R;
-import com.example.pttmobile4.adapters.ProjectListAdapter;
+import com.example.pttmobile4.adapters.SelectProjectAdapter;
 import com.example.pttmobile4.api.Client;
 import com.example.pttmobile4.models.Project;
 
@@ -35,6 +35,7 @@ public class SelectProjectActivity extends AppCompatActivity {
         if (extras != null) {
             userId = extras.getString("userId");
         }
+        mProjectList = findViewById(R.id.selectProjectList);
     }
 
     public void onResume()
@@ -74,7 +75,7 @@ public class SelectProjectActivity extends AppCompatActivity {
                 LinearLayout.VERTICAL);
         mProjectList.addItemDecoration(dividerItemDecoration);
         mProjectList.setLayoutManager(mProjectListLayoutManager);
-        mProjectListAdapter = new ProjectListAdapter(this, projectList);
+        mProjectListAdapter = new SelectProjectAdapter(this, projectList);
         mProjectList.setAdapter(mProjectListAdapter);
         mProjectListAdapter.notifyDataSetChanged();
     }
