@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.UserActivity">
+    tools:context=".activities.SelectProjectActivity">
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -14,29 +14,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <Button
-                android:id="@+id/userLogoutBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Log Out" />
-
-            <Button
-                android:id="@+id/createProjectBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Create" />
-
-            <Button
-                android:id="@+id/startPomodoroBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Start Pomodoro" />
-
-            <Button
-                android:id="@+id/startReportBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Report" />
         </LinearLayout>
         <TextView
             android:text="PROJECTS:"
@@ -44,11 +21,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/projectList"
+            android:id="@+id/selectProjectList"
             android:scrollbars="vertical">
         </androidx.recyclerview.widget.RecyclerView>
     </LinearLayout>

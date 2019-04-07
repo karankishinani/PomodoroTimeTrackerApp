@@ -36,10 +36,14 @@ public class Session {
         return startTime;
     }
 
-    public String getEndTame() {
+    public String getEndTime() {
         return endTime;
     }
 
+    //TODO: Get time worked
+    public String getTimeWorked(){
+        return "10 hours";
+    }
     public void setEndTime(String endTime) {
         this.endTime = endTime;
     }

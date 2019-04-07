@@ -1,5 +1,7 @@
 package com.example.pttmobile4.activities;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -31,6 +33,8 @@ public class UserActivity extends AppCompatActivity {
 
     Button userLogoutBtn;
     Button createProjectBtn;
+    Button startPomodoroBtn;
+    Button startReportBtn;
     String userId;
 
     @Override
@@ -46,6 +50,7 @@ public class UserActivity extends AppCompatActivity {
         mProjectList = findViewById(R.id.projectList);
         createProjectBtn = findViewById(R.id.createProjectBtn);
         userLogoutBtn = findViewById(R.id.userLogoutBtn);
+        startPomodoroBtn = findViewById(R.id.startPomodoroBtn);
 
         userLogoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,7 +67,44 @@ public class UserActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        //TODO: add a yes/no pop-up
+        startPomodoroBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        switch (which) {
+                            case DialogInterface.BUTTON_POSITIVE:
+                                Intent yes_intent = new Intent(UserActivity.this, SelectProjectActivity.class);
+                                yes_intent.putExtra("userId",userId);
+                                startActivity(yes_intent);
+                                break;
+                            case DialogInterface.BUTTON_NEGATIVE:
+                                Intent no_intent = new Intent(UserActivity.this, PomodoroActivity.class);
+                                no_intent.putExtra("userId",userId);
+                                no_intent.putExtra("SeperatePomodoro", true);
+                                startActivity(no_intent);
+                                break;
+                        }
+                    }
+                };
+                AlertDialog.Builder builder = new AlertDialog.Builder(UserActivity.this);
+                builder.setMessage("Do you want to associate it to a project?").setPositiveButton("Yes", dialogClickListener).setNegativeButton("No", dialogClickListener).show();
+            }
+        });
         //loadProjects();
+
+        startReportBtn = findViewById(R.id.startReportBtn);
+        startReportBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(UserActivity.this, GenerateReportActivity.class);
+                intent.putExtra("userId", userId);
+                startActivity(intent);
+            }
+        });
     }
 
     public void onResume()
