@@ -26,16 +26,15 @@ import java.util.Calendar;
 public class GenerateReportActivity extends AppCompatActivity {
     DatePickerDialog picker,picker3;
     TimePickerDialog picker2,picker4;
-    EditText eText, eText2, eText3, eText4;
-    Button btnGet;
+    EditText startDate, startTime, endDate, endTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_generate_report);
-        eText = (EditText) findViewById(R.id.startDate);
-        eText.setInputType(InputType.TYPE_NULL);
-        eText.setOnClickListener(new View.OnClickListener() {
+        startDate = (EditText) findViewById(R.id.startDate);
+        startDate.setInputType(InputType.TYPE_NULL);
+        startDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final Calendar cldr = Calendar.getInstance();
@@ -47,15 +46,15 @@ public class GenerateReportActivity extends AppCompatActivity {
                         new DatePickerDialog.OnDateSetListener() {
                             @Override
                             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                                eText.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+                                startDate.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
                             }
                         }, year, month, day);
                 picker.show();
             }
         });
 
-        eText2 = (EditText) findViewById(R.id.startTime);
-        eText2.setOnClickListener(new View.OnClickListener() {
+        startTime = (EditText) findViewById(R.id.startTime);
+        startTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final Calendar cldr = Calendar.getInstance();
@@ -68,10 +67,10 @@ public class GenerateReportActivity extends AppCompatActivity {
                             public void onTimeSet(TimePicker view, int hour, int min) {
                                 String x = Integer.toString(min);
                                 if(x.length() == 1){
-                                    eText2.setText(hour + ":0" + min);
+                                    startTime.setText(hour + ":0" + min);
                                 }
                                 else{
-                                    eText2.setText(hour + ":" + min);
+                                    startTime.setText(hour + ":" + min);
 
                                 }
 
@@ -81,9 +80,9 @@ public class GenerateReportActivity extends AppCompatActivity {
             }
         });
 
-        eText3 = (EditText) findViewById(R.id.endDate);
-        eText3.setInputType(InputType.TYPE_NULL);
-        eText3.setOnClickListener(new View.OnClickListener() {
+        endDate = (EditText) findViewById(R.id.endDate);
+        endDate.setInputType(InputType.TYPE_NULL);
+        endDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final Calendar cldr = Calendar.getInstance();
@@ -95,15 +94,15 @@ public class GenerateReportActivity extends AppCompatActivity {
                         new DatePickerDialog.OnDateSetListener() {
                             @Override
                             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                                eText3.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+                                endDate.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
                             }
                         }, year, month, day);
                 picker3.show();
             }
         });
 
-        eText4 = (EditText) findViewById(R.id.endTime);
-        eText4.setOnClickListener(new View.OnClickListener() {
+        endTime = (EditText) findViewById(R.id.endTime);
+        endTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final Calendar cldr = Calendar.getInstance();
@@ -116,10 +115,10 @@ public class GenerateReportActivity extends AppCompatActivity {
                             public void onTimeSet(TimePicker view, int hour, int min) {
                                 String x = Integer.toString(min);
                                 if(x.length() == 1){
-                                    eText4.setText(hour + ":0" + min);
+                                    endTime.setText(hour + ":0" + min);
                                 }
                                 else{
-                                    eText4.setText(hour + ":" + min);
+                                    endTime.setText(hour + ":" + min);
 
                                 }
                             }
@@ -127,5 +126,7 @@ public class GenerateReportActivity extends AppCompatActivity {
                 picker4.show();
             }
         });
+
+
     }
 }
