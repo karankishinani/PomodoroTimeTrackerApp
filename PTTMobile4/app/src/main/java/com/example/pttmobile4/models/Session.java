@@ -40,16 +40,12 @@ public class Session {
         return endTime;
     }
 
-    //TODO: Get time worked
-    public String getTimeWorked(){
-        return "10 hours";
-    }
-    public void setEndTime(String endTime) {
-        this.endTime = endTime;
-    }
-
     public int getCounter() {
         return counter;
+    }
+
+    public void setEndTime(String endTime) {
+        this.endTime = endTime;
     }
 
     public void setCounter(int counter) {

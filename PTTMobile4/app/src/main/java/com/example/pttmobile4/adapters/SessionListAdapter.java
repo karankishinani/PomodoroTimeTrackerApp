@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.pttmobile4.R;
 import com.example.pttmobile4.models.Session;
@@ -43,7 +42,7 @@ public class SessionListAdapter extends RecyclerView.Adapter<SessionListAdapter.
     public void onBindViewHolder(@NonNull final SessionListViewHolder holder, final int position) {
         holder.mStartTime.setText(sessionList.get(position).getStartTime());
         holder.mEndtime.setText(sessionList.get(position).getEndTime());
-        holder.mTimeWorked.setText(sessionList.get(position).getTimeWorked());
+        // holder.mTimeWorked.setText(sessionList.get(position).getTimeWorked());
 
         holder.mLayout.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
