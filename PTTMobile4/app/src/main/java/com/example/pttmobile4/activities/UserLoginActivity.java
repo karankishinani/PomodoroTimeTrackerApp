@@ -101,7 +101,7 @@ public class UserLoginActivity extends AppCompatActivity {
 
 
                         System.out.println("I AM HERER DASDHASKJDH");
-                        new CustomToast().Show_Toast(true,getApplicationContext(),findViewById(R.id.userLoginLayout) ,"Email found!");
+                        new CustomToast().Show_Toast(true,getApplicationContext(),findViewById(R.id.userLoginLayout) ,"Login Successful");
                         startActivity(intent);
 
                     } else {

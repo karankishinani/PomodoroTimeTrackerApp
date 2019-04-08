@@ -1,8 +1,5 @@
 package com.example.pttmobile4.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +9,14 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.pttmobile4.R;
+import com.example.pttmobile4.api.Client;
+import com.example.pttmobile4.models.Project;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class PomodoroActivity extends AppCompatActivity {
     private TextView timerTextView;
@@ -34,10 +39,43 @@ public class PomodoroActivity extends AppCompatActivity {
             isSeperatePomodoro = extras.getBoolean("SeperatePomodoro", false);
         }
 
+        if (!isSeperatePomodoro){
+
+            TextView project_name_label = (TextView) findViewById(R.id.project_name_label);
+            project_name_label.setVisibility(View.VISIBLE);
+
+            final TextView project_name = (TextView) findViewById(R.id.project_name);
+            project_name.setVisibility(View.VISIBLE);
+
+            // GET REQUEST to populate fields initially
+
+            Call<Project> call = Client
+                    .getInstance().getApi().getProject(Integer.valueOf(userId), Integer.valueOf(projectId));
+
+            call.enqueue(new Callback<Project>() {
+                @Override
+                public void onResponse(Call<Project> call, Response<Project> response) {
+                    Project project = response.body();
+                    if (project==null){
+                        System.out.println("User response is null");
+                    }
+                    else {
+                        project_name.setText(project.getProjectname());
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<Project> call, Throwable t) {
+                }
+
+            });
+
+        }
+
         timerTextView = (TextView) findViewById(R.id.timerText);
         stopPomodoroBtn = findViewById(R.id.stopPomodoroBtn);
 
-        timer = new CountDownTimer(30 * 1000, 1000) {
+        timer = new CountDownTimer(15 * 1000, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
                 long totalRemainingSeconds = millisUntilFinished / 1000;
@@ -45,14 +83,18 @@ public class PomodoroActivity extends AppCompatActivity {
                 long seconds = totalRemainingSeconds % 60;
                 String minutesString;
                 String secondsString;
+                minutesString = Long.toString(minutes);
+                secondsString = Long.toString(seconds);
+
+                // Pad zero when less than 10 seconds
+                if(secondsString.length()==1)
+                    secondsString = "0" + secondsString;
+
                 if (totalRemainingSeconds > 10) {
-                    minutesString = Long.toString(minutes);
-                    secondsString = Long.toString(seconds - 10);
-                    timerTextView.setText("Remaining Working Time: " + minutesString + ":" + secondsString);
+                    // secondsString = Long.toString(seconds - 10);
+                    timerTextView.setText("Remaining Working Time: \n" + minutesString + ":" + secondsString);
                 } else {
-                    minutesString = Long.toString(minutes);
-                    secondsString = Long.toString(seconds);
-                    timerTextView.setText("Remaining Relaxing Time: " + minutesString + ":" + secondsString);
+                    timerTextView.setText("Remaining Break Time: \n" + minutesString + ":" + secondsString);
                 }
             }
 
@@ -65,6 +107,8 @@ public class PomodoroActivity extends AppCompatActivity {
                             case DialogInterface.BUTTON_POSITIVE:
                                 Intent yes_intent = new Intent(PomodoroActivity.this, PomodoroActivity.class);
                                 yes_intent.putExtra("userId",userId);
+                                yes_intent.putExtra("PROJECT_ID",projectId);
+                                yes_intent.putExtra("SeperatePomodoro",isSeperatePomodoro);
                                 //TODO: increment the counter
                                 finish();
                                 startActivity(yes_intent);

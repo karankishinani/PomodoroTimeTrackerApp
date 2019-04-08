@@ -12,10 +12,8 @@ import android.widget.Toast;
 
 import com.example.pttmobile4.R;
 import com.example.pttmobile4.activities.AdminActivity;
-import com.example.pttmobile4.activities.EditProjectActivity;
 import com.example.pttmobile4.activities.PomodoroActivity;
 import com.example.pttmobile4.activities.SelectProjectActivity;
-import com.example.pttmobile4.activities.UserActivity;
 import com.example.pttmobile4.models.Project;
 
 import java.util.ArrayList;
@@ -87,7 +85,7 @@ public class SelectProjectAdapter  extends RecyclerView.Adapter<SelectProjectAda
                     Intent intent = new Intent(context, PomodoroActivity.class);
                     intent.putExtra("userId", userId);
                     intent.putExtra("PROJECT_ID",id);
-
+                    intent.putExtra("SeperatePomodoro",false);
                     //finish the current activity
                     ((SelectProjectActivity) context).finish();
                     context.startActivity(intent);

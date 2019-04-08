@@ -8,15 +8,18 @@
     tools:context=".activities.PomodoroActivity">
 
     <TextView
+        android:id="@+id/project_name_label"
         android:text="Project Name"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:visibility="invisible" />
     <EditText
         android:id="@+id/project_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:enabled="false" />
+        android:enabled="false"
+        android:visibility="invisible"/>
 
     <TextView
         android:id="@+id/timerText"

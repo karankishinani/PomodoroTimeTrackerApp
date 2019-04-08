@@ -27,8 +27,7 @@
         <DatePicker
             android:id="@+id/startDateOpt"
             android:layout_width="match_parent"
-            android:layout_height="88dp"
-            android:calendarViewShown="false"></DatePicker>
+            android:layout_height="88dp"></DatePicker>
 
         <TimePicker
             android:id="@+id/startTimeOpt"
@@ -42,8 +41,7 @@
         <DatePicker
             android:id="@+id/endDateOpt"
             android:layout_width="match_parent"
-            android:layout_height="104dp"
-            android:calendarViewShown="false"></DatePicker>
+            android:layout_height="104dp"></DatePicker>
         <TimePicker
             android:id="@+id/endTimeOpt"
             android:layout_width="match_parent"
