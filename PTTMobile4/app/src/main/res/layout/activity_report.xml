@@ -22,27 +22,31 @@
             android:id="@+id/noOfCP_label"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Number of Pomodoros Completed" />
+            android:text="Number of Pomodoros Completed"
+            android:visibility="gone"/>
 
         <EditText
             android:id="@+id/noOfCP_value"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="number" />
+            android:inputType="number"
+            android:visibility="gone"/>
 
         <TextView
             android:id="@+id/hoursWorked_label"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Total Number of Hours Worked" />
+            android:text="Total Number of Hours Worked"
+            android:visibility="gone"/>
 
         <EditText
             android:id="@+id/hoursWorked_value"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="number" />
+            android:inputType="number"
+            android:visibility="gone"/>
 
         <TextView
             android:layout_width="match_parent"
