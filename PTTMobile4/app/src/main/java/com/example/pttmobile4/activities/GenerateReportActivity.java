@@ -2,6 +2,9 @@ package com.example.pttmobile4.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
@@ -11,6 +14,7 @@ import android.os.Bundle;
 import android.os.SystemClock;
 import android.text.InputType;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
@@ -20,16 +24,22 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.example.pttmobile4.R;
+import com.example.pttmobile4.api.Client;
 import com.example.pttmobile4.models.Project;
 
 import java.sql.Time;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 public class GenerateReportActivity extends AppCompatActivity {
     DatePickerDialog picker,picker3;
     TimePickerDialog picker2,picker4;
     EditText startDate, startTime, endDate, endTime;
     CheckBox noOfCP,hoursWorked;
+    Spinner dropdownBtn;
+
+
 
     //TODO: get project ID
     String userId,ProjectId, start, end;
@@ -57,7 +67,35 @@ public class GenerateReportActivity extends AppCompatActivity {
         endDate.setInputType(InputType.TYPE_NULL);
         startTime = findViewById(R.id.startTime);
         endTime = (EditText) findViewById(R.id.endTime);
+        dropdownBtn = (Spinner) findViewById(R.id.dropdownBtn);
 
+        final List<String> spinnerArray =  new ArrayList<String>();
+
+        Call<ArrayList<Project>> call = Client.getInstance().getApi().getProjects(Integer.valueOf(userId));
+
+        call.enqueue(new Callback<ArrayList<Project>>() {
+            @Override
+            public void onResponse(Call<ArrayList<Project>> call, Response<ArrayList<Project>>  response) {
+                ArrayList<Project> projects = response.body();
+                if (projects==null){
+                    System.out.println("User response is null");
+                }
+                else {
+                    for (Project project : projects){
+                        spinnerArray.add(project.getProjectname());
+                    }
+                }
+            }
+
+
+            @Override
+            public void onFailure(Call<ArrayList<Project> > call, Throwable t) {
+            }
+
+        });
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, spinnerArray);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        dropdownBtn.setAdapter(adapter);
 
         startDate.setOnClickListener(new View.OnClickListener() {
             @Override
