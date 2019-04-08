@@ -24,21 +24,31 @@
             android:layout_height="wrap_content"
             android:text="Start Time"/>
 
+        <DatePicker
+            android:id="@+id/startDateOpt"
+            android:layout_width="match_parent"
+            android:layout_height="88dp"
+            android:calendarViewShown="false"></DatePicker>
+
         <TimePicker
             android:id="@+id/startTimeOpt"
             android:layout_width="match_parent"
-            android:layout_height="280dp"></TimePicker>
+            android:layout_height="115dp"></TimePicker>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="End Time"/>
 
+        <DatePicker
+            android:id="@+id/endDateOpt"
+            android:layout_width="match_parent"
+            android:layout_height="104dp"
+            android:calendarViewShown="false"></DatePicker>
         <TimePicker
             android:id="@+id/endTimeOpt"
             android:layout_width="match_parent"
-            android:layout_height="283dp"></TimePicker>
-
-    <Button
+            android:layout_height="157dp"></TimePicker>
+        <Button
         android:id="@+id/generateReportBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
