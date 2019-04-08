@@ -17,7 +17,8 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Project" />
+            android:text="Project"
+            />
 
         <Spinner
             android:id="@+id/dropdownBtn"
@@ -25,45 +26,65 @@
             android:layout_height="wrap_content"></Spinner>
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/textView1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Start Time" />
+            android:text="Start Date" />
 
         <EditText
-            android:id="@+id/editText2"
+            android:id="@+id/startDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
             android:focusable="false"
             android:inputType="date" />
-
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Start Time" />
         <EditText
-            android:id="@+id/editText3"
+            android:id="@+id/startTime"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="time" />
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/textView3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="End Time" />
+            android:text="End Date" />
 
         <EditText
-            android:id="@+id/editText4"
+            android:id="@+id/endDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="date" />
-
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="End Time" />
         <EditText
-            android:id="@+id/editText5"
+            android:id="@+id/endTime"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="time" />
+
+        <CheckBox
+            android:id="@+id/noOfCP"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="No. of Completed Pomodoros" />
+
+        <CheckBox
+            android:id="@+id/hoursWorked"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Total Number of Hours Worked" />
 
         <Button
             android:id="@+id/generateReportBtn"
