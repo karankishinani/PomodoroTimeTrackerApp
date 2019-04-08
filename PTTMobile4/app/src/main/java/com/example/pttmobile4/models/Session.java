@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName;
 
 public class Session {
 
+
     @SerializedName("id")
     @Expose
     private Integer id;
@@ -51,5 +52,6 @@ public class Session {
     public void setCounter(int counter) {
         this.counter = counter;
     }
+
 
 }

@@ -8,9 +8,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.pttmobile4.R;
-import com.example.pttmobile4.models.Session;
+import com.example.pttmobile4.models.Report_sessions;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,11 +19,11 @@ import androidx.recyclerview.widget.RecyclerView;
 public class SessionListAdapter extends RecyclerView.Adapter<SessionListAdapter.SessionListViewHolder> {
 
     Context context;
-    private ArrayList<Session> sessionList;
+    private List<Report_sessions> sessionList;
     private boolean selectingMultipleSessions = false;
 
 
-    public SessionListAdapter(Context context, ArrayList<Session> sessionList){
+    public SessionListAdapter(Context context, List<Report_sessions> sessionList){
         this.sessionList = sessionList;
         this.context = context;
     }
@@ -40,9 +41,9 @@ public class SessionListAdapter extends RecyclerView.Adapter<SessionListAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull final SessionListViewHolder holder, final int position) {
-        holder.mStartTime.setText(sessionList.get(position).getStartTime());
-        holder.mEndtime.setText(sessionList.get(position).getEndTime());
-        // holder.mTimeWorked.setText(sessionList.get(position).getTimeWorked());
+        holder.mStartTime.setText(sessionList.get(position).getStartingTime());
+        holder.mEndtime.setText(sessionList.get(position).getEndingTime());
+        holder.mTimeWorked.setText(sessionList.get(position).getHoursWorked());
 
         holder.mLayout.setOnLongClickListener(new View.OnLongClickListener() {
             @Override

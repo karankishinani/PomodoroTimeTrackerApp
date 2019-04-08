@@ -72,13 +72,13 @@ public interface APIInterface {
 
     @PUT("users/{userId}/projects/{projectId}/sessions/{sessionId}")
     @Headers("Content-Type: application/json")
-    Call<Session> updateSession(@Path("userId") int userId, @Path("projectId") int projectId, @Path("sessionId") int sessionId, @Body RequestBody body);
+    Call<Session> updateSession(@Path("userId") int userId, @Path("projectId") int projectId,
+                                @Path("sessionId") int sessionId, @Body RequestBody body);
 
     // REPORT
-
-    //TODO: When backend is done, double check
     @GET("users/{userId}/projects/{projectId}/report")
     @Headers("Content-Type: application/json")
-    Call<Report> getReport(@Path("userId") int userId, @Path("projectId") int projectId, @Query("from") String from, @Query("to") String to, @Query("includeCompletedPomodoros") boolean includeCompletedPomodoros, @Query("includeTotalHoursWorkedOnProject") boolean includeTotalHoursWorkedOnProject);
+    Call<Report> getReport(@Path("userId") int userId, @Path("projectId") int projectId, @Query("from") String from, @Query("to") String to,
+                           @Query("includeCompletedPomodoros") boolean includeCompletedPomodoros, @Query("includeTotalHoursWorkedOnProject") boolean includeTotalHoursWorkedOnProject);
 
 }

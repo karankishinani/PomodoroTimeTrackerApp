@@ -15,9 +15,11 @@ import com.example.pttmobile4.R;
 import com.example.pttmobile4.adapters.SessionListAdapter;
 import com.example.pttmobile4.api.Client;
 import com.example.pttmobile4.models.Report;
+import com.example.pttmobile4.models.Report_sessions;
 import com.example.pttmobile4.models.Session;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ReportActivity extends AppCompatActivity {
 
@@ -25,7 +27,7 @@ public class ReportActivity extends AppCompatActivity {
     String userId, projectId, startTime, endTime;
     boolean includeCompletedPomodoros, includeTotalHoursWorkedOnProject;
 
-    ArrayList<Session> sessionList = new ArrayList<>();
+    List<Report_sessions> sessionList = new ArrayList<>();
     Report report;
 
     private RecyclerView mSessionList;
@@ -40,17 +42,17 @@ public class ReportActivity extends AppCompatActivity {
         setContentView(R.layout.activity_report);
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            //TODO: GET all params
+            //TODO: GET all params from Intent
             userId = extras.getString("userId");
         }
 
-        //TODO: call the server with params and display
+        loadSessions();
+
     }
 
 
     private void loadSessions(){
         // GET REQUEST to populate fields initially
-        //TODO: to call this
         Call<Report> call = Client
                 .getInstance().getApi().getReport(Integer.valueOf(userId),Integer.valueOf(projectId),startTime, endTime,
                         includeCompletedPomodoros, includeTotalHoursWorkedOnProject);
@@ -63,10 +65,7 @@ public class ReportActivity extends AppCompatActivity {
                     System.out.println("Sessionlist is null");
                 }
                 else {
-                    //TODO: iterating the report, construct sessionList
-                    //for (){
-                    //
-                    //}
+                    sessionList = report.getSessions();
                     loadRecyclerView();
                 }
             }
