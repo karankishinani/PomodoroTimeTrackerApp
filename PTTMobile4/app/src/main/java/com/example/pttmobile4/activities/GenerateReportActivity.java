@@ -30,7 +30,9 @@ import com.example.pttmobile4.models.Project;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class GenerateReportActivity extends AppCompatActivity {
     DatePickerDialog picker,picker3;
@@ -38,7 +40,7 @@ public class GenerateReportActivity extends AppCompatActivity {
     EditText startDate, startTime, endDate, endTime;
     CheckBox noOfCP,hoursWorked;
     Spinner dropdownBtn;
-
+    Map<String, String> map = new HashMap<>();
 
 
     //TODO: get project ID
@@ -83,6 +85,7 @@ public class GenerateReportActivity extends AppCompatActivity {
                 else {
                     for (Project project : projects){
                         spinnerArray.add(project.getProjectname());
+                        map.put(project.getProjectname(), "" + project.getId());
                     }
                 }
             }
@@ -200,9 +203,11 @@ public class GenerateReportActivity extends AppCompatActivity {
                 start = startDate.getText().toString() + "T" + startTime.getText().toString()+"Z";
                 end =  endDate.getText().toString() + "T" + endTime.getText().toString()+"Z";
 
+                //TODO: waht if the project is not selected
+
+                ProjectId = map.get(dropdownBtn.getSelectedItem().toString());
                 Intent intent = new Intent(GenerateReportActivity.this, ReportActivity.class);
                 intent.putExtra("userId", userId);
-                //TODO: Get Project ID
                 intent.putExtra("ProjectId", ProjectId);
                 intent.putExtra("startTime", start);
                 intent.putExtra("endTime", end);
