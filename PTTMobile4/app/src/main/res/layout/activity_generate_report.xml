@@ -9,10 +9,34 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    <LinearLayout
-        android:orientation="horizontal"
+
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:text="Project"/>
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/dropdownBtn"></Spinner>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Start Time"/>
+
+        <TimePicker
+            android:id="@+id/startTimeOpt"
+            android:layout_width="match_parent"
+            android:layout_height="280dp"></TimePicker>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="End Time"/>
+
+        <TimePicker
+            android:id="@+id/endTimeOpt"
+            android:layout_width="match_parent"
+            android:layout_height="283dp"></TimePicker>
 
     <Button
         android:id="@+id/generateReportBtn"
@@ -21,6 +45,5 @@
         android:text="Generate Report" />
     </LinearLayout>
 
-    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

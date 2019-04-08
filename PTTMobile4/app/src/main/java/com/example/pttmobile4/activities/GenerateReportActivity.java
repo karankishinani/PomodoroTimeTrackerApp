@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Spinner;
 
 import com.example.pttmobile4.R;
 
@@ -14,6 +15,9 @@ public class GenerateReportActivity extends AppCompatActivity {
     //Params
     String userId,ProjectId, startTime, endTime;
     boolean isCompleted, hasTotalNumber;
+
+    //Spinner dropdown = findViewById(R.id.dropdownBtn);
+
 
     Button generateProjectBtn;
     @Override
