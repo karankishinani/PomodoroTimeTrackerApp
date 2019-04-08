@@ -133,8 +133,8 @@ public class PomodoroActivity extends AppCompatActivity {
         stopPomodoroBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                timer.cancel();
                 if (isSeperatePomodoro){
+                    timer.cancel();
                     finish();
                 } else {
                     DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
@@ -142,6 +142,7 @@ public class PomodoroActivity extends AppCompatActivity {
                         public void onClick(DialogInterface dialog, int which) {
                             switch (which) {
                                 case DialogInterface.BUTTON_POSITIVE:
+                                    timer.cancel();
                                     Intent yes_intent = new Intent(PomodoroActivity.this, UserActivity.class);
                                     yes_intent.putExtra("userId",userId);
                                     //TODO: log time
@@ -149,6 +150,7 @@ public class PomodoroActivity extends AppCompatActivity {
                                     startActivity(yes_intent);
                                     break;
                                 case DialogInterface.BUTTON_NEGATIVE:
+                                    timer.cancel();
                                     Intent no_intent = new Intent(PomodoroActivity.this, UserActivity.class);
                                     no_intent.putExtra("userId",userId);
                                     finish();
