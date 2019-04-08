@@ -23,7 +23,6 @@ import java.util.List;
 
 public class ReportActivity extends AppCompatActivity {
 
-    //TODO: Receive Params from Bundle, i.e. project name, start Time, end Time, completed pomos, totalhour
     String userId, projectId, startTime, endTime;
     boolean includeCompletedPomodoros, includeTotalHoursWorkedOnProject;
 
@@ -45,6 +44,8 @@ public class ReportActivity extends AppCompatActivity {
             //TODO: GET all params from Intent
             userId = extras.getString("userId");
         }
+
+        mSessionList= findViewById(R.id.sessionList);
 
         loadSessions();
 
