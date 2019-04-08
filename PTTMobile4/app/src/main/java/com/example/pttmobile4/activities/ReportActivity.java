@@ -41,8 +41,12 @@ public class ReportActivity extends AppCompatActivity {
         setContentView(R.layout.activity_report);
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            //TODO: GET all params from Intent
             userId = extras.getString("userId");
+            projectId = extras.getString("ProjectId");
+            startTime = extras.getString("start");
+            endTime = extras.getString("endTime");
+            includeCompletedPomodoros = extras.getBoolean("includeCompletedPomodoros", false);
+            includeTotalHoursWorkedOnProject = extras.getBoolean("includeTotalHoursWorkedOnProject", false);
         }
 
         mSessionList= findViewById(R.id.sessionList);
