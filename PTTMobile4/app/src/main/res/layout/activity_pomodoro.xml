@@ -12,7 +12,7 @@
         android:text="Project Name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="invisible" />
+        android:visibility="gone" />
     <EditText
         android:id="@+id/project_name"
         android:layout_width="match_parent"
