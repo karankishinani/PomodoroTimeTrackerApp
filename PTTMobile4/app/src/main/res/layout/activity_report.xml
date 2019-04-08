@@ -9,20 +9,46 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
 
 
-
-
-        </LinearLayout>
         <TextView
-            android:text="PROJECTS:"
-            android:textAlignment="center"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:text="REPORT"
+            android:textSize="30dp"
+            android:textAlignment="center"/>
+
+        <TextView
+            android:id="@+id/noOfCP_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Number of Pomodoros Completed" />
+
+        <EditText
+            android:id="@+id/noOfCP_value"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="number" />
+
+        <TextView
+            android:id="@+id/hoursWorked_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Total Number of Hours Worked" />
+
+        <EditText
+            android:id="@+id/hoursWorked_value"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="number" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="SESSIONS:"
+            android:textAlignment="center" />
 
 
         <androidx.recyclerview.widget.RecyclerView
@@ -31,6 +57,7 @@
             android:id="@+id/sessionList"
             android:scrollbars="vertical">
         </androidx.recyclerview.widget.RecyclerView>
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
