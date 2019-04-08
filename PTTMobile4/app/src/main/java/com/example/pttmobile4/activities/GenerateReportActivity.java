@@ -12,6 +12,7 @@ import android.os.SystemClock;
 import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -19,6 +20,7 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.example.pttmobile4.R;
+import com.example.pttmobile4.models.Project;
 
 import java.sql.Time;
 import java.util.Calendar;
@@ -27,13 +29,36 @@ public class GenerateReportActivity extends AppCompatActivity {
     DatePickerDialog picker,picker3;
     TimePickerDialog picker2,picker4;
     EditText startDate, startTime, endDate, endTime;
+    CheckBox noOfCP,hoursWorked;
+
+    //TODO: get project ID
+    String userId,ProjectId, start, end;
+    Button generateProjectBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_generate_report);
+
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            userId = extras.getString("userId");
+        }
+
+
+
+        //Initialize
+        generateProjectBtn = findViewById(R.id.generateReportBtn);
+        noOfCP = findViewById(R.id.noOfCP);
+        hoursWorked = findViewById(R.id.hoursWorked);
         startDate = (EditText) findViewById(R.id.startDate);
         startDate.setInputType(InputType.TYPE_NULL);
+        endDate = (EditText) findViewById(R.id.endDate);
+        endDate.setInputType(InputType.TYPE_NULL);
+        startTime = findViewById(R.id.startTime);
+        endTime = (EditText) findViewById(R.id.endTime);
+
+
         startDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -53,7 +78,6 @@ public class GenerateReportActivity extends AppCompatActivity {
             }
         });
 
-        startTime = (EditText) findViewById(R.id.startTime);
         startTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -80,8 +104,7 @@ public class GenerateReportActivity extends AppCompatActivity {
             }
         });
 
-        endDate = (EditText) findViewById(R.id.endDate);
-        endDate.setInputType(InputType.TYPE_NULL);
+
         endDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -101,7 +124,7 @@ public class GenerateReportActivity extends AppCompatActivity {
             }
         });
 
-        endTime = (EditText) findViewById(R.id.endTime);
+
         endTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -128,5 +151,34 @@ public class GenerateReportActivity extends AppCompatActivity {
         });
 
 
+
+
+
+
+
+        generateProjectBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                start = startDate.getText().toString() + "T" + startTime.getText().toString()+"Z";
+                end =  endDate.getText().toString() + "T" + endTime.getText().toString()+"Z";
+
+                Intent intent = new Intent(GenerateReportActivity.this, ReportActivity.class);
+                intent.putExtra("userId", userId);
+                //TODO: Get Project ID
+                intent.putExtra("ProjectId", ProjectId);
+                intent.putExtra("startTime", start);
+                intent.putExtra("endTime", end);
+                intent.putExtra("includeCompletedPomodoros", noOfCP.isChecked());
+                intent.putExtra("includeTotalHoursWorkedOnProject", hoursWorked.isChecked());
+
+                startActivity(intent);
+
+            }
+        });
+
+
     }
+
+
+
 }
