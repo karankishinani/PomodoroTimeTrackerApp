@@ -96,6 +96,7 @@ public class UserActivity extends AppCompatActivity {
         });
         //loadProjects();
 
+        //TODO: Hide this Button if the user has no Projects
         startReportBtn = findViewById(R.id.startReportBtn);
         startReportBtn.setOnClickListener(new View.OnClickListener() {
             @Override

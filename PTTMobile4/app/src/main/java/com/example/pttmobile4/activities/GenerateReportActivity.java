@@ -27,6 +27,8 @@ import com.example.pttmobile4.R;
 import com.example.pttmobile4.api.Client;
 import com.example.pttmobile4.models.Project;
 
+import org.angmarch.views.NiceSpinner;
+
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -39,7 +41,7 @@ public class GenerateReportActivity extends AppCompatActivity {
     TimePickerDialog picker2,picker4;
     EditText startDate, startTime, endDate, endTime;
     CheckBox noOfCP,hoursWorked;
-    Spinner dropdownBtn;
+    NiceSpinner niceSpinner;
     Map<String, String> map = new HashMap<>();
 
 
@@ -69,9 +71,12 @@ public class GenerateReportActivity extends AppCompatActivity {
         endDate.setInputType(InputType.TYPE_NULL);
         startTime = findViewById(R.id.startTime);
         endTime = (EditText) findViewById(R.id.endTime);
-        dropdownBtn = (Spinner) findViewById(R.id.dropdownBtn);
+        niceSpinner = (NiceSpinner) findViewById(R.id.nice_spinner);
+
 
         final List<String> spinnerArray =  new ArrayList<String>();
+
+
 
         Call<ArrayList<Project>> call = Client.getInstance().getApi().getProjects(Integer.valueOf(userId));
 
@@ -96,9 +101,9 @@ public class GenerateReportActivity extends AppCompatActivity {
             }
 
         });
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, spinnerArray);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        dropdownBtn.setAdapter(adapter);
+
+        niceSpinner.attachDataSource(spinnerArray);
+
 
         startDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -205,7 +210,7 @@ public class GenerateReportActivity extends AppCompatActivity {
 
                 //TODO: waht if the project is not selected
 
-                ProjectId = map.get(dropdownBtn.getSelectedItem().toString());
+                ProjectId = map.get(spinnerArray.get(niceSpinner.getSelectedIndex()));
                 Intent intent = new Intent(GenerateReportActivity.this, ReportActivity.class);
                 intent.putExtra("userId", userId);
                 intent.putExtra("ProjectId", ProjectId);

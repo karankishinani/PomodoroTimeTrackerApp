@@ -20,10 +20,11 @@
             android:text="Project"
             />
 
-        <Spinner
-            android:id="@+id/dropdownBtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"></Spinner>
+        <org.angmarch.views.NiceSpinner
+            android:id="@+id/nice_spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"/>
 
         <TextView
             android:id="@+id/textView1"
