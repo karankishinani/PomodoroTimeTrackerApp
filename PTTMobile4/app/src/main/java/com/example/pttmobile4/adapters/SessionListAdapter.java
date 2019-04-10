@@ -68,10 +68,10 @@ public class SessionListAdapter extends RecyclerView.Adapter<SessionListAdapter.
         int month = Integer.valueOf(time.substring(5,7)) - 1;
 
 //        "   May 7 2019, 18:39       "
-        String ans = "\t" + time.substring(8,10);
-        ans += " " + df.getMonths()[month];
-        ans += ", " + time.substring(11,16);
-        ans += "\t" + time.substring(0,4);
+        String ans = "\t" + df.getMonths()[month];
+        ans += " " + time.substring(8,10);
+        ans += " " + time.substring(0,4);
+        ans += ",  " + time.substring(11,16);
         return ans;
     }
 
