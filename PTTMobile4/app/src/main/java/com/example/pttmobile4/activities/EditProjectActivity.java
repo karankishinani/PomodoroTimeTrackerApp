@@ -177,7 +177,7 @@ public class EditProjectActivity extends AppCompatActivity {
                         }
                     };
                     AlertDialog.Builder builder = new AlertDialog.Builder(EditProjectActivity.this);
-                    builder.setMessage("The project has time already logged to it. Do you really want to delete it?").setPositiveButton("Yes", dialogClickListener).setNegativeButton("No", dialogClickListener).show();
+                    builder.setMessage("Do you really want to delete it?").setPositiveButton("Yes", dialogClickListener).setNegativeButton("No", dialogClickListener).show(); //The project has time already logged to it.
                 } else {
                     Call<Project> call = Client
                             .getInstance().getApi().deleteProject(userId, projectId);

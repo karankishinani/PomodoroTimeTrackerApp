@@ -21,6 +21,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
+        <TextView
+            android:id="@+id/projectMessage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="You do not have any Projects"
+            android:textAlignment="center"
+            android:textSize="25dp"
+            android:visibility="gone" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

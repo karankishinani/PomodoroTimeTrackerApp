@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.example.pttmobile4.R;
 import com.example.pttmobile4.adapters.UserListAdapter;
@@ -33,7 +34,7 @@ public class AdminActivity extends AppCompatActivity {
     private RecyclerView.Adapter mUserListAdapter;
     private RecyclerView.LayoutManager mUserListLayoutManager;
 
-
+    TextView adminMessage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +44,7 @@ public class AdminActivity extends AppCompatActivity {
         mUserList = findViewById(R.id.userList);
         createUserBtn = findViewById(R.id.createUserBtn);
         adminLogoutBtn = findViewById(R.id.adminLogoutBtn);
+        adminMessage = findViewById(R.id.adminMessage);
 
         adminLogoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,6 +85,10 @@ public class AdminActivity extends AppCompatActivity {
                 }
                 else {
                     loadRecyclerView();
+                    if(userList.size() == 0)
+                        adminMessage.setVisibility(View.VISIBLE);
+                    else
+                        adminMessage.setVisibility(View.GONE);
                 }
             }
 

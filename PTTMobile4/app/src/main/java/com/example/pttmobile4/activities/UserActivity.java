@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.example.pttmobile4.R;
 import com.example.pttmobile4.adapters.ProjectListAdapter;
@@ -36,6 +37,7 @@ public class UserActivity extends AppCompatActivity {
     Button startPomodoroBtn;
     Button startReportBtn;
     String userId;
+    TextView projectMessage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +53,7 @@ public class UserActivity extends AppCompatActivity {
         createProjectBtn = findViewById(R.id.createProjectBtn);
         userLogoutBtn = findViewById(R.id.userLogoutBtn);
         startPomodoroBtn = findViewById(R.id.startPomodoroBtn);
+        projectMessage = findViewById(R.id.projectMessage);
 
         userLogoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -128,6 +131,14 @@ public class UserActivity extends AppCompatActivity {
                 }
                 else {
                     loadRecyclerView();
+                    if(projectList.size() == 0){
+                        startReportBtn.setEnabled(false);
+                        projectMessage.setVisibility(View.VISIBLE);
+                    }
+                    else{
+                        startReportBtn.setEnabled(true);
+                        projectMessage.setVisibility(View.GONE);
+                    }
                 }
             }
 

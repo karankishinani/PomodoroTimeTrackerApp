@@ -38,6 +38,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
+        <TextView
+            android:id="@+id/adminMessage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="You do not have any Users"
+            android:textAlignment="center"
+            android:textSize="25dp"
+            android:visibility="gone" />
+
         <!--<ListView-->
             <!--android:id="@+id/userList"-->
             <!--android:layout_width="match_parent"-->

@@ -1,15 +1,9 @@
 package com.example.pttmobile4.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
 import android.os.Bundle;
+import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.example.pttmobile4.R;
 import com.example.pttmobile4.adapters.SelectProjectAdapter;
@@ -17,6 +11,14 @@ import com.example.pttmobile4.api.Client;
 import com.example.pttmobile4.models.Project;
 
 import java.util.ArrayList;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class SelectProjectActivity extends AppCompatActivity {
 
@@ -26,6 +28,8 @@ public class SelectProjectActivity extends AppCompatActivity {
     private RecyclerView.Adapter mProjectListAdapter;
     private RecyclerView.LayoutManager mProjectListLayoutManager;
     String userId;
+
+    TextView projectMessage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +41,7 @@ public class SelectProjectActivity extends AppCompatActivity {
             userId = extras.getString("userId");
         }
         mProjectList = findViewById(R.id.selectProjectList);
+        projectMessage = findViewById(R.id.projectMessage);
     }
 
     public void onResume()
@@ -59,6 +64,10 @@ public class SelectProjectActivity extends AppCompatActivity {
                 }
                 else {
                     loadRecyclerView();
+                    if(projectList.size() == 0)
+                        projectMessage.setVisibility(View.VISIBLE);
+                    else
+                        projectMessage.setVisibility(View.GONE);
                 }
             }
 
