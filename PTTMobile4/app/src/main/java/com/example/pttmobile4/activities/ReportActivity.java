@@ -1,13 +1,5 @@
 package com.example.pttmobile4.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
 import android.os.Bundle;
 import android.widget.LinearLayout;
 
@@ -16,10 +8,17 @@ import com.example.pttmobile4.adapters.SessionListAdapter;
 import com.example.pttmobile4.api.Client;
 import com.example.pttmobile4.models.Report;
 import com.example.pttmobile4.models.Report_sessions;
-import com.example.pttmobile4.models.Session;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ReportActivity extends AppCompatActivity {
 
@@ -43,7 +42,7 @@ public class ReportActivity extends AppCompatActivity {
         if (extras != null) {
             userId = extras.getString("userId");
             projectId = extras.getString("ProjectId");
-            startTime = extras.getString("start");
+            startTime = extras.getString("startTime");
             endTime = extras.getString("endTime");
             includeCompletedPomodoros = extras.getBoolean("includeCompletedPomodoros", false);
             includeTotalHoursWorkedOnProject = extras.getBoolean("includeTotalHoursWorkedOnProject", false);
@@ -52,6 +51,7 @@ public class ReportActivity extends AppCompatActivity {
         mSessionList= findViewById(R.id.sessionList);
 
         loadSessions();
+        System.out.println("Load completed " + userId+" p id "+projectId+" time "+startTime + " end time" +endTime);
 
     }
 
