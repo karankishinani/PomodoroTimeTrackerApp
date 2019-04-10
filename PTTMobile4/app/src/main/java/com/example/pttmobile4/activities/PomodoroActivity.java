@@ -44,7 +44,7 @@ public class PomodoroActivity extends AppCompatActivity {
         // Get Current date-time
         final Calendar cldr = Calendar.getInstance();
         int day = cldr.get(Calendar.DAY_OF_MONTH);
-        int month = cldr.get(Calendar.MONTH);
+        int month = cldr.get(Calendar.MONTH) +1;
         int year = cldr.get(Calendar.YEAR);
         int hour = cldr.get(Calendar.HOUR_OF_DAY);
         int min = cldr.get(Calendar.MINUTE);
@@ -134,7 +134,7 @@ public class PomodoroActivity extends AppCompatActivity {
 
                         final Calendar cldr = Calendar.getInstance();
                         int day = cldr.get(Calendar.DAY_OF_MONTH);
-                        int month = cldr.get(Calendar.MONTH);
+                        int month = cldr.get(Calendar.MONTH) +1;
                         int year = cldr.get(Calendar.YEAR);
                         int hour = cldr.get(Calendar.HOUR_OF_DAY);
                         int min = cldr.get(Calendar.MINUTE);
@@ -274,7 +274,7 @@ public class PomodoroActivity extends AppCompatActivity {
 
                             final Calendar cldr = Calendar.getInstance();
                             int day = cldr.get(Calendar.DAY_OF_MONTH);
-                            int month = cldr.get(Calendar.MONTH);
+                            int month = cldr.get(Calendar.MONTH) +1;
                             int year = cldr.get(Calendar.YEAR);
                             int hour = cldr.get(Calendar.HOUR_OF_DAY);
                             int min = cldr.get(Calendar.MINUTE);
