@@ -10,7 +10,6 @@ import android.widget.TextView;
 import com.example.pttmobile4.R;
 import com.example.pttmobile4.models.Report_sessions;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.NonNull;
@@ -43,7 +42,7 @@ public class SessionListAdapter extends RecyclerView.Adapter<SessionListAdapter.
     public void onBindViewHolder(@NonNull final SessionListViewHolder holder, final int position) {
         holder.mStartTime.setText(sessionList.get(position).getStartingTime());
         holder.mEndtime.setText(sessionList.get(position).getEndingTime());
-        holder.mTimeWorked.setText(sessionList.get(position).getHoursWorked());
+        holder.mTimeWorked.setText(""+sessionList.get(position).getHoursWorked());
 
         holder.mLayout.setOnLongClickListener(new View.OnLongClickListener() {
             @Override

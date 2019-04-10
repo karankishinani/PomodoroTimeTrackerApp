@@ -10,7 +10,6 @@ import com.example.pttmobile4.models.Report;
 import com.example.pttmobile4.models.Report_sessions;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -25,7 +24,7 @@ public class ReportActivity extends AppCompatActivity {
     String userId, projectId, startTime, endTime;
     boolean includeCompletedPomodoros, includeTotalHoursWorkedOnProject;
 
-    List<Report_sessions> sessionList = new ArrayList<>();
+    ArrayList<Report_sessions> sessionList = new ArrayList<>();
     Report report;
 
     private RecyclerView mSessionList;
@@ -55,8 +54,14 @@ public class ReportActivity extends AppCompatActivity {
 
     }
 
+    public void onResume()
+    {
+        super.onResume();
+        loadSessions();
+    }
 
     private void loadSessions(){
+        System.out.println("LOADING");
         // GET REQUEST to populate fields initially
         Call<Report> call = Client
                 .getInstance().getApi().getReport(Integer.valueOf(userId),Integer.valueOf(projectId),startTime, endTime,
@@ -70,7 +75,12 @@ public class ReportActivity extends AppCompatActivity {
                     System.out.println("Sessionlist is null");
                 }
                 else {
+                    System.out.println(response.toString());
                     sessionList = report.getSessions();
+                    System.out.println("huhuhuhu" +report.getCompletedPomodoros());
+                    for (Report_sessions rs: sessionList){
+                        System.out.println("Session " + rs.getStartingTime());
+                    }
                     loadRecyclerView();
                 }
             }

@@ -3,14 +3,14 @@ package com.example.pttmobile4.models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class Report {
 
     // TODO: complete this
     @SerializedName("sessions")
     @Expose
-    private List<Report_sessions> sessions;
+    private ArrayList<Report_sessions> sessions;
     @SerializedName("completedPomodoros")
     @Expose
     private int completedPomodoros;
@@ -19,7 +19,7 @@ public class Report {
     private int totalHoursWorkedOnProject;
 
 
-    public List<Report_sessions> getSessions() {
+    public ArrayList<Report_sessions> getSessions() {
         return sessions;
     }
 

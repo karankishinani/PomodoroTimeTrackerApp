@@ -64,6 +64,7 @@ public class PomodoroActivity extends AppCompatActivity {
             counter = extras.getInt("counter", 0);
             startTime = extras.getString("startTime", startTime);
             System.out.println("Number of pomodoros in this session "+ counter);
+
         }
 
         if (!isSeperatePomodoro){
