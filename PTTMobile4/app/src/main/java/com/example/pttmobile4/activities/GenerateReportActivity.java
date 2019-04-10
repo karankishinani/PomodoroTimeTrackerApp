@@ -93,6 +93,7 @@ public class GenerateReportActivity extends AppCompatActivity {
                         map.put(project.getProjectname(), "" + project.getId());
                     }
                 }
+                niceSpinner.attachDataSource(spinnerArray);
             }
 
 
@@ -102,7 +103,7 @@ public class GenerateReportActivity extends AppCompatActivity {
 
         });
 
-        niceSpinner.attachDataSource(spinnerArray);
+
 
 
         startDate.setOnClickListener(new View.OnClickListener() {

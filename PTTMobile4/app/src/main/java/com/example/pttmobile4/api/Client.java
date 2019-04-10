@@ -58,7 +58,7 @@ public class Client {
 
     private static final String AUTH = "Basic " + Base64.encodeToString(("").getBytes(), Base64.NO_WRAP);
 // "http://10.0.2.2:8080/ptt/api/";
-    private static final String BASE_URL = "http://gazelle.cc.gatech.edu:9306/ptt/";
+    private static final String BASE_URL = "http://10.0.2.2:8080/ptt/";
     private static Client mInstance;
     private Retrofit retrofit;
 
