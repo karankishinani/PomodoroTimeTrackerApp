@@ -16,7 +16,6 @@ import com.example.pttmobile4.adapters.SessionListAdapter;
 import com.example.pttmobile4.api.Client;
 import com.example.pttmobile4.models.Report;
 import com.example.pttmobile4.models.Report_sessions;
-import com.example.pttmobile4.models.Session;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +38,7 @@ public class ReportActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_report);
+        //Initialize
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             userId = extras.getString("userId");
@@ -51,12 +51,20 @@ public class ReportActivity extends AppCompatActivity {
 
         mSessionList= findViewById(R.id.sessionList);
 
-        loadSessions();
 
+
+
+    }
+
+    public void onResume()
+    {
+        super.onResume();
+        loadSessions();
     }
 
 
     private void loadSessions(){
+
         // GET REQUEST to populate fields initially
         Call<Report> call = Client
                 .getInstance().getApi().getReport(Integer.valueOf(userId),Integer.valueOf(projectId),startTime, endTime,

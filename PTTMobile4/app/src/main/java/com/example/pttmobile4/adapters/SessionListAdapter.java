@@ -11,11 +11,13 @@ import com.example.pttmobile4.R;
 import com.example.pttmobile4.models.Report_sessions;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
+import java.text.DateFormatSymbols;
 public class SessionListAdapter extends RecyclerView.Adapter<SessionListAdapter.SessionListViewHolder> {
 
     Context context;
@@ -41,8 +43,8 @@ public class SessionListAdapter extends RecyclerView.Adapter<SessionListAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull final SessionListViewHolder holder, final int position) {
-        holder.mStartTime.setText(sessionList.get(position).getStartingTime());
-        holder.mEndtime.setText(sessionList.get(position).getEndingTime());
+        holder.mStartTime.setText(timeFormant(sessionList.get(position).getStartingTime()));
+        holder.mEndtime.setText(timeFormant(sessionList.get(position).getEndingTime()));
         holder.mTimeWorked.setText(sessionList.get(position).getHoursWorked());
 
         holder.mLayout.setOnLongClickListener(new View.OnLongClickListener() {
@@ -60,6 +62,19 @@ public class SessionListAdapter extends RecyclerView.Adapter<SessionListAdapter.
     public int getItemCount() {
         return sessionList.size();
     }
+
+    private String timeFormant(String time){
+        DateFormatSymbols df = new DateFormatSymbols();
+        int month = Integer.valueOf(time.substring(5,7)) - 1;
+
+//        "   7 May, 18:39       "
+        String ans = "\t" + time.substring(8,10);
+        ans += " " + df.getMonths()[month];
+        ans += ", " + time.substring(11,16);
+        ans += "\t" + time.substring(0,4);
+        return ans;
+    }
+
 
 
     public class SessionListViewHolder extends RecyclerView.ViewHolder{
