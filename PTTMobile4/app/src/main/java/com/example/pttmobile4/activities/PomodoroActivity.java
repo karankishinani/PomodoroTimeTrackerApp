@@ -147,48 +147,93 @@ public class PomodoroActivity extends AppCompatActivity {
                             case DialogInterface.BUTTON_POSITIVE:
                                 final Intent yes_intent = new Intent(PomodoroActivity.this, PomodoroActivity.class);
                                 yes_intent.putExtra("userId",userId);
-                                yes_intent.putExtra("PROJECT_ID",projectId);
-                                yes_intent.putExtra("SeperatePomodoro",isSeperatePomodoro);
-                                yes_intent.putExtra("counter",counter);
-                                yes_intent.putExtra("startTime",startTime);
+                                yes_intent.putExtra("SeperatePomodoro", isSeperatePomodoro);
 
-                                if(counter == 1){
-                                    // POST
+                                if(!isSeperatePomodoro) {
 
-                                    final Map<String,Object> params = new ArrayMap<>();
-                                    params.put("startTime", startTime);
-                                    params.put("endTime", endTime);
-                                    params.put("counter", counter);
-                                    RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"),(new JSONObject(params)).toString());
+                                    yes_intent.putExtra("PROJECT_ID", projectId);
+                                    yes_intent.putExtra("counter", counter);
+                                    yes_intent.putExtra("startTime", startTime);
 
-                                    Call<Session> call = Client
-                                            .getInstance().getApi().createSession(Integer.valueOf(userId), Integer.valueOf(projectId), body);
+                                    if (counter == 1) {
+                                        // POST
 
-                                    call.enqueue(new Callback<Session>() {
-                                        @Override
-                                        public void onResponse(Call<Session> call, Response<Session> response) {
-                                            Session session = response.body();
-                                            if (session==null){
-                                                System.out.println("User response is null");
+                                        final Map<String, Object> params = new ArrayMap<>();
+                                        params.put("startTime", startTime);
+                                        params.put("endTime", endTime);
+                                        params.put("counter", counter);
+                                        RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), (new JSONObject(params)).toString());
+
+                                        Call<Session> call = Client
+                                                .getInstance().getApi().createSession(Integer.valueOf(userId), Integer.valueOf(projectId), body);
+
+                                        call.enqueue(new Callback<Session>() {
+                                            @Override
+                                            public void onResponse(Call<Session> call, Response<Session> response) {
+                                                Session session = response.body();
+                                                if (session == null) {
+                                                    System.out.println("User response is null");
+                                                } else {
+                                                    sessionId = "" + session.getId();
+                                                    yes_intent.putExtra("sessionId", sessionId);
+                                                    System.out.println("this is the session id YES create " + sessionId);
+                                                }
+                                                finish();
+                                                startActivity(yes_intent);
                                             }
-                                            else {
-                                                sessionId = ""+session.getId();
-                                                yes_intent.putExtra("sessionId", sessionId);
-                                                System.out.println("this is the session id YES create "+ sessionId);
+
+                                            @Override
+                                            public void onFailure(Call<Session> call, Throwable t) {
                                             }
-                                            finish();
-                                            startActivity(yes_intent);
-                                        }
 
-                                        @Override
-                                        public void onFailure(Call<Session> call, Throwable t) {
-                                        }
+                                        });
 
-                                    });
+                                    } else {
+                                        // PUT
+                                        final Map<String, Object> params = new ArrayMap<>();
+                                        params.put("startTime", startTime);
+                                        params.put("endTime", endTime);
+                                        params.put("counter", counter);
+                                        RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), (new JSONObject(params)).toString());
 
+                                        Call<Session> call = Client
+                                                .getInstance().getApi().updateSession(Integer.valueOf(userId), Integer.valueOf(projectId), Integer.valueOf(sessionId), body);
+
+                                        call.enqueue(new Callback<Session>() {
+                                            @Override
+                                            public void onResponse(Call<Session> call, Response<Session> response) {
+                                                Session session = response.body();
+                                                if (session == null) {
+                                                    System.out.println("User response is null");
+                                                } else {
+                                                    yes_intent.putExtra("sessionId", "" + session.getId());
+                                                }
+                                                finish();
+                                                startActivity(yes_intent);
+                                            }
+
+                                            @Override
+                                            public void onFailure(Call<Session> call, Throwable t) {
+                                            }
+
+                                        });
+
+
+                                    }
                                 }
+
                                 else {
-                                    // PUT
+                                    finish();
+                                    startActivity(yes_intent);
+                                }
+
+                                break;
+                            case DialogInterface.BUTTON_NEGATIVE:
+                                Intent no_intent = new Intent(PomodoroActivity.this, UserActivity.class);
+                                no_intent.putExtra("userId",userId);
+
+                                if (!isSeperatePomodoro){
+                                    // PUT REQUEST
                                     final Map<String,Object> params = new ArrayMap<>();
                                     params.put("startTime", startTime);
                                     params.put("endTime", endTime);
@@ -205,11 +250,6 @@ public class PomodoroActivity extends AppCompatActivity {
                                             if (session==null){
                                                 System.out.println("User response is null");
                                             }
-                                            else {
-                                                yes_intent.putExtra("sessionId",""+session.getId());
-                                            }
-                                            finish();
-                                            startActivity(yes_intent);
                                         }
 
                                         @Override
@@ -217,36 +257,7 @@ public class PomodoroActivity extends AppCompatActivity {
                                         }
 
                                     });
-
                                 }
-                                break;
-                            case DialogInterface.BUTTON_NEGATIVE:
-                                Intent no_intent = new Intent(PomodoroActivity.this, UserActivity.class);
-                                no_intent.putExtra("userId",userId);
-                                // PUT REQUEST
-                                final Map<String,Object> params = new ArrayMap<>();
-                                params.put("startTime", startTime);
-                                params.put("endTime", endTime);
-                                params.put("counter", counter);
-                                RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"),(new JSONObject(params)).toString());
-
-                                Call<Session> call = Client
-                                        .getInstance().getApi().updateSession(Integer.valueOf(userId), Integer.valueOf(projectId), Integer.valueOf(sessionId), body);
-
-                                call.enqueue(new Callback<Session>() {
-                                    @Override
-                                    public void onResponse(Call<Session> call, Response<Session> response) {
-                                        Session session = response.body();
-                                        if (session==null){
-                                            System.out.println("User response is null");
-                                        }
-                                    }
-
-                                    @Override
-                                    public void onFailure(Call<Session> call, Throwable t) {
-                                    }
-
-                                });
 
                                 finish();
                                 startActivity(no_intent);
