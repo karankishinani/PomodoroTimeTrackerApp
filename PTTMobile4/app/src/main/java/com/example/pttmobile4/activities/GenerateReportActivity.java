@@ -77,7 +77,6 @@ public class GenerateReportActivity extends AppCompatActivity {
         final List<String> spinnerArray =  new ArrayList<String>();
 
 
-
         Call<ArrayList<Project>> call = Client.getInstance().getApi().getProjects(Integer.valueOf(userId));
 
         call.enqueue(new Callback<ArrayList<Project>>() {
@@ -198,11 +197,6 @@ public class GenerateReportActivity extends AppCompatActivity {
         });
 
 
-
-
-
-
-
         generateProjectBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -216,7 +210,7 @@ public class GenerateReportActivity extends AppCompatActivity {
 
                 String end = String.format("%d", Integer.valueOf(endDates[2])) + "-" + String.format("%02d", Integer.valueOf(endDates[1])) + "-" + String.format("%02d", Integer.valueOf(endDates[0])) + "T" + String.format("%02d", Integer.valueOf(endHours[0])) + ":" + String.format("%02d", Integer.valueOf(endHours[1])) +"Z";
 
-                //TODO: waht if the project is not selected
+                //TODO: what if the project is not selected
 
                 ProjectId = map.get(spinnerArray.get(niceSpinner.getSelectedIndex()));
                 Intent intent = new Intent(GenerateReportActivity.this, ReportActivity.class);

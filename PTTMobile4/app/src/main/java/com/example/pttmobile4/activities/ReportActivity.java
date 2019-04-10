@@ -1,22 +1,16 @@
 package com.example.pttmobile4.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
 import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.example.pttmobile4.R;
 import com.example.pttmobile4.adapters.SessionListAdapter;
 import com.example.pttmobile4.api.Client;
 import com.example.pttmobile4.models.Report;
 import com.example.pttmobile4.models.Report_sessions;
-import com.example.pttmobile4.models.Session;
 
 import java.util.ArrayList;
 
@@ -56,6 +50,20 @@ public class ReportActivity extends AppCompatActivity {
             includeTotalHoursWorkedOnProject = extras.getBoolean("includeTotalHoursWorkedOnProject", false);
         }
 
+        if(includeCompletedPomodoros){
+            TextView noOfCP_label = (TextView) findViewById(R.id.noOfCP_label);
+            noOfCP_label.setVisibility(View.VISIBLE);
+            TextView noOfCP_value = (TextView) findViewById(R.id.noOfCP_value);
+            noOfCP_value.setVisibility(View.VISIBLE);
+        }
+
+        if(includeTotalHoursWorkedOnProject){
+            final TextView hoursWorked_label = (TextView) findViewById(R.id.hoursWorked_label);
+            hoursWorked_label.setVisibility(View.VISIBLE);
+            final TextView hoursWorked_value = (TextView) findViewById(R.id.hoursWorked_value);
+            hoursWorked_value.setVisibility(View.VISIBLE);
+        }
+
         mSessionList= findViewById(R.id.sessionList);
 
         loadSessions();
@@ -82,12 +90,19 @@ public class ReportActivity extends AppCompatActivity {
                     System.out.println("Sessionlist is null");
                 }
                 else {
-                    System.out.println(response.toString());
-                    sessionList = report.getSessions();
-                    System.out.println("huhuhuhu" +report.getCompletedPomodoros());
-                    for (Report_sessions rs: sessionList){
-                        System.out.println("Session " + rs.getStartingTime());
+
+                    if(includeCompletedPomodoros){
+                        EditText noOfCP_value = findViewById(R.id.noOfCP_value);
+                        noOfCP_value.setText(""+report.getCompletedPomodoros());
                     }
+
+                    if(includeTotalHoursWorkedOnProject){
+                        EditText hoursWorked_value = findViewById(R.id.hoursWorked_value);
+                        hoursWorked_value.setText(""+report.getTotalHoursWorkedOnProject());
+                    }
+
+                    sessionList = report.getSessions();
+
                     loadRecyclerView();
                 }
             }
