@@ -16,16 +16,24 @@ import com.example.pttmobile4.adapters.SessionListAdapter;
 import com.example.pttmobile4.api.Client;
 import com.example.pttmobile4.models.Report;
 import com.example.pttmobile4.models.Report_sessions;
+import com.example.pttmobile4.models.Session;
 
 import java.util.ArrayList;
-import java.util.List;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ReportActivity extends AppCompatActivity {
 
     String userId, projectId, startTime, endTime;
     boolean includeCompletedPomodoros, includeTotalHoursWorkedOnProject;
 
-    List<Report_sessions> sessionList = new ArrayList<>();
+    ArrayList<Report_sessions> sessionList = new ArrayList<>();
     Report report;
 
     private RecyclerView mSessionList;
@@ -38,12 +46,11 @@ public class ReportActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_report);
-        //Initialize
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             userId = extras.getString("userId");
             projectId = extras.getString("ProjectId");
-            startTime = extras.getString("start");
+            startTime = extras.getString("startTime");
             endTime = extras.getString("endTime");
             includeCompletedPomodoros = extras.getBoolean("includeCompletedPomodoros", false);
             includeTotalHoursWorkedOnProject = extras.getBoolean("includeTotalHoursWorkedOnProject", false);
@@ -51,8 +58,7 @@ public class ReportActivity extends AppCompatActivity {
 
         mSessionList= findViewById(R.id.sessionList);
 
-
-
+        loadSessions();
 
     }
 
@@ -62,9 +68,7 @@ public class ReportActivity extends AppCompatActivity {
         loadSessions();
     }
 
-
     private void loadSessions(){
-
         // GET REQUEST to populate fields initially
         Call<Report> call = Client
                 .getInstance().getApi().getReport(Integer.valueOf(userId),Integer.valueOf(projectId),startTime, endTime,
@@ -78,7 +82,12 @@ public class ReportActivity extends AppCompatActivity {
                     System.out.println("Sessionlist is null");
                 }
                 else {
+                    System.out.println(response.toString());
                     sessionList = report.getSessions();
+                    System.out.println("huhuhuhu" +report.getCompletedPomodoros());
+                    for (Report_sessions rs: sessionList){
+                        System.out.println("Session " + rs.getStartingTime());
+                    }
                     loadRecyclerView();
                 }
             }
