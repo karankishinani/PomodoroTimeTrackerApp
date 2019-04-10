@@ -67,7 +67,7 @@ public class SessionListAdapter extends RecyclerView.Adapter<SessionListAdapter.
         DateFormatSymbols df = new DateFormatSymbols();
         int month = Integer.valueOf(time.substring(5,7)) - 1;
 
-//        "   7 May, 18:39       "
+//        "   May 7 2019, 18:39       "
         String ans = "\t" + time.substring(8,10);
         ans += " " + df.getMonths()[month];
         ans += ", " + time.substring(11,16);
