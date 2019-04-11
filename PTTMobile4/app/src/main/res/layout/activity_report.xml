@@ -31,6 +31,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:enabled="false"
+            android:focusable="false"
             android:visibility="gone"/>
 
         <TextView
@@ -46,6 +47,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:enabled="false"
+            android:focusable="false"
             android:visibility="gone"/>
 
         <TextView

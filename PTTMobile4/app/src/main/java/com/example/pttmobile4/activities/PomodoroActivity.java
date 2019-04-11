@@ -103,7 +103,7 @@ public class PomodoroActivity extends AppCompatActivity {
         timerTextView = (TextView) findViewById(R.id.timerText);
         stopPomodoroBtn = findViewById(R.id.stopPomodoroBtn);
 
-        timer = new CountDownTimer(15 * 1000, 1000) {
+        timer = new CountDownTimer(30*60 * 1000, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
                 long totalRemainingSeconds = millisUntilFinished / 1000;
@@ -118,9 +118,9 @@ public class PomodoroActivity extends AppCompatActivity {
                 if(secondsString.length()==1)
                     secondsString = "0" + secondsString;
 
-                if (totalRemainingSeconds > 10) {
+                if (totalRemainingSeconds > 5*60) {
                     // secondsString = Long.toString(seconds - 10);
-                    timerTextView.setText("Remaining Working Time: \n" + minutesString + ":" + secondsString);
+                    timerTextView.setText("Remaining Working Time: \n" + (minutes - 5) + ":" + secondsString);
                 } else {
                     timerTextView.setText("Remaining Break Time: \n" + minutesString + ":" + secondsString);
                 }
@@ -277,7 +277,12 @@ public class PomodoroActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (isSeperatePomodoro){
                     timer.cancel();
+
+                    final Intent intent = new Intent(PomodoroActivity.this, UserActivity.class);
+                    intent.putExtra("userId",userId);
                     finish();
+                    startActivity(intent);
+
                 } else {
                     DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
                         @Override
