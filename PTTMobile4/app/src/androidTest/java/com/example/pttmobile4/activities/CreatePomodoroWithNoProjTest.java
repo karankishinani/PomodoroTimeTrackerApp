@@ -196,12 +196,7 @@ public class CreatePomodoroWithNoProjTest {
         SystemClock.sleep(2000);
 
         ViewInteraction appCompatButton8 = onView(
-                allOf(withId(android.R.id.button2), withText("No"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("android.widget.ScrollView")),
-                                        0),
-                                2)));
+                allOf(withId(android.R.id.button2), withText("No")));
         appCompatButton8.perform(click());
         SystemClock.sleep(5000);
 
@@ -230,12 +225,7 @@ public class CreatePomodoroWithNoProjTest {
 
 
         ViewInteraction appCompatButton11 = onView(
-                allOf(withId(android.R.id.button2), withText("No"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("android.widget.ScrollView")),
-                                        0),
-                                2)));
+                allOf(withId(android.R.id.button2), withText("No")));
         appCompatButton11.perform(click());
         SystemClock.sleep((2*60+2)*1000);
 
@@ -251,12 +241,7 @@ public class CreatePomodoroWithNoProjTest {
         SystemClock.sleep((2*60+2)*1000);
 
         ViewInteraction appCompatButton13 = onView(
-                allOf(withId(android.R.id.button2), withText("No"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(R.id.buttonPanel),
-                                        0),
-                                2)));
+                allOf(withId(android.R.id.button2), withText("No")));
         appCompatButton13.perform(click());
         SystemClock.sleep(2000);
 
@@ -272,23 +257,13 @@ public class CreatePomodoroWithNoProjTest {
         SystemClock.sleep(2000);
 
         ViewInteraction appCompatButton15 = onView(
-                allOf(withId(android.R.id.button2), withText("No"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("android.widget.ScrollView")),
-                                        0),
-                                2)));
+                allOf(withId(android.R.id.button2), withText("No")));
         appCompatButton15.perform(click());
         SystemClock.sleep((2*60+2)*1000);
 
 
         ViewInteraction appCompatButton16 = onView(
-                allOf(withId(android.R.id.button1), withText("Yes"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(R.id.buttonPanel),
-                                        0),
-                                3)));
+                allOf(withId(android.R.id.button1), withText("Yes")));
         appCompatButton16.perform(click());
         SystemClock.sleep(2000);
 
