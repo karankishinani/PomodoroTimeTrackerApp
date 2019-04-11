@@ -25,7 +25,6 @@ import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static androidx.test.espresso.action.ViewActions.pressImeActionButton;
 import static androidx.test.espresso.action.ViewActions.replaceText;
-import static androidx.test.espresso.action.ViewActions.scrollTo;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
@@ -256,7 +255,7 @@ public class CreatePomodoroWithProjTest {
 
         ViewInteraction appCompatButton6 = onView(
                 allOf(withId(android.R.id.button1), withText("Yes")));
-        appCompatButton6.perform(scrollTo(), click());
+        appCompatButton6.perform(click());
         SystemClock.sleep(2000);
 
         ViewInteraction linearLayout = onView(
@@ -289,7 +288,7 @@ public class CreatePomodoroWithProjTest {
                                         withId(R.id.buttonPanel),
                                         0),
                                 2)));
-        appCompatButton8.perform(scrollTo(), click());
+        appCompatButton8.perform(click());
         SystemClock.sleep(2000);
 
         ViewInteraction appCompatButton9 = onView(
@@ -305,7 +304,7 @@ public class CreatePomodoroWithProjTest {
 
         ViewInteraction appCompatButton10 = onView(
                 allOf(withId(android.R.id.button1), withText("Yes")));
-        appCompatButton10.perform(scrollTo(), click());
+        appCompatButton10.perform(click());
         SystemClock.sleep(2000);
 
         ViewInteraction linearLayout2 = onView(
@@ -327,7 +326,7 @@ public class CreatePomodoroWithProjTest {
                                         withId(R.id.buttonPanel),
                                         0),
                                 3)));
-        appCompatButton11.perform(scrollTo(), click());
+        appCompatButton11.perform(click());
         SystemClock.sleep(5000);
 
         ViewInteraction appCompatButton12 = onView(
@@ -348,7 +347,7 @@ public class CreatePomodoroWithProjTest {
                                         withId(R.id.buttonPanel),
                                         0),
                                 3)));
-        appCompatButton13.perform(scrollTo(), click());
+        appCompatButton13.perform(click());
         SystemClock.sleep(2000);
 
         ViewInteraction appCompatButton14 = onView(
@@ -369,7 +368,7 @@ public class CreatePomodoroWithProjTest {
                                         withClassName(is("android.widget.ScrollView")),
                                         0),
                                 3)));
-        appCompatButton15.perform(scrollTo(), click());
+        appCompatButton15.perform(click());
         SystemClock.sleep(2000);
 
         ViewInteraction linearLayout3 = onView(
@@ -391,7 +390,7 @@ public class CreatePomodoroWithProjTest {
                                         withId(R.id.buttonPanel),
                                         0),
                                 3)));
-        appCompatButton16.perform(scrollTo(), click());
+        appCompatButton16.perform(click());
         SystemClock.sleep(31*60*1000);
 
         ViewInteraction appCompatButton17 = onView(
@@ -401,7 +400,7 @@ public class CreatePomodoroWithProjTest {
                                         withId(R.id.buttonPanel),
                                         0),
                                 2)));
-        appCompatButton17.perform(scrollTo(), click());
+        appCompatButton17.perform(click());
     }
 
     private static Matcher<View> childAtPosition(

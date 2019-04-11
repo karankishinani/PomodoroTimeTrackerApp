@@ -30,7 +30,6 @@ import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static androidx.test.espresso.action.ViewActions.pressImeActionButton;
 import static androidx.test.espresso.action.ViewActions.replaceText;
-import static androidx.test.espresso.action.ViewActions.scrollTo;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
@@ -263,7 +262,7 @@ public class ReportTest {
 
         ViewInteraction test3_appCompatButton6 = onView(
                 allOf(withId(android.R.id.button1), withText("Yes")));
-        test3_appCompatButton6.perform(scrollTo(), click());
+        test3_appCompatButton6.perform(click());
         SystemClock.sleep(2000);
 
         ViewInteraction test3_linearLayout = onView(
@@ -296,7 +295,7 @@ public class ReportTest {
                                         withId(R.id.buttonPanel),
                                         0),
                                 2)));
-        test3_appCompatButton8.perform(scrollTo(), click());
+        test3_appCompatButton8.perform(click());
         SystemClock.sleep(2000);
 
         ViewInteraction test3_appCompatButton9 = onView(
@@ -312,7 +311,7 @@ public class ReportTest {
 
         ViewInteraction test3_appCompatButton10 = onView(
                 allOf(withId(android.R.id.button1), withText("Yes")));
-        test3_appCompatButton10.perform(scrollTo(), click());
+        test3_appCompatButton10.perform(click());
         SystemClock.sleep(2000);
 
         ViewInteraction test3_linearLayout2 = onView(
@@ -334,7 +333,7 @@ public class ReportTest {
                                         withId(R.id.buttonPanel),
                                         0),
                                 3)));
-        test3_appCompatButton11.perform(scrollTo(), click());
+        test3_appCompatButton11.perform(click());
         SystemClock.sleep(5000);
 
         ViewInteraction test3_appCompatButton12 = onView(
@@ -355,7 +354,7 @@ public class ReportTest {
                                         withId(R.id.buttonPanel),
                                         0),
                                 3)));
-        test3_appCompatButton13.perform(scrollTo(), click());
+        test3_appCompatButton13.perform(click());
         SystemClock.sleep(2000);
 
         ViewInteraction test3_appCompatButton14 = onView(
@@ -376,7 +375,7 @@ public class ReportTest {
                                         withClassName(is("android.widget.ScrollView")),
                                         0),
                                 3)));
-        test3_appCompatButton15.perform(scrollTo(), click());
+        test3_appCompatButton15.perform(click());
         SystemClock.sleep(2000);
 
         ViewInteraction test3_linearLayout3 = onView(
@@ -398,7 +397,7 @@ public class ReportTest {
                                         withId(R.id.buttonPanel),
                                         0),
                                 3)));
-        test3_appCompatButton16.perform(scrollTo(), click());
+        test3_appCompatButton16.perform(click());
         SystemClock.sleep(31*60*1000);
 
         ViewInteraction test3_appCompatButton17 = onView(
@@ -408,7 +407,7 @@ public class ReportTest {
                                         withId(R.id.buttonPanel),
                                         0),
                                 2)));
-        test3_appCompatButton17.perform(scrollTo(), click());
+        test3_appCompatButton17.perform(click());
 
 
         ViewInteraction appCompatButton3 = onView(
