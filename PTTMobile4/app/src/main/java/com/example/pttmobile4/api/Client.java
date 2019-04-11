@@ -2,6 +2,8 @@ package com.example.pttmobile4.api;
 
 import android.util.Base64;
 
+import com.example.pttmobile4.BuildConfig;
+
 import java.io.IOException;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
@@ -57,8 +59,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class Client {
 
     private static final String AUTH = "Basic " + Base64.encodeToString(("").getBytes(), Base64.NO_WRAP);
-// "http://10.0.2.2:8080/ptt/api/";
-    private static final String BASE_URL = "http://gazelle.cc.gatech.edu:9306/ptt/";
+    // "http://10.0.2.2:8080/ptt/api/";
+    private static final String BASE_URL = BuildConfig.BASE_URL;
+        //"http://gazelle.cc.gatech.edu:9306/ptt/";
     private static Client mInstance;
     private Retrofit retrofit;
 

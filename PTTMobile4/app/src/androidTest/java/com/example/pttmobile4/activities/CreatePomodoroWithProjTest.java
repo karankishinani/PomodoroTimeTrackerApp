@@ -15,6 +15,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import androidx.annotation.VisibleForTesting;
 import androidx.test.espresso.ViewInteraction;
 import androidx.test.filters.LargeTest;
 import androidx.test.rule.ActivityTestRule;
@@ -36,11 +37,19 @@ import static org.hamcrest.Matchers.is;
 @RunWith(AndroidJUnit4.class)
 public class CreatePomodoroWithProjTest {
 
+    @VisibleForTesting
+    public void setTime(){
+        PomodoroActivity.pomodoroTime = 2;
+        PomodoroActivity.breakTime = 1;
+    };
+
     @Rule
     public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
 
     @Test
     public void createPomodoroWithProjTest() {
+        setTime();
+
         ViewInteraction test2_appCompatButton = onView(
                 allOf(withId(R.id.mainAdminLoginBtn), withText("Admin"),
                         childAtPosition(
@@ -317,7 +326,7 @@ public class CreatePomodoroWithProjTest {
                                 0),
                         isDisplayed()));
         linearLayout2.perform(click());
-        SystemClock.sleep(31*60*1000);
+        SystemClock.sleep((2*60+2)*1000);
 
         ViewInteraction appCompatButton11 = onView(
                 allOf(withId(android.R.id.button1), withText("Yes"),
@@ -381,7 +390,7 @@ public class CreatePomodoroWithProjTest {
                                 0),
                         isDisplayed()));
         linearLayout3.perform(click());
-        SystemClock.sleep(31*60*1000);
+        SystemClock.sleep((2*60+2)*1000);
 
         ViewInteraction appCompatButton16 = onView(
                 allOf(withId(android.R.id.button1), withText("Yes"),
@@ -391,7 +400,7 @@ public class CreatePomodoroWithProjTest {
                                         0),
                                 3)));
         appCompatButton16.perform(click());
-        SystemClock.sleep(31*60*1000);
+        SystemClock.sleep((2*60+2)*1000);
 
         ViewInteraction appCompatButton17 = onView(
                 allOf(withId(android.R.id.button2), withText("No"),

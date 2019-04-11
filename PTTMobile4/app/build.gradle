@@ -1,5 +1,12 @@
 apply plugin: 'com.android.application'
 
+def serverUrl = "http://10.0.2.2:8080/ptt/"
+task(runProgram){
+    if(project.hasProperty("url")){
+        serverUrl = url;
+    }
+}
+
 android {
     compileSdkVersion 28
     defaultConfig {
@@ -11,6 +18,9 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
+        debug {
+            buildConfigField("java.lang.String","BASE_URL","$serverUrl")
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'

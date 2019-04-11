@@ -37,6 +37,8 @@ public class PomodoroActivity extends AppCompatActivity {
     String sessionId;
     String startTime;
     int counter;
+    public static int pomodoroTime = 30;
+    public static int breakTime = 5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,7 +105,7 @@ public class PomodoroActivity extends AppCompatActivity {
         timerTextView = (TextView) findViewById(R.id.timerText);
         stopPomodoroBtn = findViewById(R.id.stopPomodoroBtn);
 
-        timer = new CountDownTimer(30*60 * 1000, 1000) {
+        timer = new CountDownTimer(pomodoroTime*60 * 1000, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
                 long totalRemainingSeconds = millisUntilFinished / 1000;
@@ -118,9 +120,9 @@ public class PomodoroActivity extends AppCompatActivity {
                 if(secondsString.length()==1)
                     secondsString = "0" + secondsString;
 
-                if (totalRemainingSeconds > 5*60) {
+                if (totalRemainingSeconds > breakTime*60) {
                     // secondsString = Long.toString(seconds - 10);
-                    timerTextView.setText("Remaining Working Time: \n" + (minutes - 5) + ":" + secondsString);
+                    timerTextView.setText("Remaining Working Time: \n" + (minutes - breakTime) + ":" + secondsString);
                 } else {
                     timerTextView.setText("Remaining Break Time: \n" + minutesString + ":" + secondsString);
                 }

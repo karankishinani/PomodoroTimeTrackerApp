@@ -17,6 +17,7 @@ import org.junit.runner.RunWith;
 
 import java.util.Calendar;
 
+import androidx.annotation.VisibleForTesting;
 import androidx.test.espresso.DataInteraction;
 import androidx.test.espresso.ViewInteraction;
 import androidx.test.filters.LargeTest;
@@ -42,11 +43,19 @@ import static org.hamcrest.Matchers.is;
 @RunWith(AndroidJUnit4.class)
 public class ReportTest {
 
+    @VisibleForTesting
+    public void setTime(){
+        PomodoroActivity.pomodoroTime = 2;
+        PomodoroActivity.breakTime = 1;
+    };
+
     @Rule
     public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
 
     @Test
     public void reportTest() {
+        setTime();
+
         ViewInteraction test2_appCompatButton = onView(
                 allOf(withId(R.id.mainAdminLoginBtn), withText("Admin"),
                         childAtPosition(
@@ -324,7 +333,7 @@ public class ReportTest {
                                 0),
                         isDisplayed()));
         test3_linearLayout2.perform(click());
-        SystemClock.sleep(31*60*1000);
+        SystemClock.sleep((2*60+2)*1000);
 
         ViewInteraction test3_appCompatButton11 = onView(
                 allOf(withId(android.R.id.button1), withText("Yes"),
@@ -388,7 +397,7 @@ public class ReportTest {
                                 0),
                         isDisplayed()));
         test3_linearLayout3.perform(click());
-        SystemClock.sleep(31*60*1000);
+        SystemClock.sleep((2*60+2)*1000);
 
         ViewInteraction test3_appCompatButton16 = onView(
                 allOf(withId(android.R.id.button1), withText("Yes"),
@@ -398,7 +407,7 @@ public class ReportTest {
                                         0),
                                 3)));
         test3_appCompatButton16.perform(click());
-        SystemClock.sleep(31*60*1000);
+        SystemClock.sleep((2*60+2)*1000);
 
         ViewInteraction test3_appCompatButton17 = onView(
                 allOf(withId(android.R.id.button2), withText("No"),

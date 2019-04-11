@@ -15,6 +15,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import androidx.annotation.VisibleForTesting;
 import androidx.test.espresso.ViewInteraction;
 import androidx.test.filters.LargeTest;
 import androidx.test.rule.ActivityTestRule;
@@ -35,11 +36,19 @@ import static org.hamcrest.Matchers.is;
 @RunWith(AndroidJUnit4.class)
 public class CreatePomodoroWithNoProjTest {
 
+    @VisibleForTesting
+    public void setTime(){
+        PomodoroActivity.pomodoroTime = 2;
+        PomodoroActivity.breakTime = 1;
+    };
+
     @Rule
     public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
 
     @Test
     public void createPomodoroWithNoProjTest() {
+        setTime();
+
         ViewInteraction appCompatButton = onView(
                 allOf(withId(R.id.mainAdminLoginBtn), withText("Admin"),
                         childAtPosition(
@@ -228,7 +237,7 @@ public class CreatePomodoroWithNoProjTest {
                                         0),
                                 2)));
         appCompatButton11.perform(click());
-        SystemClock.sleep(31*60*1000);
+        SystemClock.sleep((2*60+2)*1000);
 
 
         ViewInteraction appCompatButton12 = onView(
@@ -239,7 +248,7 @@ public class CreatePomodoroWithNoProjTest {
                                         0),
                                 3)));
         appCompatButton12.perform(click());
-        SystemClock.sleep(31*60*1000);
+        SystemClock.sleep((2*60+2)*1000);
 
         ViewInteraction appCompatButton13 = onView(
                 allOf(withId(android.R.id.button2), withText("No"),
@@ -270,7 +279,7 @@ public class CreatePomodoroWithNoProjTest {
                                         0),
                                 2)));
         appCompatButton15.perform(click());
-        SystemClock.sleep(31*60*1000);
+        SystemClock.sleep((2*60+2)*1000);
 
 
         ViewInteraction appCompatButton16 = onView(
