@@ -1,6 +1,6 @@
 apply plugin: 'com.android.application'
 
-def serverUrl = "http://10.0.2.2:8080/ptt/"
+def serverUrl = "\"http://gazelle.cc.gatech.edu:9306/ptt/\""; //"http://10.0.2.2:8080/ptt/"
 task(runProgram){
     if(project.hasProperty("url")){
         serverUrl = url;

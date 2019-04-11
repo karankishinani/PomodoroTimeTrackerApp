@@ -11,7 +11,6 @@ import com.example.pttmobile4.R;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
-import org.hamcrest.core.IsInstanceOf;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -123,11 +122,6 @@ public class CreateUserTest {
 
         ViewInteraction userList = onView(
                 allOf(withId(R.id.userList),
-                        childAtPosition(
-                                childAtPosition(
-                                        IsInstanceOf.<View>instanceOf(android.view.ViewGroup.class),
-                                        0),
-                                2),
                         isDisplayed()));
         userList.check(matches(isDisplayed()));
 
@@ -135,11 +129,6 @@ public class CreateUserTest {
 
         ViewInteraction recyclerView = onView(
                 allOf(withId(R.id.userList),
-                        childAtPosition(
-                                childAtPosition(
-                                        IsInstanceOf.<View>instanceOf(android.view.ViewGroup.class),
-                                        0),
-                                2),
                         isDisplayed()));
         recyclerView.check(matches(isDisplayed()));
 

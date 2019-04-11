@@ -215,16 +215,6 @@ public class CreateProjectTest {
         SystemClock.sleep(2000);
 
 
-        ViewInteraction linearLayout = onView(
-                allOf(withId(R.id.layout),
-                        childAtPosition(
-                                allOf(withId(R.id.projectList),
-                                        childAtPosition(
-                                                IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class),
-                                                2)),
-                                0),
-                        isDisplayed()));
-        linearLayout.check(matches(isDisplayed()));
 
         ViewInteraction checkProj = onView(allOf(withId(R.id.project_name),withText("P1"), isDisplayed()));
         checkProj.check(matches(isDisplayed()));

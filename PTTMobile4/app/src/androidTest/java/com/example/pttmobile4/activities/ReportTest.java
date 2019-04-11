@@ -35,8 +35,8 @@ import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
+import static org.hamcrest.CoreMatchers.anything;
 import static org.hamcrest.Matchers.allOf;
-import static org.hamcrest.Matchers.anything;
 import static org.hamcrest.Matchers.is;
 
 @LargeTest
@@ -55,6 +55,8 @@ public class ReportTest {
     @Test
     public void reportTest() {
         setTime();
+
+
 
         ViewInteraction test2_appCompatButton = onView(
                 allOf(withId(R.id.mainAdminLoginBtn), withText("Admin"),
@@ -123,13 +125,7 @@ public class ReportTest {
         test2_appCompatEditText4.perform(replaceText("m@s.m"), closeSoftKeyboard());
 
         ViewInteraction test2_appCompatButton3 = onView(
-                allOf(withId(R.id.createUserOkBtn), withText("OK"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(R.id.createUserLayout),
-                                        6),
-                                1),
-                        isDisplayed()));
+                allOf(withId(R.id.createUserOkBtn), withText("OK")));
         test2_appCompatButton3.perform(click());
         SystemClock.sleep(2000);
 
@@ -144,6 +140,8 @@ public class ReportTest {
                         isDisplayed()));
         test2_appCompatButton4.perform(click());
         SystemClock.sleep(2000);
+
+
 
         ViewInteraction test3_appCompatButton = onView(
                 allOf(withId(R.id.mainUserLoginBtn), withText("USER"),
@@ -200,6 +198,7 @@ public class ReportTest {
                         isDisplayed()));
         test3_appCompatButton2.perform(click());
         SystemClock.sleep(2000);
+
 
 
         ViewInteraction test3_appCompatButton3 = onView(
@@ -387,6 +386,8 @@ public class ReportTest {
         ViewInteraction test3_appCompatButton17 = onView(
                 allOf(withId(android.R.id.button2), withText("No")));
         test3_appCompatButton17.perform(click());
+
+
 
 
         ViewInteraction appCompatButton3 = onView(
@@ -612,21 +613,12 @@ public class ReportTest {
 
 
         DataInteraction appCompatTextView = onData(anything())
-                .inAdapterView(allOf(withId(R.id.nice_spinner),
-                        childAtPosition(
-                                withClassName(is("android.widget.PopupWindow$PopupBackgroundView")),
-                                0)))
+                .inAdapterView(allOf(withId(R.id.nice_spinner)))
                 .atPosition(0);
         appCompatTextView.perform(click());
 
         ViewInteraction appCompatEditText10 = onView(
-                allOf(withId(R.id.startDate),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("androidx.constraintlayout.widget.ConstraintLayout")),
-                                        0),
-                                3),
-                        isDisplayed()));
+                allOf(withId(R.id.startDate)));
         appCompatEditText10.perform(replaceText(""+month+"/"+day+"/"+(year-1)));
         SystemClock.sleep(2000);
 
