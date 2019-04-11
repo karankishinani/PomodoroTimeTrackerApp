@@ -71,7 +71,6 @@ public class UserActivity extends AppCompatActivity {
             }
         });
 
-        //TODO: add a yes/no pop-up
         startPomodoroBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -82,12 +81,14 @@ public class UserActivity extends AppCompatActivity {
                             case DialogInterface.BUTTON_POSITIVE:
                                 Intent yes_intent = new Intent(UserActivity.this, SelectProjectActivity.class);
                                 yes_intent.putExtra("userId",userId);
+                                finish();
                                 startActivity(yes_intent);
                                 break;
                             case DialogInterface.BUTTON_NEGATIVE:
                                 Intent no_intent = new Intent(UserActivity.this, PomodoroActivity.class);
                                 no_intent.putExtra("userId",userId);
                                 no_intent.putExtra("SeperatePomodoro", true);
+                                finish();
                                 startActivity(no_intent);
                                 break;
                         }
@@ -99,7 +100,6 @@ public class UserActivity extends AppCompatActivity {
         });
         //loadProjects();
 
-        //TODO: Hide this Button if the user has no Projects
         startReportBtn = findViewById(R.id.startReportBtn);
         startReportBtn.setOnClickListener(new View.OnClickListener() {
             @Override
