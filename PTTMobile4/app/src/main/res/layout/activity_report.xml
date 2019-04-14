@@ -60,7 +60,7 @@
             android:id="@+id/sessionMessage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="No Sessions Found for the Selected Time Range"
+            android:text="No Sessions Found"
             android:textAlignment="center"
             android:textSize="25dp"
             android:visibility="gone" />

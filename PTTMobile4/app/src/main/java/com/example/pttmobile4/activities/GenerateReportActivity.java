@@ -205,7 +205,7 @@ public class GenerateReportActivity extends AppCompatActivity {
 
                     ProjectId = map.get(spinnerArray.get(niceSpinner.getSelectedIndex()));
                     if (userId == null || ProjectId == null || start.length() !=17  || end.length()!= 17 ){
-                        new CustomToast().Show_Toast(false,getApplicationContext(),findViewById(R.id.generateReportLayout) ,"Invalid Parameters!");
+                        new CustomToast().Show_Toast(false,getApplicationContext(),findViewById(R.id.generateReportLayout) ,"All Fields are Required");
                     } else {
                         Intent intent = new Intent(GenerateReportActivity.this, ReportActivity.class);
                         intent.putExtra("userId", userId);
@@ -220,7 +220,7 @@ public class GenerateReportActivity extends AppCompatActivity {
 
                 } catch (Exception e){
                     e.printStackTrace();
-                    new CustomToast().Show_Toast(false,getApplicationContext(),findViewById(R.id.generateReportLayout) ,"Invalid Parameters!");
+                    new CustomToast().Show_Toast(false,getApplicationContext(),findViewById(R.id.generateReportLayout) ,"All Fields are Required");
 
                 }
 
