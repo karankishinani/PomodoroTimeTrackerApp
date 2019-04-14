@@ -142,7 +142,7 @@ public class EditProjectActivity extends AppCompatActivity {
         deleteProjectBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String startTime = "2000-01-01T00:00Z";
+                String startTime = "1900-01-01T00:00Z";
                 final Calendar cldr = Calendar.getInstance();
                 int day = cldr.get(Calendar.DAY_OF_MONTH);
                 int month = cldr.get(Calendar.MONTH) +1;
