@@ -404,7 +404,7 @@ public class CancelTest {
         checkproj.perform(click());
         SystemClock.sleep(2000);
 
-
+        /*
         ViewInteraction appCompatButton16 = onView(
                 allOf(withId(R.id.deleteProjectBtn), withText("Delete"),
                         childAtPosition(
@@ -419,7 +419,7 @@ public class CancelTest {
         ViewInteraction appCompatButton17 = onView(
                 allOf(withId(android.R.id.button2), withText("No")));
         appCompatButton17.perform(click());
-        SystemClock.sleep(2000);
+        SystemClock.sleep(2000);*/
 
         pressBack();
         SystemClock.sleep(2000);
