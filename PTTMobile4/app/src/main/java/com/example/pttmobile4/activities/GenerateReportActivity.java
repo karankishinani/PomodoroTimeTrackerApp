@@ -15,6 +15,7 @@ import android.widget.TimePicker;
 import com.example.pttmobile4.R;
 import com.example.pttmobile4.api.Client;
 import com.example.pttmobile4.models.Project;
+import com.example.pttmobile4.utils.CustomToast;
 
 import org.angmarch.views.NiceSpinner;
 
@@ -202,15 +203,21 @@ public class GenerateReportActivity extends AppCompatActivity {
                 String end = String.format("%d", Integer.valueOf(endDates[2])) + "-" + String.format("%02d", Integer.valueOf(endDates[1])) + "-" + String.format("%02d", Integer.valueOf(endDates[0])) + "T" + String.format("%02d", Integer.valueOf(endHours[0])) + ":" + String.format("%02d", Integer.valueOf(endHours[1])) +"Z";
 
                 ProjectId = map.get(spinnerArray.get(niceSpinner.getSelectedIndex()));
-                Intent intent = new Intent(GenerateReportActivity.this, ReportActivity.class);
-                intent.putExtra("userId", userId);
-                intent.putExtra("ProjectId", ProjectId);
-                intent.putExtra("startTime", start);
-                intent.putExtra("endTime", end);
-                intent.putExtra("includeCompletedPomodoros", noOfCP.isChecked());
-                intent.putExtra("includeTotalHoursWorkedOnProject", hoursWorked.isChecked());
 
-                startActivity(intent);
+                if (userId == null || ProjectId == null || start == null || end == null ){
+                    new CustomToast().Show_Toast(false,getApplicationContext(),findViewById(R.id.generateReportLayout) ,"Invalid Parameters!");
+                } else {
+                    Intent intent = new Intent(GenerateReportActivity.this, ReportActivity.class);
+                    intent.putExtra("userId", userId);
+                    intent.putExtra("ProjectId", ProjectId);
+                    intent.putExtra("startTime", start);
+                    intent.putExtra("endTime", end);
+                    intent.putExtra("includeCompletedPomodoros", noOfCP.isChecked());
+                    intent.putExtra("includeTotalHoursWorkedOnProject", hoursWorked.isChecked());
+
+                    startActivity(intent);
+                }
+
 
             }
         });
