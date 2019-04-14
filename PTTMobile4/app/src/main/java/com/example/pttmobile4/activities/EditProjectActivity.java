@@ -48,7 +48,6 @@ public class EditProjectActivity extends AppCompatActivity {
 
         projectName = findViewById(R.id.projectName);
 
-        // TODO: test the synchronous version, perhaps change the EditUserActivity to synchronous version
         // populate the EditText
         Call<Project> call = Client
                 .getInstance().getApi().getProject(userId, projectId);

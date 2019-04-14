@@ -1,26 +1,15 @@
 package com.example.pttmobile4.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.DialogFragment;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
 import android.app.DatePickerDialog;
-import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.text.InputType;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.example.pttmobile4.R;
@@ -29,12 +18,16 @@ import com.example.pttmobile4.models.Project;
 
 import org.angmarch.views.NiceSpinner;
 
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import androidx.appcompat.app.AppCompatActivity;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class GenerateReportActivity extends AppCompatActivity {
     DatePickerDialog picker,picker3;
@@ -44,8 +37,6 @@ public class GenerateReportActivity extends AppCompatActivity {
     NiceSpinner niceSpinner;
     Map<String, String> map = new HashMap<>();
 
-
-    //TODO: get project ID
     String userId,ProjectId, start, end;
     Button generateProjectBtn;
 
@@ -209,8 +200,6 @@ public class GenerateReportActivity extends AppCompatActivity {
                 String[] endHours = endTime.getText().toString().split(":");
 
                 String end = String.format("%d", Integer.valueOf(endDates[2])) + "-" + String.format("%02d", Integer.valueOf(endDates[1])) + "-" + String.format("%02d", Integer.valueOf(endDates[0])) + "T" + String.format("%02d", Integer.valueOf(endHours[0])) + ":" + String.format("%02d", Integer.valueOf(endHours[1])) +"Z";
-
-                //TODO: what if the project is not selected
 
                 ProjectId = map.get(spinnerArray.get(niceSpinner.getSelectedIndex()));
                 Intent intent = new Intent(GenerateReportActivity.this, ReportActivity.class);

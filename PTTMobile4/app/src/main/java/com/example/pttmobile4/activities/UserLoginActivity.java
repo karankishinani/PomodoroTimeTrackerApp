@@ -2,7 +2,6 @@ package com.example.pttmobile4.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -96,11 +95,7 @@ public class UserLoginActivity extends AppCompatActivity {
                         isLoggedIn = true;
                         Intent intent = new Intent(getApplicationContext(), UserActivity.class);
                         intent.putExtra("userId", userId);
-                        //TODO: to be delteted
-                        Log.d("Info","here ");
 
-
-                        System.out.println("I AM HERER DASDHASKJDH");
                         new CustomToast().Show_Toast(true,getApplicationContext(),findViewById(R.id.userLoginLayout) ,"Login Successful");
                         startActivity(intent);
 

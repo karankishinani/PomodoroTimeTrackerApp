@@ -25,7 +25,6 @@ import static androidx.test.espresso.Espresso.pressBack;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static androidx.test.espresso.action.ViewActions.replaceText;
-import static androidx.test.espresso.action.ViewActions.scrollTo;
 import static androidx.test.espresso.assertion.ViewAssertions.doesNotExist;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
@@ -243,13 +242,8 @@ public class DeleteProjectWithTimeTest {
         SystemClock.sleep(2000);
 
         ViewInteraction appCompatButton9 = onView(
-                allOf(withId(android.R.id.button1), withText("Yes"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("android.widget.ScrollView")),
-                                        0),
-                                3)));
-        appCompatButton9.perform(scrollTo(), click());
+                allOf(withId(android.R.id.button1), withText("Yes")));
+        appCompatButton9.perform(click());
 
         SystemClock.sleep(2000);
 
@@ -265,8 +259,8 @@ public class DeleteProjectWithTimeTest {
                         isDisplayed()));
         linearLayout.perform(click());
 
-        //Pomodoro Started, wait for 10s and stop
-        SystemClock.sleep(10000);
+        //Pomodoro Started, wait for 70s and stop
+        SystemClock.sleep(70000);
 
         ViewInteraction appCompatButton10 = onView(
                 allOf(withId(R.id.stopPomodoroBtn), withText("Stop Pomodoro"),
@@ -281,13 +275,8 @@ public class DeleteProjectWithTimeTest {
         SystemClock.sleep(2000);
         //Do you wanna log time? Yes
         ViewInteraction appCompatButton11 = onView(
-                allOf(withId(android.R.id.button1), withText("Yes"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(R.id.buttonPanel),
-                                        0),
-                                3)));
-        appCompatButton11.perform(scrollTo(), click());
+                allOf(withId(android.R.id.button1), withText("Yes")));
+        appCompatButton11.perform(click());
 
         SystemClock.sleep(2000);
 
@@ -318,13 +307,8 @@ public class DeleteProjectWithTimeTest {
         SystemClock.sleep(2000);
 
         ViewInteraction appCompatButton13 = onView(
-                allOf(withId(android.R.id.button1), withText("Yes"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("android.widget.ScrollView")),
-                                        0),
-                                3)));
-        appCompatButton13.perform(scrollTo(), click());
+                allOf(withId(android.R.id.button1), withText("Yes")));
+        appCompatButton13.perform(click());
 
         SystemClock.sleep(2000);
 

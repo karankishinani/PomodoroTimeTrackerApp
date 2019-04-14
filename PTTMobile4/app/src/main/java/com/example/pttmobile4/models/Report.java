@@ -7,7 +7,6 @@ import java.util.ArrayList;
 
 public class Report {
 
-    // TODO: complete this
     @SerializedName("sessions")
     @Expose
     private ArrayList<Report_sessions> sessions;

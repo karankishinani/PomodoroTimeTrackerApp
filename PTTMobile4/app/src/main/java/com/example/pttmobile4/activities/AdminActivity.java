@@ -27,7 +27,6 @@ public class AdminActivity extends AppCompatActivity {
     Button createUserBtn;
     Button adminLogoutBtn;
 
-    //todo:
     ArrayList<User> userList = new ArrayList<>();
 
     private RecyclerView mUserList;

@@ -305,7 +305,6 @@ public class PomodoroActivity extends AppCompatActivity {
                                     timer.cancel();
                                     final Intent yes_intent = new Intent(PomodoroActivity.this, UserActivity.class);
                                     yes_intent.putExtra("userId",userId);
-                                    //TODO: log time
 
                                     if(counter == 0){
 
