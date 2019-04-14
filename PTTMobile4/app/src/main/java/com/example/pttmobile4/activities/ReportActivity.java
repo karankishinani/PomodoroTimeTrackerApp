@@ -33,6 +33,8 @@ public class ReportActivity extends AppCompatActivity {
     private RecyclerView mSessionList;
     private RecyclerView.Adapter mSessionListAdapter;
     private RecyclerView.LayoutManager mSessionListLayoutManager;
+    TextView sessionMessage;
+
 
 
     @Override
@@ -64,6 +66,8 @@ public class ReportActivity extends AppCompatActivity {
             hoursWorked_value.setVisibility(View.VISIBLE);
         }
 
+        sessionMessage = findViewById(R.id.sessionMessage);
+
         mSessionList= findViewById(R.id.sessionList);
         //loadSessions();
 
@@ -86,8 +90,10 @@ public class ReportActivity extends AppCompatActivity {
                 report = response.body();
                 if (report==null){
                     System.out.println("Sessionlist is null");
+                    sessionMessage.setVisibility(View.VISIBLE);
                 }
                 else {
+                    sessionMessage.setVisibility(View.GONE);
                     if(includeCompletedPomodoros){
                         EditText noOfCP_value = findViewById(R.id.noOfCP_value);
                         noOfCP_value.setText(""+report.getCompletedPomodoros());
