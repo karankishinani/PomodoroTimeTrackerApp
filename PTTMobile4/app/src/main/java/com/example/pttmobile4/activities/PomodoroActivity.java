@@ -41,6 +41,119 @@ public class PomodoroActivity extends AppCompatActivity {
     public static int breakTime = 5;
 
 
+    @Override
+    public void onBackPressed() {
+        if (isSeperatePomodoro){
+            timer.cancel();
+
+            final Intent intent = new Intent(PomodoroActivity.this, UserActivity.class);
+            intent.putExtra("userId",userId);
+            finish();
+            //startActivity(intent);
+
+        } else {
+            DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+
+                    final Calendar cldr = Calendar.getInstance();
+                    int day = cldr.get(Calendar.DAY_OF_MONTH);
+                    int month = cldr.get(Calendar.MONTH) +1;
+                    int year = cldr.get(Calendar.YEAR);
+                    int hour = cldr.get(Calendar.HOUR_OF_DAY);
+                    int min = cldr.get(Calendar.MINUTE);
+
+                    String endTime = String.format("%d", year) + "-" + String.format("%02d", month) + "-" + String.format("%02d", day) + "T" + String.format("%02d", hour) + ":" + String.format("%02d", min) +"Z";
+
+                    switch (which) {
+                        case DialogInterface.BUTTON_POSITIVE:
+
+                            timer.cancel();
+                            //final Intent yes_intent = new Intent(PomodoroActivity.this, UserActivity.class);
+                            //yes_intent.putExtra("userId",userId);
+
+                            if(counter == 0){
+
+                                // POST
+
+                                final Map<String,Object> params = new ArrayMap<>();
+                                params.put("startTime", startTime);
+                                params.put("endTime", endTime);
+                                params.put("counter", counter);
+                                RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"),(new JSONObject(params)).toString());
+
+                                Call<Session> call = Client
+                                        .getInstance().getApi().createSession(Integer.valueOf(userId), Integer.valueOf(projectId), body);
+
+                                call.enqueue(new Callback<Session>() {
+                                    @Override
+                                    public void onResponse(Call<Session> call, Response<Session> response) {
+                                        Session session = response.body();
+                                        if (session==null){
+                                            System.out.println("User response is null");
+                                        }
+                                        else {
+                                            sessionId = ""+session.getId();
+                                            //yes_intent.putExtra("sessionId", sessionId);
+                                            System.out.println("this is the session id YES create "+ sessionId);
+                                        }
+                                        finish();
+                                        //startActivity(yes_intent);
+                                    }
+
+                                    @Override
+                                    public void onFailure(Call<Session> call, Throwable t) {
+                                    }
+
+                                });
+
+                            }
+
+                            else {
+                                // PUT REQUEST
+                                final Map<String,Object> params = new ArrayMap<>();
+                                params.put("startTime", startTime);
+                                params.put("endTime", endTime);
+                                params.put("counter", counter);
+                                RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"),(new JSONObject(params)).toString());
+
+                                Call<Session> call = Client
+                                        .getInstance().getApi().updateSession(Integer.valueOf(userId), Integer.valueOf(projectId), Integer.valueOf(sessionId), body);
+
+                                call.enqueue(new Callback<Session>() {
+                                    @Override
+                                    public void onResponse(Call<Session> call, Response<Session> response) {
+                                        Session session = response.body();
+                                        if (session==null){
+                                            System.out.println("User response is null");
+                                        }
+                                        finish();
+                                        //startActivity(yes_intent);
+                                    }
+
+                                    @Override
+                                    public void onFailure(Call<Session> call, Throwable t) {
+                                    }
+
+                                });
+
+                            }
+
+                            break;
+                        case DialogInterface.BUTTON_NEGATIVE:
+                            timer.cancel();
+                            Intent no_intent = new Intent(PomodoroActivity.this, UserActivity.class);
+                            no_intent.putExtra("userId",userId);
+                            finish();
+                            startActivity(no_intent);
+                            break;
+                    }
+                }
+            };
+            AlertDialog.Builder builder = new AlertDialog.Builder(PomodoroActivity.this);
+            builder.setMessage("Do you want to log time to the project?").setPositiveButton("Yes", dialogClickListener).setNegativeButton("No", dialogClickListener).show();
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
