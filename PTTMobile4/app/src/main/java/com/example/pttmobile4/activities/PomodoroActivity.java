@@ -41,14 +41,6 @@ public class PomodoroActivity extends AppCompatActivity {
     public static int breakTime = 5;
 
 
-    @Override
-    public void onBackPressed()
-    {
-        //Do nothing
-        return;
-        // code here to show dialog
-        //super.onBackPressed();  // optional depending on your needs
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
