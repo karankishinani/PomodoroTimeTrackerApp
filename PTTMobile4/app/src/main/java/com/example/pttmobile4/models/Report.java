@@ -16,7 +16,7 @@ public class Report {
     private int completedPomodoros;
     @SerializedName("totalHoursWorkedOnProject")
     @Expose
-    private int totalHoursWorkedOnProject;
+    private double totalHoursWorkedOnProject;
 
 
     public ArrayList<Report_sessions> getSessions() {
@@ -27,7 +27,7 @@ public class Report {
         return completedPomodoros;
     }
 
-    public int getTotalHoursWorkedOnProject() {
+    public double getTotalHoursWorkedOnProject() {
         return totalHoursWorkedOnProject;
     }
 }

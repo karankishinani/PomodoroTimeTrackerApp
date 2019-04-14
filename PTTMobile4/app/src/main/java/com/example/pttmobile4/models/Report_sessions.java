@@ -13,7 +13,7 @@ public class Report_sessions {
     private String endingTime;
     @SerializedName("hoursWorked")
     @Expose
-    private int hoursWorked;
+    private double hoursWorked;
 
     public String getStartingTime() {
         return startingTime;
@@ -23,7 +23,7 @@ public class Report_sessions {
         return endingTime;
     }
 
-    public int getHoursWorked() {
+    public double getHoursWorked() {
         return hoursWorked;
     }
 }

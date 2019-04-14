@@ -65,8 +65,7 @@ public class ReportActivity extends AppCompatActivity {
         }
 
         mSessionList= findViewById(R.id.sessionList);
-
-        loadSessions();
+        //loadSessions();
 
     }
 
@@ -81,7 +80,6 @@ public class ReportActivity extends AppCompatActivity {
         Call<Report> call = Client
                 .getInstance().getApi().getReport(Integer.valueOf(userId),Integer.valueOf(projectId),startTime, endTime,
                         includeCompletedPomodoros, includeTotalHoursWorkedOnProject);
-
         call.enqueue(new Callback<Report>() {
             @Override
             public void onResponse(Call<Report> call, Response<Report> response) {
@@ -90,7 +88,6 @@ public class ReportActivity extends AppCompatActivity {
                     System.out.println("Sessionlist is null");
                 }
                 else {
-
                     if(includeCompletedPomodoros){
                         EditText noOfCP_value = findViewById(R.id.noOfCP_value);
                         noOfCP_value.setText(""+report.getCompletedPomodoros());

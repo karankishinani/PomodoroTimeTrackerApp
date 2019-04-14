@@ -159,59 +159,64 @@ public class EditProjectActivity extends AppCompatActivity {
                     public void onResponse(Call<Report> call, Response<Report> response) {
                         Report report = response.body();
                         if (report == null) {
-                            Call<Project> call2 = Client
-                                .getInstance().getApi().deleteProject(userId, projectId);
-                            call2.enqueue(new Callback<Project>() {
-                                @Override
-                                public void onResponse(Call<Project> call, Response<Project> response) {
-                                    Project project = response.body();
-                                    if (project == null) {
-                                        System.out.println("Project response is null");
-                                    } else {
-                                        new CustomToast().Show_Toast(true,getApplicationContext(),findViewById(R.id.editProjectLayout) ,"Deleted: " + project.getProjectname());
-                                    }
-                                }
-
-                                @Override
-                                public void onFailure(Call<Project> call, Throwable t) {
-                                    new CustomToast().Show_Toast(false,getApplicationContext(),findViewById(R.id.editProjectLayout) ,"Failed!");
-                                }
-                            });
-                            finish();
+                            System.out.println("report is null");
                         }
                         else {
-                            DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    switch (which) {
-                                        case DialogInterface.BUTTON_POSITIVE:
-                                            Call<Project> call3 = Client
-                                                    .getInstance().getApi().deleteProject(userId, projectId);
-                                            call3.enqueue(new Callback<Project>() {
-                                                @Override
-                                                public void onResponse(Call<Project> call, Response<Project> response) {
-                                                    Project project = response.body();
-                                                    if (project == null) {
-                                                        System.out.println("Project response is null");
-                                                    } else {
-                                                        new CustomToast().Show_Toast(true,getApplicationContext(),findViewById(R.id.editProjectLayout) ,"Deleted: " + project.getProjectname());
-                                                    }
-                                                }
-                                                @Override
-                                                public void onFailure(Call<Project> call, Throwable t) {
-                                                    new CustomToast().Show_Toast(false,getApplicationContext(),findViewById(R.id.editProjectLayout) ,"Failed!");
-                                                }
-                                            });
-                                            // Go back to Last Activity
-                                            finish();
-                                            break;
-                                        case DialogInterface.BUTTON_NEGATIVE:
-                                            break;
+                            if (report.getSessions().isEmpty()) {
+                                Call<Project> call2 = Client
+                                        .getInstance().getApi().deleteProject(userId, projectId);
+                                call2.enqueue(new Callback<Project>() {
+                                    @Override
+                                    public void onResponse(Call<Project> call, Response<Project> response) {
+                                        Project project = response.body();
+                                        if (project == null) {
+                                            System.out.println("Project response is null");
+                                        } else {
+                                            new CustomToast().Show_Toast(true,getApplicationContext(),findViewById(R.id.editProjectLayout) ,"Deleted: " + project.getProjectname());
+                                        }
                                     }
-                                }
-                            };
-                            AlertDialog.Builder builder = new AlertDialog.Builder(EditProjectActivity.this);
-                            builder.setMessage("This project has time already logged to it. Do you really want to delete it?").setPositiveButton("Yes", dialogClickListener).setNegativeButton("No", dialogClickListener).show(); //The project has time already logged to it.
+
+                                    @Override
+                                    public void onFailure(Call<Project> call, Throwable t) {
+                                        new CustomToast().Show_Toast(false,getApplicationContext(),findViewById(R.id.editProjectLayout) ,"Failed!");
+                                    }
+                                });
+                                finish();
+                            } else {
+                                DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        switch (which) {
+                                            case DialogInterface.BUTTON_POSITIVE:
+                                                Call<Project> call3 = Client
+                                                        .getInstance().getApi().deleteProject(userId, projectId);
+                                                call3.enqueue(new Callback<Project>() {
+                                                    @Override
+                                                    public void onResponse(Call<Project> call, Response<Project> response) {
+                                                        Project project = response.body();
+                                                        if (project == null) {
+                                                            System.out.println("Project response is null");
+                                                        } else {
+                                                            new CustomToast().Show_Toast(true, getApplicationContext(), findViewById(R.id.editProjectLayout), "Deleted: " + project.getProjectname());
+                                                        }
+                                                    }
+
+                                                    @Override
+                                                    public void onFailure(Call<Project> call, Throwable t) {
+                                                        new CustomToast().Show_Toast(false, getApplicationContext(), findViewById(R.id.editProjectLayout), "Failed!");
+                                                    }
+                                                });
+                                                // Go back to Last Activity
+                                                finish();
+                                                break;
+                                            case DialogInterface.BUTTON_NEGATIVE:
+                                                break;
+                                        }
+                                    }
+                                };
+                                AlertDialog.Builder builder = new AlertDialog.Builder(EditProjectActivity.this);
+                                builder.setMessage("This project has time already logged to it. Do you really want to delete it?").setPositiveButton("Yes", dialogClickListener).setNegativeButton("No", dialogClickListener).show(); //The project has time already logged to it.
+                            }
                         }
                     }
 
