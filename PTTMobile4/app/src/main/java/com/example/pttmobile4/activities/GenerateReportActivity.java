@@ -192,15 +192,20 @@ public class GenerateReportActivity extends AppCompatActivity {
         generateProjectBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String[] startDates = startDate.getText().toString().split("/");
-                String[] startHours = startTime.getText().toString().split(":");
+                try {
+                    String[] startDates = startDate.getText().toString().split("/");
+                    String[] startHours = startTime.getText().toString().split(":");
 
-                String start = String.format("%d", Integer.valueOf(startDates[2])) + "-" + String.format("%02d", Integer.valueOf(startDates[1])) + "-" + String.format("%02d", Integer.valueOf(startDates[0])) + "T" + String.format("%02d", Integer.valueOf(startHours[0])) + ":" + String.format("%02d", Integer.valueOf(startHours[1])) +"Z";
+                    String start = String.format("%d", Integer.valueOf(startDates[2])) + "-" + String.format("%02d", Integer.valueOf(startDates[1])) + "-" + String.format("%02d", Integer.valueOf(startDates[0])) + "T" + String.format("%02d", Integer.valueOf(startHours[0])) + ":" + String.format("%02d", Integer.valueOf(startHours[1])) +"Z";
 
-                String[] endDates = endDate.getText().toString().split("/");
-                String[] endHours = endTime.getText().toString().split(":");
+                    String[] endDates = endDate.getText().toString().split("/");
+                    String[] endHours = endTime.getText().toString().split(":");
 
-                String end = String.format("%d", Integer.valueOf(endDates[2])) + "-" + String.format("%02d", Integer.valueOf(endDates[1])) + "-" + String.format("%02d", Integer.valueOf(endDates[0])) + "T" + String.format("%02d", Integer.valueOf(endHours[0])) + ":" + String.format("%02d", Integer.valueOf(endHours[1])) +"Z";
+                    String end = String.format("%d", Integer.valueOf(endDates[2])) + "-" + String.format("%02d", Integer.valueOf(endDates[1])) + "-" + String.format("%02d", Integer.valueOf(endDates[0])) + "T" + String.format("%02d", Integer.valueOf(endHours[0])) + ":" + String.format("%02d", Integer.valueOf(endHours[1])) +"Z";
+                } catch (Exception e){
+                    e.printStackTrace();
+                    new CustomToast().Show_Toast(false,getApplicationContext(),findViewById(R.id.generateReportLayout) ,"Invalid Parameters!");
+                }
 
                 ProjectId = map.get(spinnerArray.get(niceSpinner.getSelectedIndex()));
                 if (userId == null || ProjectId == null || start.length() !=17  || end.length()!= 17 ){
