@@ -46,7 +46,6 @@ public class PomodoroActivity extends AppCompatActivity {
     {
         //Do nothing
         return;
-
         // code here to show dialog
         //super.onBackPressed();  // optional depending on your needs
     }
@@ -244,8 +243,8 @@ public class PomodoroActivity extends AppCompatActivity {
 
                                 break;
                             case DialogInterface.BUTTON_NEGATIVE:
-                                Intent no_intent = new Intent(PomodoroActivity.this, UserActivity.class);
-                                no_intent.putExtra("userId",userId);
+                                //Intent no_intent = new Intent(PomodoroActivity.this, UserActivity.class);
+                                //no_intent.putExtra("userId",userId);
 
                                 if (!isSeperatePomodoro){
                                     // PUT REQUEST
@@ -275,7 +274,7 @@ public class PomodoroActivity extends AppCompatActivity {
                                 }
 
                                 finish();
-                                startActivity(no_intent);
+                                //startActivity(no_intent);
                                 break;
                         }
                     }
@@ -296,7 +295,7 @@ public class PomodoroActivity extends AppCompatActivity {
                     final Intent intent = new Intent(PomodoroActivity.this, UserActivity.class);
                     intent.putExtra("userId",userId);
                     finish();
-                    startActivity(intent);
+                    //startActivity(intent);
 
                 } else {
                     DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
@@ -316,8 +315,8 @@ public class PomodoroActivity extends AppCompatActivity {
                                 case DialogInterface.BUTTON_POSITIVE:
 
                                     timer.cancel();
-                                    final Intent yes_intent = new Intent(PomodoroActivity.this, UserActivity.class);
-                                    yes_intent.putExtra("userId",userId);
+                                    //final Intent yes_intent = new Intent(PomodoroActivity.this, UserActivity.class);
+                                    //yes_intent.putExtra("userId",userId);
 
                                     if(counter == 0){
 
@@ -341,11 +340,11 @@ public class PomodoroActivity extends AppCompatActivity {
                                                 }
                                                 else {
                                                     sessionId = ""+session.getId();
-                                                    yes_intent.putExtra("sessionId", sessionId);
+                                                    //yes_intent.putExtra("sessionId", sessionId);
                                                     System.out.println("this is the session id YES create "+ sessionId);
                                                 }
                                                 finish();
-                                                startActivity(yes_intent);
+                                                //startActivity(yes_intent);
                                             }
 
                                             @Override
@@ -375,7 +374,7 @@ public class PomodoroActivity extends AppCompatActivity {
                                                     System.out.println("User response is null");
                                                 }
                                                 finish();
-                                                startActivity(yes_intent);
+                                                //startActivity(yes_intent);
                                             }
 
                                             @Override
