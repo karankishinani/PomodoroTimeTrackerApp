@@ -93,7 +93,7 @@ public class ReportActivity extends AppCompatActivity {
                     sessionMessage.setVisibility(View.VISIBLE);
                 }
                 else {
-                    sessionMessage.setVisibility(View.GONE);
+
                     if(includeCompletedPomodoros){
                         EditText noOfCP_value = findViewById(R.id.noOfCP_value);
                         noOfCP_value.setText(""+report.getCompletedPomodoros());
@@ -105,6 +105,12 @@ public class ReportActivity extends AppCompatActivity {
                     }
 
                     sessionList = report.getSessions();
+
+                    if(sessionList.size() == 0)
+                        sessionMessage.setVisibility(View.VISIBLE);
+                    else
+                        sessionMessage.setVisibility(View.GONE);
+
 
                     loadRecyclerView();
                 }

@@ -259,8 +259,8 @@ public class DeleteProjectWithTimeTest {
                         isDisplayed()));
         linearLayout.perform(click());
 
-        //Pomodoro Started, wait for 70s and stop
-        SystemClock.sleep(70000);
+        //Pomodoro Started, wait for 10s and stop
+        SystemClock.sleep(10000);
 
         ViewInteraction appCompatButton10 = onView(
                 allOf(withId(R.id.stopPomodoroBtn), withText("Stop Pomodoro"),
