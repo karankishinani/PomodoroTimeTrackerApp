@@ -203,8 +203,7 @@ public class GenerateReportActivity extends AppCompatActivity {
                 String end = String.format("%d", Integer.valueOf(endDates[2])) + "-" + String.format("%02d", Integer.valueOf(endDates[1])) + "-" + String.format("%02d", Integer.valueOf(endDates[0])) + "T" + String.format("%02d", Integer.valueOf(endHours[0])) + ":" + String.format("%02d", Integer.valueOf(endHours[1])) +"Z";
 
                 ProjectId = map.get(spinnerArray.get(niceSpinner.getSelectedIndex()));
-
-                if (userId == null || ProjectId == null || start == null || end == null ){
+                if (userId == null || ProjectId == null || start.length() !=17  || end.length()!= 17 ){
                     new CustomToast().Show_Toast(false,getApplicationContext(),findViewById(R.id.generateReportLayout) ,"Invalid Parameters!");
                 } else {
                     Intent intent = new Intent(GenerateReportActivity.this, ReportActivity.class);
