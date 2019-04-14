@@ -124,7 +124,7 @@ public class DeleteProjectTest {
                         isDisplayed()));
         appCompatButton3.perform(click());
 
-        SystemClock.sleep(2000);
+        SystemClock.sleep(4000);
 
         ViewInteraction appCompatButton4 = onView(
                 allOf(withId(R.id.adminLogoutBtn), withText("Log Out"),
@@ -247,11 +247,11 @@ public class DeleteProjectTest {
 
         SystemClock.sleep(2000);
 
-        ViewInteraction appCompatButton10 = onView(
-                allOf(withId(android.R.id.button1), withText("Yes")));
-        appCompatButton10.perform(click());
-
-        SystemClock.sleep(2000);
+//        ViewInteraction appCompatButton10 = onView(
+//                allOf(withId(android.R.id.button1), withText("Yes")));
+//        appCompatButton10.perform(click());
+//
+//        SystemClock.sleep(2000);
 
         ViewInteraction deleteProj = onView(allOf(withId(R.id.project_name),withText("project to be deleted"), isDisplayed()));
         deleteProj.check(doesNotExist());
@@ -317,7 +317,6 @@ public class DeleteProjectTest {
                         isDisplayed()));
         appCompatButton14.perform(click());
 
-        //TODO: check for project with time logged in deliverable part b
     }
 
     private static Matcher<View> childAtPosition(
